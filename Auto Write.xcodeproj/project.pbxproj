@@ -9,11 +9,24 @@
 /* Begin PBXBuildFile section */
 		991C2F0C1B3989F300892ABD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991C2F0B1B3989F300892ABD /* AppDelegate.swift */; };
 		991C2F0F1B3989F300892ABD /* Auto_Write.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 991C2F0D1B3989F300892ABD /* Auto_Write.xcdatamodeld */; };
-		991C2F111B3989F300892ABD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991C2F101B3989F300892ABD /* ViewController.swift */; };
+		991C2F111B3989F300892ABD /* NewDocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991C2F101B3989F300892ABD /* NewDocumentViewController.swift */; };
 		991C2F141B3989F300892ABD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 991C2F121B3989F300892ABD /* Main.storyboard */; };
 		991C2F161B3989F300892ABD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 991C2F151B3989F300892ABD /* Images.xcassets */; };
 		991C2F191B3989F300892ABD /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 991C2F171B3989F300892ABD /* LaunchScreen.xib */; };
 		991C2F251B3989F400892ABD /* Auto_WriteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991C2F241B3989F400892ABD /* Auto_WriteTests.swift */; };
+		991C2F331B398E5800892ABD /* tessdata in Resources */ = {isa = PBXBuildFile; fileRef = 991C2F321B398E5800892ABD /* tessdata */; };
+		991C2F351B3A5E8700892ABD /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991C2F341B3A5E8700892ABD /* DashboardViewController.swift */; };
+		99BA15BE1B3A6AA500352E6F /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BA15BD1B3A6AA500352E6F /* Document.swift */; };
+		99BA15C01B3A734300352E6F /* NewDocumentSettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BA15BF1B3A734300352E6F /* NewDocumentSettingsTableViewController.swift */; };
+		99BA15C21B3AAA7D00352E6F /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BA15C11B3AAA7D00352E6F /* Question.swift */; };
+		99FEDB5C1B3AC364000FE88D /* ShowDocumentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FEDB5B1B3AC364000FE88D /* ShowDocumentTableViewController.swift */; };
+		99FEDB5E1B3BEDA6000FE88D /* ShowDocumentDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FEDB5D1B3BEDA6000FE88D /* ShowDocumentDetailViewController.swift */; };
+		99FEDB601B3D0018000FE88D /* ShowDocumentDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FEDB5F1B3D0018000FE88D /* ShowDocumentDetailTableViewCell.swift */; };
+		99FEDB621B3D3C56000FE88D /* AWSCognitoCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FEDB611B3D3C56000FE88D /* AWSCognitoCredentials.swift */; };
+		99FEDB641B412201000FE88D /* DocumentDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FEDB631B412201000FE88D /* DocumentDB.swift */; };
+		99FEDB661B413BAB000FE88D /* AWSDynamoDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FEDB651B413BAB000FE88D /* AWSDynamoDB.swift */; };
+		99FEDB681B414FA3000FE88D /* QuestionDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FEDB671B414FA3000FE88D /* QuestionDB.swift */; };
+		CD00A52E3F1C6224AD79241A /* libPods-Auto Write.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CAB40C8382379FECE72D6FC8 /* libPods-Auto Write.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,13 +44,29 @@
 		991C2F0A1B3989F300892ABD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		991C2F0B1B3989F300892ABD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		991C2F0E1B3989F300892ABD /* Auto_Write.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Auto_Write.xcdatamodel; sourceTree = "<group>"; };
-		991C2F101B3989F300892ABD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		991C2F101B3989F300892ABD /* NewDocumentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDocumentViewController.swift; sourceTree = "<group>"; };
 		991C2F131B3989F300892ABD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		991C2F151B3989F300892ABD /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		991C2F181B3989F300892ABD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		991C2F1E1B3989F400892ABD /* Auto WriteTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Auto WriteTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		991C2F231B3989F400892ABD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		991C2F241B3989F400892ABD /* Auto_WriteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auto_WriteTests.swift; sourceTree = "<group>"; };
+		991C2F2E1B398A6800892ABD /* Auto Write-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Auto Write-Bridging-Header.h"; sourceTree = "<group>"; };
+		991C2F321B398E5800892ABD /* tessdata */ = {isa = PBXFileReference; lastKnownFileType = folder; path = tessdata; sourceTree = "<group>"; };
+		991C2F341B3A5E8700892ABD /* DashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
+		99BA15BD1B3A6AA500352E6F /* Document.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
+		99BA15BF1B3A734300352E6F /* NewDocumentSettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewDocumentSettingsTableViewController.swift; sourceTree = "<group>"; };
+		99BA15C11B3AAA7D00352E6F /* Question.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
+		99FEDB5B1B3AC364000FE88D /* ShowDocumentTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowDocumentTableViewController.swift; sourceTree = "<group>"; };
+		99FEDB5D1B3BEDA6000FE88D /* ShowDocumentDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowDocumentDetailViewController.swift; sourceTree = "<group>"; };
+		99FEDB5F1B3D0018000FE88D /* ShowDocumentDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowDocumentDetailTableViewCell.swift; sourceTree = "<group>"; };
+		99FEDB611B3D3C56000FE88D /* AWSCognitoCredentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AWSCognitoCredentials.swift; sourceTree = "<group>"; };
+		99FEDB631B412201000FE88D /* DocumentDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentDB.swift; sourceTree = "<group>"; };
+		99FEDB651B413BAB000FE88D /* AWSDynamoDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AWSDynamoDB.swift; sourceTree = "<group>"; };
+		99FEDB671B414FA3000FE88D /* QuestionDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionDB.swift; sourceTree = "<group>"; };
+		CAB40C8382379FECE72D6FC8 /* libPods-Auto Write.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Auto Write.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE1DE9973485679C3135A40D /* Pods-Auto Write.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Auto Write.release.xcconfig"; path = "Pods/Target Support Files/Pods-Auto Write/Pods-Auto Write.release.xcconfig"; sourceTree = "<group>"; };
+		F49D6271056093B81A8EC73F /* Pods-Auto Write.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Auto Write.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Auto Write/Pods-Auto Write.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD00A52E3F1C6224AD79241A /* libPods-Auto Write.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -64,6 +94,8 @@
 				991C2F081B3989F300892ABD /* Auto Write */,
 				991C2F211B3989F400892ABD /* Auto WriteTests */,
 				991C2F071B3989F300892ABD /* Products */,
+				C821EB8B30F7403D9A6F35A9 /* Pods */,
+				AA42CC36424E482739E5387A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -79,8 +111,13 @@
 		991C2F081B3989F300892ABD /* Auto Write */ = {
 			isa = PBXGroup;
 			children = (
-				991C2F0B1B3989F300892ABD /* AppDelegate.swift */,
-				991C2F101B3989F300892ABD /* ViewController.swift */,
+				99BA15BB1B3A6A2100352E6F /* Language pack */,
+				99BA15BC1B3A6A3F00352E6F /* Model */,
+				991C2F341B3A5E8700892ABD /* DashboardViewController.swift */,
+				99BA15BF1B3A734300352E6F /* NewDocumentSettingsTableViewController.swift */,
+				991C2F101B3989F300892ABD /* NewDocumentViewController.swift */,
+				99FEDB5B1B3AC364000FE88D /* ShowDocumentTableViewController.swift */,
+				99FEDB5D1B3BEDA6000FE88D /* ShowDocumentDetailViewController.swift */,
 				991C2F121B3989F300892ABD /* Main.storyboard */,
 				991C2F151B3989F300892ABD /* Images.xcassets */,
 				991C2F171B3989F300892ABD /* LaunchScreen.xib */,
@@ -93,7 +130,9 @@
 		991C2F091B3989F300892ABD /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				991C2F0B1B3989F300892ABD /* AppDelegate.swift */,
 				991C2F0A1B3989F300892ABD /* Info.plist */,
+				991C2F2E1B398A6800892ABD /* Auto Write-Bridging-Header.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -115,6 +154,45 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		99BA15BB1B3A6A2100352E6F /* Language pack */ = {
+			isa = PBXGroup;
+			children = (
+				991C2F321B398E5800892ABD /* tessdata */,
+			);
+			name = "Language pack";
+			sourceTree = "<group>";
+		};
+		99BA15BC1B3A6A3F00352E6F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				99BA15BD1B3A6AA500352E6F /* Document.swift */,
+				99BA15C11B3AAA7D00352E6F /* Question.swift */,
+				99FEDB5F1B3D0018000FE88D /* ShowDocumentDetailTableViewCell.swift */,
+				99FEDB611B3D3C56000FE88D /* AWSCognitoCredentials.swift */,
+				99FEDB651B413BAB000FE88D /* AWSDynamoDB.swift */,
+				99FEDB631B412201000FE88D /* DocumentDB.swift */,
+				99FEDB671B414FA3000FE88D /* QuestionDB.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		AA42CC36424E482739E5387A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CAB40C8382379FECE72D6FC8 /* libPods-Auto Write.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C821EB8B30F7403D9A6F35A9 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F49D6271056093B81A8EC73F /* Pods-Auto Write.debug.xcconfig */,
+				CE1DE9973485679C3135A40D /* Pods-Auto Write.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -122,9 +200,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 991C2F281B3989F400892ABD /* Build configuration list for PBXNativeTarget "Auto Write" */;
 			buildPhases = (
+				CE290AC4E1D33B67AA710203 /* Check Pods Manifest.lock */,
 				991C2F021B3989F300892ABD /* Sources */,
 				991C2F031B3989F300892ABD /* Frameworks */,
 				991C2F041B3989F300892ABD /* Resources */,
+				C5665088A00F4F66AEAED14B /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -196,6 +276,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				991C2F141B3989F300892ABD /* Main.storyboard in Resources */,
+				991C2F331B398E5800892ABD /* tessdata in Resources */,
 				991C2F191B3989F300892ABD /* LaunchScreen.xib in Resources */,
 				991C2F161B3989F300892ABD /* Images.xcassets in Resources */,
 			);
@@ -210,14 +291,58 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		C5665088A00F4F66AEAED14B /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Auto Write/Pods-Auto Write-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CE290AC4E1D33B67AA710203 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		991C2F021B3989F300892ABD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				991C2F111B3989F300892ABD /* ViewController.swift in Sources */,
+				99FEDB661B413BAB000FE88D /* AWSDynamoDB.swift in Sources */,
+				99FEDB681B414FA3000FE88D /* QuestionDB.swift in Sources */,
+				991C2F111B3989F300892ABD /* NewDocumentViewController.swift in Sources */,
+				99BA15C21B3AAA7D00352E6F /* Question.swift in Sources */,
+				99FEDB601B3D0018000FE88D /* ShowDocumentDetailTableViewCell.swift in Sources */,
+				99FEDB641B412201000FE88D /* DocumentDB.swift in Sources */,
 				991C2F0F1B3989F300892ABD /* Auto_Write.xcdatamodeld in Sources */,
+				99FEDB5E1B3BEDA6000FE88D /* ShowDocumentDetailViewController.swift in Sources */,
+				99FEDB621B3D3C56000FE88D /* AWSCognitoCredentials.swift in Sources */,
+				99BA15BE1B3A6AA500352E6F /* Document.swift in Sources */,
+				991C2F351B3A5E8700892ABD /* DashboardViewController.swift in Sources */,
+				99FEDB5C1B3AC364000FE88D /* ShowDocumentTableViewController.swift in Sources */,
 				991C2F0C1B3989F300892ABD /* AppDelegate.swift in Sources */,
+				99BA15C01B3A734300352E6F /* NewDocumentSettingsTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -342,21 +467,28 @@
 		};
 		991C2F291B3989F400892ABD /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F49D6271056093B81A8EC73F /* Pods-Auto Write.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "Auto Write/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Auto Write/Auto Write-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		991C2F2A1B3989F400892ABD /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CE1DE9973485679C3135A40D /* Pods-Auto Write.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "Auto Write/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Auto Write/Auto Write-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -413,6 +545,7 @@
 				991C2F2A1B3989F400892ABD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		991C2F2B1B3989F400892ABD /* Build configuration list for PBXNativeTarget "Auto WriteTests" */ = {
 			isa = XCConfigurationList;
@@ -421,6 +554,7 @@
 				991C2F2D1B3989F400892ABD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
