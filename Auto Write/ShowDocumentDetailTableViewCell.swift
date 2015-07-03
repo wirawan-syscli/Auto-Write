@@ -6,22 +6,11 @@
 //  Copyright (c) 2015 wirawan sanusi. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
-class ShowDocumentDetailTableViewCell: UITableViewCell {
+class ShowDocumentDetailTableViewCell: SWTableViewCell{
     
     @IBOutlet weak var numberLabel: UILabel!
     @IBOutlet weak var questionTextView: UITextView!
     
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-    }
-
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
 }

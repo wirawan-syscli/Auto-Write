@@ -11,7 +11,7 @@ import UIKit
 // MARK: INIT
 class NewDocumentSettingsTableViewController: UITableViewController {
     
-    var document: Document?
+    var document: Documents?
     
     @IBOutlet weak var titleLabel: UITextField!
     @IBOutlet weak var subjectLabel: UITextField!
@@ -29,25 +29,15 @@ class NewDocumentSettingsTableViewController: UITableViewController {
         super.viewDidLoad()
 
         titleLabel.delegate = self
+        titleLabel.borderStyle = .None
         subjectLabel.delegate = self
+        subjectLabel.borderStyle = .None
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    func NewDocumentSettingsTableViewControllerPreparingSettingForNewDocument() {
-        
-        titleLabel.text = ""
-        subjectLabel.text = ""
-        gradeStepper.value = 1.0
-        gradeValue = 1
-        gradeLabel.text = "\(gradeValue)"
-        totalQuestionsValue = 1
-        totalQuestionsLabel.text = "\(totalQuestionsValue)"
-    }
-
 }
 
 // MARK: UITEXTFIELD
@@ -93,20 +83,18 @@ extension NewDocumentSettingsTableViewController {
     
     @IBAction func NewDocumentSettingsWillPresentNewDocumentViewController(sender: AnyObject) {
         
-        if count(titleLabel.text)   > 0 &&
-           count(subjectLabel.text) > 0 &&
-           gradeValue               > 0 &&
-           totalQuestionsValue      > 0
-        {
-            document = Document(title: titleLabel.text,
-                                subject: subjectLabel.text,
-                                grade: gradeValue,
-                                totalQuestions: totalQuestionsValue)
-            if let error = document?.save() {
-                showAlertFromCoreDataErrorBeforePresentingNewDocument()
-            } else {
-                NewDocumentSettingsIsPresentingNewDocumentViewController()
-            }
+        if count(titleLabel.text)   > 0 && count(subjectLabel.text) > 0 &&
+           gradeValue               > 0 && totalQuestionsValue      > 0 {
+            
+            document = Documents.MR_createEntity()
+            document?.id = IntDate.convert(NSDate())
+            document?.title = titleLabel.text
+            document?.subject = subjectLabel.text
+            document?.grade = gradeValue
+            document?.totalQuestions = totalQuestionsValue
+            
+            NewDocumentSettingsIsPresentingNewDocumentViewController()
+
         } else {
             showAlert()
         }
@@ -121,7 +109,7 @@ extension NewDocumentSettingsTableViewController {
 // MARK: SEGUE SETTINGS
 extension NewDocumentSettingsTableViewController {
     
-    //FIXME: SEGUE ERROR
+    // FIXME: SEGUE ERROR
     // Unbalanced calls to begin/end appearance transitions for <Auto_Write.NewDocumentSettingsTableViewController: 0x14d502f90>.
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showNewDocument" {
@@ -140,18 +128,6 @@ extension NewDocumentSettingsTableViewController {
                                       message: "Please fill out the following form",
                                       preferredStyle: .Alert)
         let action = UIAlertAction(title: "Ok", style: .Default) { (action: UIAlertAction!) -> Void in }
-        alert.addAction(action)
-        
-        presentViewController(alert, animated: true, completion: nil)
-    }
-    
-    func showAlertFromCoreDataErrorBeforePresentingNewDocument() {
-        let alert = UIAlertController(title: "Could not saved document",
-            message: "An error has occured. \r Preparing new document.",
-            preferredStyle: .Alert)
-        let action = UIAlertAction(title: "Ok", style: .Default) { (action: UIAlertAction!) -> Void in
-            self.NewDocumentSettingsTableViewControllerPreparingSettingForNewDocument()
-        }
         alert.addAction(action)
         
         presentViewController(alert, animated: true, completion: nil)

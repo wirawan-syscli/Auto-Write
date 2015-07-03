@@ -7,11 +7,11 @@
 //
 
 import UIKit
-import CoreData
 
+// MARK: INIT CLASS
 class DashboardViewController: UIViewController {
-
-    var documents: [Document] = Array()
+    
+    var documents: [Documents] = Array()
     
     @IBOutlet weak var newDocumentView: UIView!
     @IBOutlet weak var showDocumentView: UIView!
@@ -19,92 +19,41 @@ class DashboardViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        addShadowToViews()
         initUIGestureRecognizer()
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let manageContext = appDelegate.managedObjectContext!
-        
-        if let documents = dashboardViewControllerPerformDocumentFetchRequest(manageContext) {
-            self.documents = documents
-            
-            if let questions = dashboardViewControllerPerformQuestionFetchRequest(manageContext) {
-                
-                for question in questions {
-                    for var index = 0; index < self.documents.count; index++ {
-                        var document = self.documents[index] as Document
-                        if question.id == document.id {
-                            self.documents[index].questions.append(question)
-                        }
-                    }
-                }
-            } else {
-                showAlertFromCoreDataErrorBeforePresentingNewQuestion()
-            }
-        } else {
-            showAlertFromCoreDataErrorBeforePresentingNewDocument()
-        }
-        
+    
+        fetchAllData()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func addShadowToViews() {
+        
+        let RGBColor = CGFloat(220.0 / 255.0)
+        let borderColor = UIColor(red: RGBColor, green: RGBColor, blue: RGBColor, alpha: 1.0).CGColor
+        newDocumentView.layer.borderColor = borderColor
+        newDocumentView.layer.borderWidth = 1.0
+        showDocumentView.layer.borderColor = borderColor
+        showDocumentView.layer.borderWidth = 1.0
+    }
 }
 
+// MARK: PERFORM FETCH REQUEST
 extension DashboardViewController  {
     
-    func dashboardViewControllerPerformDocumentFetchRequest(manageContext: NSManagedObjectContext) -> [Document]? {
-        let fetchRequest = NSFetchRequest(entityName: "Document")
-        
-        var error: NSError?
-        let fetchResult = manageContext.executeFetchRequest(fetchRequest, error: &error)
-        
-        if let results = fetchResult {
-            var documents: [Document] = Array()
-            for result in results {
-                var id = result.valueForKey("id") as! NSDate
-                var title = result.valueForKey("title") as! String
-                var subject = result.valueForKey("subject") as! String
-                var grade = result.valueForKey("grade") as! Int
-                var totalQuestions = result.valueForKey("totalQuestions") as! Int
-                
-                var document = Document(id: id, title: title, subject: subject, grade: grade, totalQuestions: totalQuestions)
-                documents.append(document)
-            }
-            return documents
-        }
-        
-        return nil
-    }
-    
-    func dashboardViewControllerPerformQuestionFetchRequest(manageContext: NSManagedObjectContext) -> [Question]? {
-        let fetchRequest = NSFetchRequest(entityName: "Question")
-        
-        var error: NSError?
-        let fetchResult = manageContext.executeFetchRequest(fetchRequest, error: &error)
-        
-        if let results = fetchResult {
-            var questions: [Question] = Array()
-            for result in results {
-                var id = result.valueForKey("id") as! NSDate
-                var text = result.valueForKey("text") as! String
-                
-                var question = Question(id: id, text: text)
-                questions.append(question)
-            }
-            return questions
-        }
-        
-        return nil
+    func fetchAllData() {
+        self.documents = Documents.MR_findAllSortedBy("id", ascending: true) as! [Documents]
     }
 }
 
-
+// MARK: PERFORM GESTURE RECOGNIZER
 extension DashboardViewController: UIGestureRecognizerDelegate {
     
     func initUIGestureRecognizer() {
@@ -116,7 +65,6 @@ extension DashboardViewController: UIGestureRecognizerDelegate {
         
         var tapGesture = UITapGestureRecognizer(target: self, action: Selector("performTapGestureOnNewDocument:"))
         tapGesture.delegate = self
-        tapGesture.numberOfTapsRequired = 1
         newDocumentView.addGestureRecognizer(tapGesture)
     }
     
@@ -127,18 +75,18 @@ extension DashboardViewController: UIGestureRecognizerDelegate {
     
     func initTapGestureRecognitionForShowDocument() {
         
-        var tapGesture = UITapGestureRecognizer(target: self, action: Selector("performTapGestureonShowDocument:"))
+        var tapGesture = UITapGestureRecognizer(target: self, action: Selector("performTapGestureOnShowDocument:"))
         tapGesture.delegate = self
-        tapGesture.numberOfTapsRequired = 1
         showDocumentView.addGestureRecognizer(tapGesture)
     }
     
-    func performTapGestureonShowDocument(recognizer: UITapGestureRecognizer) {
+    func performTapGestureOnShowDocument(recognizer: UITapGestureRecognizer) {
         
         performSegueWithIdentifier("showListDocument", sender: self)
     }
 }
 
+// MARK: PREPARE SEGUE
 extension DashboardViewController {
     
     @IBAction func unwindFromNewDocument(segue: UIStoryboardSegue) {
@@ -146,38 +94,12 @@ extension DashboardViewController {
         let source: NewDocumentViewController = segue.sourceViewController as! NewDocumentViewController
         documents.append(source.document!)
     }
-}
-
-extension DashboardViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if segue.identifier == "showListDocument" {
-            let destination: ShowDocumentTableViewController = segue.destinationViewController as! ShowDocumentTableViewController
+            let destination: ShowDocumentViewController = segue.destinationViewController as! ShowDocumentViewController
             destination.documents = documents
         }
-    }
-}
-
-extension DashboardViewController {
-    
-    func showAlertFromCoreDataErrorBeforePresentingNewDocument() {
-        let alert = UIAlertController(title: "Could not retrieved document",
-            message: "An error has occured. \r Preparing blank document.",
-            preferredStyle: .Alert)
-        let action = UIAlertAction(title: "Ok", style: .Default) { (action: UIAlertAction!) -> Void in }
-        alert.addAction(action)
-        
-        presentViewController(alert, animated: true, completion: nil)
-    }
-    
-    func showAlertFromCoreDataErrorBeforePresentingNewQuestion() {
-        let alert = UIAlertController(title: "Could not retrieved question",
-            message: "An error has occured. \r Preparing blank question.",
-            preferredStyle: .Alert)
-        let action = UIAlertAction(title: "Ok", style: .Default) { (action: UIAlertAction!) -> Void in }
-        alert.addAction(action)
-        
-        presentViewController(alert, animated: true, completion: nil)
     }
 }

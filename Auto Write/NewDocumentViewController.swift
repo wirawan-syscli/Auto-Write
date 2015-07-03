@@ -12,17 +12,22 @@ import UIKit
 class NewDocumentViewController: UIViewController{
 
     @IBOutlet weak var textView: UITextView!
-    @IBOutlet weak var loadingView: UIView!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var progressView: UIProgressView!
-
-    var saveBarButtonItem: UIBarButtonItem!
-    var operationQueue: NSOperationQueue!
-    var document: Document!
-    var question: Question?
+    
+    // CORE DATA
+    var document: Documents!
+    var questions: NSMutableOrderedSet = NSMutableOrderedSet()
+    var question: Questions?
     var currentQuestion: Int = 1
     
+    // NSOPERATION
+    var operationQueue: NSOperationQueue!
+    
+    // VIEW
+    var saveBarButtonItem: UIBarButtonItem!
+    var hud: MBProgressHUD?
+    
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
@@ -33,22 +38,16 @@ class NewDocumentViewController: UIViewController{
     }
 
     override func didReceiveMemoryWarning() {
+        
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
         
     }
     
-    func NewDocumentViewControllerPreparingSettingForOldQuestion() {
-        currentQuestion--;
-        NewDocumentViewControllerPreparingSettingForNewQuestion()
-    }
-    
     func NewDocumentViewControllerPreparingSettingForNewQuestion() {
-        
+    
         navigationItem.title = "Question #\(currentQuestion)"
         textView.text = ""
-        loadingView.alpha = 0.0
-        progressView.progress = 0.0
         operationQueue = NSOperationQueue()
     }
 }
@@ -59,18 +58,19 @@ extension NewDocumentViewController: UIImagePickerControllerDelegate,
     
     @IBAction func imagePickerUsingCamera(sender: AnyObject) {
         
-        var imagePicker = UIImagePickerController()
-        imagePicker.delegate = self
-        imagePicker.sourceType = .Camera
-        imagePicker.allowsEditing = true
-        presentViewController(imagePicker, animated: true, completion: nil)
+        imagePickerInitWithType(.Camera)
     }
     
     @IBAction func imagePickerUsingPhotoLibrary(sender: AnyObject) {
         
+        imagePickerInitWithType(.PhotoLibrary)
+    }
+    
+    func imagePickerInitWithType(sourceType: UIImagePickerControllerSourceType) {
+        
         var imagePicker = UIImagePickerController()
         imagePicker.delegate = self
-        imagePicker.sourceType = .PhotoLibrary
+        imagePicker.sourceType = sourceType
         presentViewController(imagePicker, animated: true, completion: nil)
     }
     
@@ -84,17 +84,16 @@ extension NewDocumentViewController: UIImagePickerControllerDelegate,
     
 }
 
-// MARK: G8TESSERACTOCR
+// MARK: G8TESSERACTOCR & MBProgressHUD
 extension NewDocumentViewController: G8TesseractDelegate {
     
     func performRecognizingText(image: UIImage) {
         
         let imageBW = image.g8_blackAndWhite()
         
-        UIView.animateWithDuration(1.0, animations: { () -> Void in
-            self.loadingView.alpha = 1.0
-        })
-        activityIndicator.startAnimating()
+        hud = MBProgressHUD.showHUDAddedTo(view, animated: true)
+        hud!.mode = .AnnularDeterminate
+        hud!.labelText = "Scanning.."
         
         autoreleasepool { () -> () in
             var operation = G8RecognitionOperation(language: "eng+jpn")
@@ -115,28 +114,25 @@ extension NewDocumentViewController: G8TesseractDelegate {
     
     // GUIDE_1: From top
     func performRecognizingTextIsCompleted(tesseract: G8Tesseract) {
-        UIView.animateWithDuration(0.5, animations: { () -> Void in
-            self.loadingView.alpha = 0.0
-        })
-        self.activityIndicator.stopAnimating()
+        
+        hud!.hide(true)
+        
         self.navigationItem.rightBarButtonItem = self.saveBarButtonItem
         self.textView.text = tesseract.recognizedText
         
         // release unused object to reduce memory usage
-        self.operationQueue = nil
         G8Tesseract.clearCache()
     }
     
     func shouldCancelImageRecognitionForTesseract(tesseract: G8Tesseract!) -> Bool {
+        
         return false
     }
     
     func progressImageRecognitionForTesseract(tesseract: G8Tesseract!) {
         
         var progress: Float = Float(tesseract.progress) / 100.0
-        dispatch_async(dispatch_get_main_queue(), { () -> Void in
-            self.progressView.setProgress(progress, animated: true)
-        })
+        hud!.progress = progress;
     }
 }
 
@@ -152,6 +148,7 @@ extension NewDocumentViewController: UITextViewDelegate {
     func textViewDoneEditing() {
         
         textView.resignFirstResponder()
+        
         if count(textView.text) > 0 {
             navigationItem.rightBarButtonItem = saveBarButtonItem
         } else {
@@ -162,30 +159,54 @@ extension NewDocumentViewController: UITextViewDelegate {
     func textViewSaveEditing() {
         
         if count(textView.text) > 0 {
-            question = Question(id: document.id, text: textView.text)
-            if let question = self.question {
-                if currentQuestion <= document.totalQuestions {
-                    textViewPerformManageObjectContext()
-                } else {
-                    performSegueWithIdentifier("unwindFromNewDocument", sender: self)
-                }
-            } else {
-                showAlert()
-            }
+            
+            initObjectContext()
+            
         } else {
             showAlert()
         }
     }
+}
+
+// MARK: OBJECT CONTEXT
+extension NewDocumentViewController {
     
-    func textViewPerformManageObjectContext() {
-        if let error = question?.save() {
-            showAlertFromCoreDataErrorBeforePresentingOldQuestion()
+    func initObjectContext() {
+        
+        createObjectContext()
+        
+        if currentQuestion <= Int(document.totalQuestions) {
+            self.showAlertBeforePresentingNewQuestion()
         } else {
-            self.document.questions.append(self.question!)
-            currentQuestion++
-            showAlertBeforePresentingNewQuestion()
+            self.saveObjectContext()
+            performSegueWithIdentifier("unwindFromNewDocument", sender: self)
         }
     }
+    
+    func createObjectContext() {
+        
+        question = Questions.MR_createEntity()
+        question?.id = IntDate.convert(NSDate())
+        question?.documentId = document.id
+        question?.text = textView.text
+        questions.addObject(question!)
+        
+        self.currentQuestion++
+    }
+    
+    func saveObjectContext() {
+        
+        document.questions = questions
+        
+        var defaultContext = NSManagedObjectContext.MR_defaultContext()
+        defaultContext.MR_saveToPersistentStoreWithCompletion { (success: Bool, error: NSError!) -> Void in
+            if success == true {
+            } else if error != nil {
+                self.showAlertFromCoreDataErrorBeforePresentingOldQuestion()
+            }
+        }
+    }
+    
 }
 
 // MARK: ALERT SETTINGS
@@ -203,24 +224,26 @@ extension NewDocumentViewController {
         presentViewController(alert, animated: true, completion: nil)
     }
     
-    func showAlertFromCoreDataErrorBeforePresentingOldQuestion() {
-        let alert = UIAlertController(title: "Could not saved question",
-            message: "An error has occured. \r Resetting question.",
-            preferredStyle: .Alert)
-        let action = UIAlertAction(title: "Ok", style: .Default) { (action: UIAlertAction!) -> Void in
-            self.NewDocumentViewControllerPreparingSettingForOldQuestion()
-        }
-        alert.addAction(action)
-        
-        presentViewController(alert, animated: true, completion: nil)
-    }
-    
     func showAlertBeforePresentingNewQuestion() {
         
         let alert = UIAlertController(title: "Question saved",
                                       message: "Question has been saved and preparing for next question form.\r Click OK to start.",
                                       preferredStyle: .Alert)
         let action = UIAlertAction(title: "Ok", style: .Default) { (action: UIAlertAction!) -> Void in
+            self.NewDocumentViewControllerPreparingSettingForNewQuestion()
+        }
+        alert.addAction(action)
+        
+        presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    func showAlertFromCoreDataErrorBeforePresentingOldQuestion() {
+        
+        let alert = UIAlertController(title: "Question cannot be saved",
+            message: "An error has occured so the question cannot be saved.  \rpreparing for new question form.\r Click OK to begin.",
+            preferredStyle: .Alert)
+        let action = UIAlertAction(title: "Ok", style: .Default) { (action: UIAlertAction!) -> Void in
+            self.currentQuestion--
             self.NewDocumentViewControllerPreparingSettingForNewQuestion()
         }
         alert.addAction(action)

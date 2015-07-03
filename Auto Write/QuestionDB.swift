@@ -8,31 +8,31 @@
 
 import UIKit
 
-class QuestionDB: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
-    
-    class func dynamoDBTableName() -> String! {
-        return "Questions"
-    }
-    
-    class func hashKeyAttribute() -> String! {
-        return "id"
-    }
-    
-    let id         : Int
-    let documentId : NSData
-    let text       : String
-    
-    init(question: Question, currentQuestion: Int) {
-        let documentId = NSKeyedArchiver.archivedDataWithRootObject(question.id)
-        
-        self.id = currentQuestion + 1
-        self.documentId   = documentId
-        self.text = question.text
-        
-        super.init()
-    }
-    
-    required init!(coder: NSCoder!) {
-        fatalError("init(coder:) has not been implemented")
-    }
-}
+//class QuestionDB: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
+//    
+//    class func dynamoDBTableName() -> String! {
+//        return "Questions"
+//    }
+//    
+//    class func hashKeyAttribute() -> String! {
+//        return "id"
+//    }
+//    
+//    let id         : Int
+//    let documentId : NSData
+//    let text       : String
+//    
+//    init(question: QuestionOld, currentQuestion: Int) {
+//        let documentId = NSKeyedArchiver.archivedDataWithRootObject(question.id)
+//        
+//        self.id = currentQuestion + 1
+//        self.documentId   = documentId
+//        self.text = question.text
+//        
+//        super.init()
+//    }
+//    
+//    required init!(coder: NSCoder!) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
+//}

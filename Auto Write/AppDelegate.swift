@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import CoreData
+import Parse
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,8 +18,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
-        AWSCognitoCredentials.connect()
-        MagicalRecord.setupCoreDataStack()
+        MagicalRecord.setupCoreDataStackWithStoreNamed("Auto_Write")
+        Parse.setApplicationId("VrZQFPMrHpelCHpbSjsHbR8mvKriRrL93rPtSbiK",
+            clientKey: "ukyOLb6HfXKWIfJspYspGmGdwz21uKxxUaB7zl76")
         
         return true
     }

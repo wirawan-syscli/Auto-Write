@@ -4,11 +4,8 @@
 
 #import <TesseractOCR/TesseractOCR.h>
 
-#import <AWSCore/AWSCore.h>
-#import <AWSS3/AWSS3.h>
-#import <AWSDynamoDB/AWSDynamoDB.h>
-#import <AWSSQS/AWSSQS.h>
-#import <AWSSNS/AWSSNS.h>
-#import <AWSCognito/AWSCognito.h>
-
 #import <MagicalRecord/MagicalRecord.h>
+
+#import <MBProgressHUD/MBProgressHUD.h>
+
+#import <SWTableViewCell/SWTableViewCell.h>

@@ -8,10 +8,11 @@
 
 import UIKit
 
+// MARK: INIT CLASS
 class ShowDocumentTableViewController: UITableViewController {
     
-    var documents: [Document]!
-    var selectedDocument: Document?
+    var documents: [Documents]!
+    var selectedDocument: Documents?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,22 +22,27 @@ class ShowDocumentTableViewController: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+}
 
-    // MARK: - Table view data source
+// MARK: TABLE VIEW DATA SOURCE
+extension ShowDocumentTableViewController {
+    
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
-
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return documents.count
     }
-
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("documentCell", forIndexPath: indexPath) as! UITableViewCell
-
+        
         cell.textLabel?.text = documents[indexPath.row].title
         cell.detailTextLabel?.text = documents[indexPath.row].subject
-
+        
+        println(documents[indexPath.row].questions)
+        
         return cell
     }
     
@@ -48,17 +54,16 @@ class ShowDocumentTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == UITableViewCellEditingStyle.Delete {
             
-            if let error = documents[indexPath.row].remove(indexPath.row){
-                println("error")
-            }
-            
+            documents[indexPath.row].MR_deleteEntity()
             documents.removeAtIndex(indexPath.row)
+            NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
             
             tableView.reloadData()
         }
     }
 }
 
+// MARK: PREPARE SEGUE
 extension ShowDocumentTableViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

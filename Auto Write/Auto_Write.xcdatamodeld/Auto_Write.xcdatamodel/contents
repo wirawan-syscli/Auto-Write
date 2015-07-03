@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14D136" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="Document" syncable="YES">
+    <entity name="Documents" representedClassName="Documents" syncable="YES">
         <attribute name="grade" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="id" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="subject" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="totalQuestions" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <relationship name="question" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Question" syncable="YES"/>
+        <relationship name="questions" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Questions" inverseName="documents" inverseEntity="Questions" syncable="YES"/>
     </entity>
-    <entity name="Question" syncable="YES">
-        <attribute name="id" optional="YES" attributeType="Date" syncable="YES"/>
+    <entity name="Questions" representedClassName="Questions" syncable="YES">
+        <attribute name="documentId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="document" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Document" syncable="YES"/>
+        <relationship name="documents" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Documents" inverseName="questions" inverseEntity="Documents" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Document" positionX="-425" positionY="-18" width="128" height="133"/>
-        <element name="Question" positionX="-54" positionY="27" width="128" height="88"/>
+        <element name="Documents" positionX="-425" positionY="-18" width="128" height="135"/>
+        <element name="Questions" positionX="-54" positionY="27" width="128" height="105"/>
     </elements>
 </model>
