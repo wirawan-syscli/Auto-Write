@@ -175,10 +175,11 @@ extension ShowDocumentDetailViewController {
     
     func documentDetailViewWillSaveQuestionsIntoDatabase(PFDocument: PFObject) {
         
-        let totalQuestions: Int = Int(document.totalQuestions) - 1
-        for index in 0...totalQuestions {
+        let totalQuestions: Int = Int(document.totalQuestions)
+        for index in 0..<totalQuestions {
             
-            hud!.progress = Float(index / totalQuestions);
+            var indexProgress = index + 1
+            hud!.progress = Float( indexProgress / totalQuestions);
             
             let PFQuestion = PFObject(className: "Questions")
             PFQuestion["questionId"] = document.questions[index].id
