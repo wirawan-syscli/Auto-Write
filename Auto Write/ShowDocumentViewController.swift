@@ -16,11 +16,15 @@ class ShowDocumentViewController: UIViewController {
     
     @IBOutlet weak var tableview: UITableView!
     
+    var selectedDocumentIndex: Int?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         tableview.delegate = self
         tableview.dataSource = self
+        tableview.rowHeight = UITableViewAutomaticDimension
+        tableview.estimatedRowHeight = 44
     }
 
     override func didReceiveMemoryWarning() {
@@ -45,6 +49,7 @@ extension ShowDocumentViewController: UITableViewDelegate, UITableViewDataSource
         
         cell.leftUtilityButtons = leftButtonPressed() as [AnyObject]
         cell.rightUtilityButtons = rightButtonPressed() as [AnyObject]
+        cell.tag = indexPath.row
         cell.delegate = self
         
         let RGBColor = CGFloat(220.0 / 255.0)
@@ -67,6 +72,12 @@ extension ShowDocumentViewController: UITableViewDelegate, UITableViewDataSource
         cell.totalQuestionsLabel.layer.borderColor = cell.totalQuestionsLabel.tintColor.CGColor
         cell.totalQuestionsLabel.layer.borderWidth = 1.25
         
+        cell.transform = CGAffineTransformMakeScale(0.0, 0.0)
+        let durationTime = 1.0 + (Float(indexPath.row) * 0.1)
+        UIView.animateWithDuration(NSTimeInterval(durationTime), animations: { () -> Void in
+            cell.transform = CGAffineTransformMakeScale(1.0, 1.0)
+        })
+        
         return cell
     }
     
@@ -75,23 +86,10 @@ extension ShowDocumentViewController: UITableViewDelegate, UITableViewDataSource
         performSegueWithIdentifier("showDocumentDetail", sender: self)
     }
     
-//    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-//        if editingStyle == UITableViewCellEditingStyle.Delete {
-//            
-//            documents[indexPath.row].MR_deleteEntity()
-//            documents.removeAtIndex(indexPath.row)
-//            NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
-//            
-//            tableView.reloadData()
-//        }
-//    }
-    
     func leftButtonPressed() -> NSMutableArray {
         let leftUtilityButtons = NSMutableArray()
         
-        leftUtilityButtons.sw_addUtilityButtonWithColor(UIColor.redColor(), title: "A")
-        leftUtilityButtons.sw_addUtilityButtonWithColor(UIColor.blueColor(), title: "B")
-        leftUtilityButtons.sw_addUtilityButtonWithColor(UIColor.greenColor(), title: "C")
+        leftUtilityButtons.sw_addUtilityButtonWithColor(UIColor.orangeColor(), title: "Edit")
         
         return leftUtilityButtons
     }
@@ -99,16 +97,47 @@ extension ShowDocumentViewController: UITableViewDelegate, UITableViewDataSource
     func rightButtonPressed() -> NSMutableArray {
         let rightUtilityButtons = NSMutableArray()
         
-        rightUtilityButtons.sw_addUtilityButtonWithColor(UIColor.redColor(), title: "A")
-        rightUtilityButtons.sw_addUtilityButtonWithColor(UIColor.blueColor(), title: "B")
-        rightUtilityButtons.sw_addUtilityButtonWithColor(UIColor.greenColor(), title: "C")
+        rightUtilityButtons.sw_addUtilityButtonWithColor(UIColor.redColor(), title: "Delete")
         
         return rightUtilityButtons
     }
 }
 
+// MARK: UIGESTURE RECOGNIZER
+extension ShowDocumentViewController {
+    
+    func swipeableTableViewCell(cell: SWTableViewCell!, didTriggerLeftUtilityButtonWithIndex index: Int) {
+        if index == 0 {
+            selectedDocumentIndex = cell.tag
+            performSegueWithIdentifier("showEditDocument", sender: self)
+        }
+    }
+    
+    func swipeableTableViewCell(cell: SWTableViewCell!, didTriggerRightUtilityButtonWithIndex index: Int) {
+        if index == 0 {
+            deleteDocument(cell.tag)
+        }
+    }
+}
+
+// MARK: CORE DATA 
+extension ShowDocumentViewController {
+    
+    func deleteDocument(index: Int) {
+        documents[index].MR_deleteEntity()
+        documents.removeAtIndex(index)
+        NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
+        
+        tableview.reloadData()
+    }
+}
+
 // MARK: PREPARE SEGUE
 extension ShowDocumentViewController {
+    
+    @IBAction func unwindFromEditDocument(segue: UIStoryboardSegue) {
+        tableview.reloadData()
+    }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showDocumentDetail" {
@@ -116,6 +145,11 @@ extension ShowDocumentViewController {
             if let document = selectedDocument {
                 destination.document = document
             }
+        }
+        
+        if segue.identifier == "showEditDocument" {
+            let destination: EditDocumentViewController = segue.destinationViewController as! EditDocumentViewController
+            destination.document = documents[selectedDocumentIndex!]
         }
     }
 }

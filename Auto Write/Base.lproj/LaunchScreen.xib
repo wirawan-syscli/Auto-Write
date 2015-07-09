@@ -7,7 +7,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
+            <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CoverBackground" translatesAutoresizingMaskIntoConstraints="NO" id="gTW-hC-yLe">
@@ -17,7 +17,9 @@
                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="120" id="MtG-l9-mB7"/>
-                        <constraint firstAttribute="height" constant="120" id="NjD-LW-Sbv"/>
+                        <constraint firstAttribute="height" constant="120" id="NjD-LW-Sbv">
+                            <variation key="heightClass=regular-widthClass=compact" constant="118"/>
+                        </constraint>
                     </constraints>
                     <variation key="default">
                         <mask key="constraints">
@@ -49,12 +51,12 @@
                     <exclude reference="Jg6-md-Dpb"/>
                 </mask>
                 <mask key="constraints">
+                    <exclude reference="Hfb-1q-Qtb"/>
+                    <exclude reference="Njx-wa-pTk"/>
                     <exclude reference="8XP-r4-sAm"/>
                     <exclude reference="FLm-et-Gdp"/>
                     <exclude reference="JYc-eu-Tmf"/>
                     <exclude reference="TC2-iz-4XB"/>
-                    <exclude reference="Hfb-1q-Qtb"/>
-                    <exclude reference="Njx-wa-pTk"/>
                 </mask>
             </variation>
             <variation key="heightClass=regular-widthClass=compact">
@@ -63,12 +65,12 @@
                     <include reference="Jg6-md-Dpb"/>
                 </mask>
                 <mask key="constraints">
+                    <include reference="Hfb-1q-Qtb"/>
+                    <include reference="Njx-wa-pTk"/>
                     <include reference="8XP-r4-sAm"/>
                     <include reference="FLm-et-Gdp"/>
                     <include reference="JYc-eu-Tmf"/>
                     <include reference="TC2-iz-4XB"/>
-                    <include reference="Hfb-1q-Qtb"/>
-                    <include reference="Njx-wa-pTk"/>
                 </mask>
             </variation>
             <point key="canvasLocation" x="548" y="455"/>
@@ -76,6 +78,6 @@
     </objects>
     <resources>
         <image name="CoverBackground" width="414" height="736"/>
-        <image name="Icon" width="122" height="120"/>
+        <image name="Icon" width="120" height="118"/>
     </resources>
 </document>

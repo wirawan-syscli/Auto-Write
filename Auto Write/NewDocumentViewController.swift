@@ -93,6 +93,7 @@ extension NewDocumentViewController: G8TesseractDelegate {
         
         hud = MBProgressHUD.showHUDAddedTo(view, animated: true)
         hud!.mode = .AnnularDeterminate
+        hud?.color = UIColor.orangeColor()
         hud!.labelText = "Scanning.."
         
         autoreleasepool { () -> () in

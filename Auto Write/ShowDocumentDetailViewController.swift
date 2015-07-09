@@ -28,27 +28,29 @@ class ShowDocumentDetailViewController: UIViewController {
     var textViews = [NSIndexPath: UITextView]()
     var textViewsHeight = [NSIndexPath: CGFloat]()
     var currentTextView: UITextView?
+    var currentIndex: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.estimatedRowHeight = 50
         tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 50
+        tableView.reloadSections(NSIndexSet(indexesInRange: NSMakeRange(0, tableView.numberOfSections())), withRowAnimation: .None)
         
         titleLabel.text = document.title
         subjectLabel.text = document.subject
         totalQuestionsLabel.text = "\(document.totalQuestions) Question"
         gradeLabel.text = "Grade \(document.grade)"
+        
+        initNotificationSettings()
     }
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillDisappear(animated: Bool) {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
         
-        //tableView.reloadData()
-        //tableView.setNeedsLayout()
-        //tableView.layoutIfNeeded()
+        super.viewWillDisappear(animated)
     }
 
     override func didReceiveMemoryWarning() {
@@ -90,78 +92,126 @@ extension ShowDocumentDetailViewController: UITableViewDelegate, UITableViewData
         
         return cell
     }
+}
+
+// MARK: NSNOTIFICATION CENTER
+extension ShowDocumentDetailViewController {
     
-//    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-//        let height = textViewHeightForRowAt(indexPath)
-//        
-//        if(textViewsHeight[indexPath] == nil || textViewsHeight[indexPath] < height) {
-//            textViewsHeight[indexPath] = height
-//        }
-//        
-//        return textViewsHeight[indexPath]!
-//    }
-//    
-//    func textViewHeightForRowAt(indexPath: NSIndexPath) -> CGFloat {
-//        var textView: UITextView? = textViews[indexPath]
-//        var textViewWidth: CGFloat = 346.0
-//        var textViewHeight: CGFloat = CGFloat(FLT_MAX)
-//        if textView?.attributedText != nil {
-//            textViewWidth = textView!.frame.size.width
-//            textViewHeight = textView!.frame.size.height
-//        }else {
-//            textView = UITextView()
-//            let question = document.questions.objectAtIndex(indexPath.row) as! Questions
-//            let attributedText = NSAttributedString(string: question.text)
-//            textView!.attributedText = attributedText
-//            textViewWidth = 346
-//        }
-//
-//        let size: CGSize = textView!.sizeThatFits(CGSize(width: textViewWidth, height: textViewHeight))
-//        return size.height
-//    }
+    func initNotificationSettings() {
+        
+        let event = NSNotificationCenter.defaultCenter()
+        event.addObserver(self, selector: Selector("keyboardDidShow:"), name: UIKeyboardDidShowNotification, object: nil)
+        event.addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardWillHideNotification, object: nil)
+    }
+    
+    func keyboardDidShow(notification: NSNotification) {
+        let info: [NSObject: AnyObject] = notification.userInfo!
+        
+        let duration = info[UIKeyboardAnimationDurationUserInfoKey] as! Double
+        let curve = info[UIKeyboardAnimationCurveUserInfoKey] as! Int
+        
+        let keyboardFrame = info[UIKeyboardFrameBeginUserInfoKey]!.CGRectValue()
+        let keyboardHeight = keyboardFrame.height
+        let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: keyboardHeight, right: 0.0)
+        
+        tableView.contentInset = contentInsets
+        tableView.scrollIndicatorInsets = contentInsets
+        
+        var aRect = tableView.frame
+        let activeField = currentTextView?.frame.origin
+        aRect.size.height -= keyboardFrame.size.height
+        if !CGRectContainsPoint(aRect, activeField!) {
+            tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: currentIndex!, inSection: 0), atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
+        }
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        let contentInsets = UIEdgeInsetsZero
+        tableView.contentInset = contentInsets
+        tableView.scrollIndicatorInsets = contentInsets
+    }
 }
 
 // MARK: UITEXTVIEW
 extension ShowDocumentDetailViewController: UITextViewDelegate {
+    
+    func textViewShouldBeginEditing(textView: UITextView) -> Bool {
+        currentIndex = textView.tag
+        currentTextView = textView
+        
+        var doneEditingButton = UIBarButtonItem(title: "Done", style: .Plain, target: self, action: Selector("textViewDoneEditing"))
+        navigationItem.rightBarButtonItem = doneEditingButton
+        
+        return true
+    }
+    
     func textViewDidChange(textView: UITextView) {
         tableView.beginUpdates()
         tableView.endUpdates()
     }
     
-    func textViewDidBeginEditing(textView: UITextView) {
-        currentTextView = textView
-        
-        var doneEditingButton = UIBarButtonItem(title: "Done", style: .Plain, target: self, action: Selector("textViewDoneEditing"))
-        navigationItem.rightBarButtonItem = doneEditingButton
-    }
-    
     func textViewDidChangeSelection(textView: UITextView) {
+        currentTextView = textView
     }
     
-    // MARK: UPDATE DATA INTO COREDATA
     func textViewDoneEditing() {
-        navigationItem.rightBarButtonItem = nil
-        
         currentTextView?.resignFirstResponder()
         
-        let indexPath = currentTextView!.tag
-//      document.question.text = currentTextView!.text as String
-//        if let error = document.question.update(indexPath) {
-//            showAlertFromCoreDataErrorFromQuestion()
-//        }
+        dataSavedIntoObjectContext()
         
+        navigationItem.rightBarButtonItem = nil
         currentTextView = nil
+        
     }
 }
 
-// MARK: SAVE TO DATABASE SERVER
+// MARK: CORE DATA
 extension ShowDocumentDetailViewController {
+    
+    func dataSavedIntoObjectContext() {
+        let indexPath = self.currentTextView!.tag
+        let question = document.questions[indexPath] as! Questions
+        let currentTextView = self.currentTextView?.text
+        println(currentTextView)
+        question.text = currentTextView!
+        
+        let defaultContext = NSManagedObjectContext.MR_defaultContext()
+        defaultContext.MR_saveToPersistentStoreWithCompletion { (success: Bool, error: NSError!) -> Void in
+            if !success {
+                self.showAlertFromCoreDataErrorFromQuestion()
+            }
+        }
+    }
     
     @IBAction func documentDetailViewWillSaveDocumentIntoDatabase(sender: AnyObject) {
         
         hud = MBProgressHUD.showHUDAddedTo(view, animated: true)
         hud!.mode = .AnnularDeterminate
+        hud?.color = UIColor.orangeColor()
         hud!.labelText = "Uploading.."
+        
+        let predicate = NSPredicate(format: "documentId = \(document.id)")
+        let query = PFQuery(className: "Documents", predicate: predicate)
+        let results = query.findObjects()
+        
+        if results?.count == 0 {
+            createDataIntoDatabase()
+        } else {
+            let PFDocument = results?.last as! PFObject
+            updateDataIntoDatabase(PFDocument)
+        }
+    }
+}
+
+// MARK: CREATE NEW OBJECT TO DATABASE
+extension ShowDocumentDetailViewController {
+    
+    func createDataIntoDatabase() {
+        let PFDocument = createDocumentAndSaveIntoDatabase()
+        createQuestionsAndSaveIntoDatabase(PFDocument)
+    }
+    
+    func createDocumentAndSaveIntoDatabase() -> PFObject {
         
         let PFDocument = PFObject(className: "Documents")
         PFDocument["documentId"] = document.id
@@ -169,30 +219,91 @@ extension ShowDocumentDetailViewController {
         PFDocument["subject"] = document.subject
         PFDocument["grade"] = document.grade
         PFDocument["totalQuestions"] = document.totalQuestions
-
-        documentDetailViewWillSaveQuestionsIntoDatabase(PFDocument)
+        
+        return PFDocument
     }
     
-    func documentDetailViewWillSaveQuestionsIntoDatabase(PFDocument: PFObject) {
+    func createQuestionsAndSaveIntoDatabase(PFDocument: PFObject) {
         
-        let totalQuestions: Int = Int(document.totalQuestions)
+        let totalQuestions = Int(document.totalQuestions)
         for index in 0..<totalQuestions {
             
             var indexProgress = index + 1
-            hud!.progress = Float( indexProgress / totalQuestions);
+            hud!.progress = Float( indexProgress / totalQuestions )
             
             let PFQuestion = PFObject(className: "Questions")
-            PFQuestion["questionId"] = document.questions[index].id
+            let question = document.questions[index] as! Questions
+            PFQuestion["questionId"] = question.id
             PFQuestion["documentId"] = document.id
-            PFQuestion["text"] = document.questions[index].text
+            PFQuestion["text"] = question.text
             PFQuestion["parent"] = PFDocument
+            
             PFQuestion.saveInBackgroundWithBlock({ (success: Bool, error: NSError?) -> Void in
-                if success {
-                    self.hud!.hide(true)
-                    self.showAlertWithSuccessNotification()
+                if success{
+                    if indexProgress == totalQuestions {
+                        self.hud!.hide(true)
+                        self.showAlertWithSuccessNotification()
+                    }
                 } else {
                     self.showAlertWithFailureNotification()
                 }
+            })
+        }
+    }
+}
+
+// MARK: UPDATE OLD OBJECT TO DATABASE
+extension ShowDocumentDetailViewController {
+    
+    func updateDataIntoDatabase(PFDocument: PFObject) {
+        
+        let documentId = PFDocument["documentId"] as! Int
+        
+        let predicate = NSPredicate(format: "documentId = \(documentId)")
+        let query = PFQuery(className: "Documents", predicate: predicate)
+        var error: NSError?
+        let results = query.findObjects(&error)
+        
+        if error != nil {
+            println(error?.userInfo)
+        } else {
+            let PFDocument = results?.first as! PFObject
+            PFDocument["title"] = document.title
+            PFDocument["subject"] = document.subject
+            
+            PFDocument.save(&error)
+            if error != nil {
+                println(error?.userInfo)
+            }
+        }
+        
+        let totalQuestions = Int(document.totalQuestions)
+        let questions = document.questions
+        for index in 0..<totalQuestions {
+            
+            var indexProgress = index + 1
+            hud!.progress = Float( indexProgress / totalQuestions )
+            
+            let question = questions[index] as! Questions
+            let questionId = question.id as! Int
+            
+            let predicate = NSPredicate(format: "questionId = \(questionId)")
+            let query = PFQuery(className: "Questions", predicate: predicate)
+            query.findObjectsInBackgroundWithBlock({ (results: [AnyObject]?, error: NSError?) -> Void in
+                
+                let PFQuestion = results?.first as! PFObject
+                PFQuestion["text"] = questions[index].text
+                
+                PFQuestion.saveInBackgroundWithBlock({ (success: Bool, error: NSError?) -> Void in
+                    if success {
+                        if indexProgress == totalQuestions {
+                            self.hud!.hide(true)
+                            self.showAlertWithSuccessNotification()
+                        }
+                    } else {
+                        self.showAlertWithFailureNotification()
+                    }
+                })
             })
         }
     }
@@ -203,7 +314,7 @@ extension ShowDocumentDetailViewController {
     
     func showAlertWithSuccessNotification() {
         
-        let alert = UIAlertController(title: "Upload Successfully", message: "Document uploaded successfully to the server.", preferredStyle: UIAlertControllerStyle.Alert)
+        let alert = UIAlertController(title: "Upload Successfully", message: "Document uploaded successfully to the database server.", preferredStyle: UIAlertControllerStyle.Alert)
         let action = UIAlertAction(title: "Continue", style: UIAlertActionStyle.Default) { (alert: UIAlertAction!) -> Void in }
         alert.addAction(action)
         

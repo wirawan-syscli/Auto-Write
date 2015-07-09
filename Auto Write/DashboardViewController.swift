@@ -15,6 +15,7 @@ class DashboardViewController: UIViewController {
     
     @IBOutlet weak var newDocumentView: UIView!
     @IBOutlet weak var showDocumentView: UIView!
+    @IBOutlet weak var downloadDocumentView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +43,8 @@ class DashboardViewController: UIViewController {
         newDocumentView.layer.borderWidth = 1.0
         showDocumentView.layer.borderColor = borderColor
         showDocumentView.layer.borderWidth = 1.0
+        downloadDocumentView.layer.borderColor = borderColor
+        downloadDocumentView.layer.borderWidth = 1.0
     }
 }
 
@@ -59,6 +62,7 @@ extension DashboardViewController: UIGestureRecognizerDelegate {
     func initUIGestureRecognizer() {
         initTapGestureRecognitionForNewDocument()
         initTapGestureRecognitionForShowDocument()
+        initTapGestureRecognitionForDownloadDocument()
     }
     
     func initTapGestureRecognitionForNewDocument() {
@@ -84,6 +88,18 @@ extension DashboardViewController: UIGestureRecognizerDelegate {
         
         performSegueWithIdentifier("showListDocument", sender: self)
     }
+    
+    func initTapGestureRecognitionForDownloadDocument() {
+        
+        var tapGesture = UITapGestureRecognizer(target: self, action: Selector("performTapGestureOnDownloadDocument:"))
+        tapGesture.delegate = self
+        downloadDocumentView.addGestureRecognizer(tapGesture)
+    }
+    
+    func performTapGestureOnDownloadDocument(recognizer: UITapGestureRecognizer) {
+        
+        performSegueWithIdentifier("showDownloadDocument", sender: self)
+    }
 }
 
 // MARK: PREPARE SEGUE
@@ -95,11 +111,22 @@ extension DashboardViewController {
         documents.append(source.document!)
     }
     
+    @IBAction func unwindFromDownloadDocument(segue: UIStoryboardSegue) {
+        
+        //let source: DownloadDocumentViewController = segue.sourceViewController as! DownloadDocumentViewController
+        //documents.append(source.downloadedDocument!)
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if segue.identifier == "showListDocument" {
             let destination: ShowDocumentViewController = segue.destinationViewController as! ShowDocumentViewController
             destination.documents = documents
+        }
+        
+        if segue.identifier == "showDownloadDocument" {
+            let destination: DownloadDocumentViewController = segue.destinationViewController as! DownloadDocumentViewController
+            destination.savedDocuments = documents
         }
     }
 }

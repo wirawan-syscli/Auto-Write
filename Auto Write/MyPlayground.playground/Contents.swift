@@ -9,3 +9,10 @@ dateFormatter.dateFormat = "yyMMddHHmmssSSS"
 var value = dateFormatter.stringFromDate(NSDate())
 
 value.toInt()
+
+
+var text:String? = "text"
+
+if let text = text {
+    text
+}

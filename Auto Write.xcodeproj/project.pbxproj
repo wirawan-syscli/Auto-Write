@@ -17,9 +17,12 @@
 		991C2F251B3989F400892ABD /* Auto_WriteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991C2F241B3989F400892ABD /* Auto_WriteTests.swift */; };
 		991C2F331B398E5800892ABD /* tessdata in Resources */ = {isa = PBXBuildFile; fileRef = 991C2F321B398E5800892ABD /* tessdata */; };
 		991C2F351B3A5E8700892ABD /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991C2F341B3A5E8700892ABD /* DashboardViewController.swift */; };
-		99BA15BE1B3A6AA500352E6F /* DocumentOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BA15BD1B3A6AA500352E6F /* DocumentOld.swift */; };
+		99A391E31B4BB10F00C18E40 /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A391E21B4BB10F00C18E40 /* CollectionViewController.swift */; };
+		99A391E51B4BB32700C18E40 /* DownloadDocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A391E41B4BB32700C18E40 /* DownloadDocumentViewController.swift */; };
+		99A391E71B4BC91E00C18E40 /* DownloadDocumentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A391E61B4BC91E00C18E40 /* DownloadDocumentCollectionViewCell.swift */; };
+		99A391E91B4E244A00C18E40 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A391E81B4E244A00C18E40 /* LoginViewController.swift */; };
 		99BA15C01B3A734300352E6F /* NewDocumentSettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BA15BF1B3A734300352E6F /* NewDocumentSettingsTableViewController.swift */; };
-		99BA15C21B3AAA7D00352E6F /* QuestionOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BA15C11B3AAA7D00352E6F /* QuestionOld.swift */; };
+		99D84AB11B4A6054003EDD9E /* EditDocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D84AB01B4A6054003EDD9E /* EditDocumentViewController.swift */; };
 		99EDD7891B4654DF00B00284 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99EDD7871B4654DF00B00284 /* Bolts.framework */; };
 		99EDD78A1B4654DF00B00284 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99EDD7881B4654DF00B00284 /* Parse.framework */; };
 		99EDD78C1B46553000B00284 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99EDD78B1B46553000B00284 /* AudioToolbox.framework */; };
@@ -40,7 +43,6 @@
 		99EDD7AE1B466CDE00B00284 /* Questions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99EDD7AD1B466CDE00B00284 /* Questions.swift */; };
 		99EDD7B01B46704800B00284 /* ShowDocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99EDD7AF1B46704800B00284 /* ShowDocumentViewController.swift */; };
 		99EDD7B21B46720D00B00284 /* ShowDocumentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99EDD7B11B46720D00B00284 /* ShowDocumentTableViewCell.swift */; };
-		99FEDB5C1B3AC364000FE88D /* ShowDocumentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FEDB5B1B3AC364000FE88D /* ShowDocumentTableViewController.swift */; };
 		99FEDB5E1B3BEDA6000FE88D /* ShowDocumentDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FEDB5D1B3BEDA6000FE88D /* ShowDocumentDetailViewController.swift */; };
 		99FEDB601B3D0018000FE88D /* ShowDocumentDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FEDB5F1B3D0018000FE88D /* ShowDocumentDetailTableViewCell.swift */; };
 		99FEDB621B3D3C56000FE88D /* AWSCognitoCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FEDB611B3D3C56000FE88D /* AWSCognitoCredentials.swift */; };
@@ -75,9 +77,12 @@
 		991C2F2E1B398A6800892ABD /* Auto Write-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Auto Write-Bridging-Header.h"; sourceTree = "<group>"; };
 		991C2F321B398E5800892ABD /* tessdata */ = {isa = PBXFileReference; lastKnownFileType = folder; path = tessdata; sourceTree = "<group>"; };
 		991C2F341B3A5E8700892ABD /* DashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
-		99BA15BD1B3A6AA500352E6F /* DocumentOld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentOld.swift; sourceTree = "<group>"; };
+		99A391E21B4BB10F00C18E40 /* CollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
+		99A391E41B4BB32700C18E40 /* DownloadDocumentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadDocumentViewController.swift; sourceTree = "<group>"; };
+		99A391E61B4BC91E00C18E40 /* DownloadDocumentCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadDocumentCollectionViewCell.swift; sourceTree = "<group>"; };
+		99A391E81B4E244A00C18E40 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		99BA15BF1B3A734300352E6F /* NewDocumentSettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewDocumentSettingsTableViewController.swift; sourceTree = "<group>"; };
-		99BA15C11B3AAA7D00352E6F /* QuestionOld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionOld.swift; sourceTree = "<group>"; };
+		99D84AB01B4A6054003EDD9E /* EditDocumentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditDocumentViewController.swift; sourceTree = "<group>"; };
 		99EDD77E1B46348B00B00284 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
 		99EDD7871B4654DF00B00284 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		99EDD7881B4654DF00B00284 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
@@ -99,7 +104,6 @@
 		99EDD7AD1B466CDE00B00284 /* Questions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Questions.swift; sourceTree = "<group>"; };
 		99EDD7AF1B46704800B00284 /* ShowDocumentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowDocumentViewController.swift; sourceTree = "<group>"; };
 		99EDD7B11B46720D00B00284 /* ShowDocumentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowDocumentTableViewCell.swift; sourceTree = "<group>"; };
-		99FEDB5B1B3AC364000FE88D /* ShowDocumentTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowDocumentTableViewController.swift; sourceTree = "<group>"; };
 		99FEDB5D1B3BEDA6000FE88D /* ShowDocumentDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowDocumentDetailViewController.swift; sourceTree = "<group>"; };
 		99FEDB5F1B3D0018000FE88D /* ShowDocumentDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowDocumentDetailTableViewCell.swift; sourceTree = "<group>"; };
 		99FEDB611B3D3C56000FE88D /* AWSCognitoCredentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AWSCognitoCredentials.swift; sourceTree = "<group>"; };
@@ -169,12 +173,15 @@
 			children = (
 				99BA15BB1B3A6A2100352E6F /* Language pack */,
 				99BA15BC1B3A6A3F00352E6F /* Model */,
+				99A391E81B4E244A00C18E40 /* LoginViewController.swift */,
 				991C2F341B3A5E8700892ABD /* DashboardViewController.swift */,
 				99BA15BF1B3A734300352E6F /* NewDocumentSettingsTableViewController.swift */,
 				991C2F101B3989F300892ABD /* NewDocumentViewController.swift */,
-				99FEDB5B1B3AC364000FE88D /* ShowDocumentTableViewController.swift */,
 				99EDD7AF1B46704800B00284 /* ShowDocumentViewController.swift */,
+				99D84AB01B4A6054003EDD9E /* EditDocumentViewController.swift */,
 				99FEDB5D1B3BEDA6000FE88D /* ShowDocumentDetailViewController.swift */,
+				99A391E41B4BB32700C18E40 /* DownloadDocumentViewController.swift */,
+				99A391E21B4BB10F00C18E40 /* CollectionViewController.swift */,
 				991C2F121B3989F300892ABD /* Main.storyboard */,
 				991C2F151B3989F300892ABD /* Images.xcassets */,
 				991C2F171B3989F300892ABD /* LaunchScreen.xib */,
@@ -226,10 +233,9 @@
 				99EDD7AB1B466CDE00B00284 /* Documents.swift */,
 				99EDD7AD1B466CDE00B00284 /* Questions.swift */,
 				99EDD7A51B4662D400B00284 /* IntDate.swift */,
-				99BA15BD1B3A6AA500352E6F /* DocumentOld.swift */,
-				99BA15C11B3AAA7D00352E6F /* QuestionOld.swift */,
 				99EDD7B11B46720D00B00284 /* ShowDocumentTableViewCell.swift */,
 				99FEDB5F1B3D0018000FE88D /* ShowDocumentDetailTableViewCell.swift */,
+				99A391E61B4BC91E00C18E40 /* DownloadDocumentCollectionViewCell.swift */,
 				99FEDB611B3D3C56000FE88D /* AWSCognitoCredentials.swift */,
 				99FEDB651B413BAB000FE88D /* AWSDynamoDB.swift */,
 				99FEDB631B412201000FE88D /* DocumentDB.swift */,
@@ -406,22 +412,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				99A391E91B4E244A00C18E40 /* LoginViewController.swift in Sources */,
+				99A391E31B4BB10F00C18E40 /* CollectionViewController.swift in Sources */,
 				99FEDB661B413BAB000FE88D /* AWSDynamoDB.swift in Sources */,
 				99FEDB681B414FA3000FE88D /* QuestionDB.swift in Sources */,
 				991C2F111B3989F300892ABD /* NewDocumentViewController.swift in Sources */,
-				99BA15C21B3AAA7D00352E6F /* QuestionOld.swift in Sources */,
 				99FEDB601B3D0018000FE88D /* ShowDocumentDetailTableViewCell.swift in Sources */,
 				99FEDB641B412201000FE88D /* DocumentDB.swift in Sources */,
 				99EDD7B21B46720D00B00284 /* ShowDocumentTableViewCell.swift in Sources */,
+				99A391E51B4BB32700C18E40 /* DownloadDocumentViewController.swift in Sources */,
 				991C2F0F1B3989F300892ABD /* Auto_Write.xcdatamodeld in Sources */,
 				99FEDB5E1B3BEDA6000FE88D /* ShowDocumentDetailViewController.swift in Sources */,
+				99D84AB11B4A6054003EDD9E /* EditDocumentViewController.swift in Sources */,
 				99FEDB621B3D3C56000FE88D /* AWSCognitoCredentials.swift in Sources */,
-				99BA15BE1B3A6AA500352E6F /* DocumentOld.swift in Sources */,
 				99EDD7AE1B466CDE00B00284 /* Questions.swift in Sources */,
+				99A391E71B4BC91E00C18E40 /* DownloadDocumentCollectionViewCell.swift in Sources */,
 				991C2F351B3A5E8700892ABD /* DashboardViewController.swift in Sources */,
 				99EDD7B01B46704800B00284 /* ShowDocumentViewController.swift in Sources */,
 				99EDD7A61B4662D400B00284 /* IntDate.swift in Sources */,
-				99FEDB5C1B3AC364000FE88D /* ShowDocumentTableViewController.swift in Sources */,
 				991C2F0C1B3989F300892ABD /* AppDelegate.swift in Sources */,
 				99EDD7AC1B466CDE00B00284 /* Documents.swift in Sources */,
 				99BA15C01B3A734300352E6F /* NewDocumentSettingsTableViewController.swift in Sources */,

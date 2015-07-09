@@ -12,5 +12,4 @@ class ShowDocumentDetailTableViewCell: SWTableViewCell{
     
     @IBOutlet weak var numberLabel: UILabel!
     @IBOutlet weak var questionTextView: UITextView!
-    
 }
