@@ -9,14 +9,15 @@
 import UIKit
 
 class LoginViewController: UIViewController {
-
-    @IBOutlet weak var scrollView: UIScrollView!
+    
+    
     @IBOutlet weak var imageLogo: UIImageView!
     @IBOutlet weak var loginView: UIView!
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
     
+    //var imageLogo: UIImageView?
     var currentTextField: UITextField?
     var isPlayed: Bool = false
     var destinationFrame: CGRect = CGRect()
@@ -62,15 +63,26 @@ class LoginViewController: UIViewController {
 
 extension LoginViewController: POPAnimationDelegate {
     
+    func initImageLogo() {
+        
+//        let image = UIImage(named: "Icon")
+//        imageLogo = UIImageView(frame: CGRectMake(0.0, 0.0, image!.size.width, image!.size.height))
+//        imageLogo!.image = image
+//        view.addSubview(imageLogo!)
+//        
+//        println(imageLogo?.frame)
+        viewWillAnimateLogo()
+    }
+    
     func viewWillAnimateLogo() {
         initViewStyling()
         
         let origin = imageLogo.frame.origin
         let size = imageLogo.frame.size
         let animation = POPSpringAnimation(propertyNamed: kPOPViewFrame)
-        destinationFrame = CGRect(x: origin.x, y: origin.y - 170.0, width: size.width, height: size.height)
         
         animation.springSpeed = 0.5
+        destinationFrame = CGRectMake(origin.x, origin.y - 170.0, size.width, size.height)
         animation.toValue = NSValue(CGRect: destinationFrame)
         animation.name = "imageLogo"
         animation.delegate = self
@@ -103,8 +115,7 @@ extension LoginViewController: POPAnimationDelegate {
     func pop_animationDidStop(anim: POPAnimation!, finished: Bool) {
         
         if anim.name == "imageLogo" {
-            println(destinationFrame)
-            imageLogo.pop_removeAnimationForKey("imageLogo")
+            imageLogo!.pop_removeAnimationForKey("imageLogo")
             viewWillAnimateLoginView()
             viewWillAnimateLoginButton()
         } else if anim.name == "loginView" {
@@ -126,7 +137,6 @@ extension LoginViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        println(imageLogo.frame)
         return true
     }
     
