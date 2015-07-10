@@ -13,15 +13,16 @@ class DashboardViewController: UIViewController {
     
     var documents: [Documents] = Array()
     
-    @IBOutlet weak var newDocumentView: UIView!
-    @IBOutlet weak var showDocumentView: UIView!
-    @IBOutlet weak var downloadDocumentView: UIView!
+    @IBOutlet weak var logoView: UIView!
+    @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        addShadowToViews()
-        initUIGestureRecognizer()
+        logoView.layer.cornerRadius = 10
+        
+        tableView.delegate = self
+        tableView.dataSource = self
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -35,16 +36,15 @@ class DashboardViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func addShadowToViews() {
+    func addShadowToViews(cell: DashboardTableViewCell) -> DashboardTableViewCell {
         
         let RGBColor = CGFloat(220.0 / 255.0)
         let borderColor = UIColor(red: RGBColor, green: RGBColor, blue: RGBColor, alpha: 1.0).CGColor
-        newDocumentView.layer.borderColor = borderColor
-        newDocumentView.layer.borderWidth = 1.0
-        showDocumentView.layer.borderColor = borderColor
-        showDocumentView.layer.borderWidth = 1.0
-        downloadDocumentView.layer.borderColor = borderColor
-        downloadDocumentView.layer.borderWidth = 1.0
+        cell.layer.borderColor = borderColor
+        cell.layer.borderWidth = 1.0
+        cell.selectionStyle = .None
+        
+        return cell
     }
 }
 
@@ -56,49 +56,54 @@ extension DashboardViewController  {
     }
 }
 
-// MARK: PERFORM GESTURE RECOGNIZER
-extension DashboardViewController: UIGestureRecognizerDelegate {
+// MARK: UITABLEVIEW
+extension DashboardViewController: UITableViewDataSource, UITableViewDelegate {
     
-    func initUIGestureRecognizer() {
-        initTapGestureRecognitionForNewDocument()
-        initTapGestureRecognitionForShowDocument()
-        initTapGestureRecognitionForDownloadDocument()
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
     }
     
-    func initTapGestureRecognitionForNewDocument() {
-        
-        var tapGesture = UITapGestureRecognizer(target: self, action: Selector("performTapGestureOnNewDocument:"))
-        tapGesture.delegate = self
-        newDocumentView.addGestureRecognizer(tapGesture)
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 3
     }
     
-    func performTapGestureOnNewDocument(recognizer: UITapGestureRecognizer) {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        var cell: DashboardTableViewCell = tableView.dequeueReusableCellWithIdentifier("dashboardCell", forIndexPath: indexPath) as! DashboardTableViewCell
         
-        performSegueWithIdentifier("showNewDocumentSettings", sender: self)
+        switch indexPath.row{
+        case 0:
+            cell.menuTextLabel.text = "Create New Document"
+            break;
+        case 1:
+            cell.menuTextLabel.text = "Show All Document"
+            break;
+        case 2:
+            cell.menuTextLabel.text = "Download Document"
+            break;
+        default :
+            break;
+        }
+        
+        cell = addShadowToViews(cell)
+
+        return cell
     }
     
-    func initTapGestureRecognitionForShowDocument() {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        var tapGesture = UITapGestureRecognizer(target: self, action: Selector("performTapGestureOnShowDocument:"))
-        tapGesture.delegate = self
-        showDocumentView.addGestureRecognizer(tapGesture)
-    }
-    
-    func performTapGestureOnShowDocument(recognizer: UITapGestureRecognizer) {
-        
-        performSegueWithIdentifier("showListDocument", sender: self)
-    }
-    
-    func initTapGestureRecognitionForDownloadDocument() {
-        
-        var tapGesture = UITapGestureRecognizer(target: self, action: Selector("performTapGestureOnDownloadDocument:"))
-        tapGesture.delegate = self
-        downloadDocumentView.addGestureRecognizer(tapGesture)
-    }
-    
-    func performTapGestureOnDownloadDocument(recognizer: UITapGestureRecognizer) {
-        
-        performSegueWithIdentifier("showDownloadDocument", sender: self)
+        switch indexPath.row {
+        case 0:
+            performSegueWithIdentifier("showNewDocumentSettings", sender: self)
+            break;
+        case 1:
+            performSegueWithIdentifier("showListDocument", sender: self)
+            break;
+        case 2:
+            performSegueWithIdentifier("showDownloadDocument", sender: self)
+            break;
+        default:
+            break;
+        }
     }
 }
 

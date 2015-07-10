@@ -11,3 +11,5 @@
 #import <SWTableViewCell/SWTableViewCell.h>
 
 #import <pop/POP.h>
+
+#import "Reachability.h"

@@ -22,6 +22,7 @@ class DownloadDocumentViewController: UIViewController {
     
     var hud: MBProgressHUD?
     var tapGesture: UITapGestureRecognizer?
+    var reach: Reachability?
     
     override func viewDidLoad() {
         
@@ -33,7 +34,7 @@ class DownloadDocumentViewController: UIViewController {
         
         addShadowToSearchBar()
         initTapGestureRecognizer()
-        performSearchingDocuments(nil)
+        checkForConnection()
         }
 
     override func didReceiveMemoryWarning() {
@@ -61,6 +62,28 @@ class DownloadDocumentViewController: UIViewController {
 // MARK: FETCHING DATA CONTROLLER
 extension DownloadDocumentViewController {
     
+    func checkForConnection() {
+        
+        self.hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        self.hud!.mode = .AnnularDeterminate
+        self.hud?.color = UIColor.orangeColor()
+        self.hud!.labelText = "Scanning.."
+    
+        reach = Reachability(hostname: "www.google.com")
+        
+        reach!.reachableBlock = { (reachability) in
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                self.performSearchingDocuments(nil)
+            })
+        }
+        reach!.unreachableBlock = { (reachability) in
+            self.hud!.hide(true)
+            self.showAlertFromNoConnection()
+        }
+        
+        reach!.startNotifier()
+    }
+    
     func performSearchingDocuments(keyword: String?){
         
         var downloadedDocuments = [[Int: String]]()
@@ -74,11 +97,6 @@ extension DownloadDocumentViewController {
         }
         
         query.findObjectsInBackgroundWithBlock { (queryResults: [AnyObject]?, error: NSError?) -> Void in
-            
-            self.hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
-            self.hud!.mode = .AnnularDeterminate
-            self.hud?.color = UIColor.orangeColor()
-            self.hud!.labelText = "Scanning.."
             
             var PFObjects = [PFObject]()
             if let extractedResults = queryResults {
@@ -237,6 +255,18 @@ extension DownloadDocumentViewController {
         let cancel = UIAlertAction(title: "Cancel", style: .Default) { (alert: UIAlertAction!) -> Void in }
         alert.addAction(begin)
         alert.addAction(cancel)
+        
+        presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    func showAlertFromNoConnection() {
+        
+        let alert = UIAlertController(title: "No Internet Connection", message: "Internet connection is required to view this page", preferredStyle: .Alert)
+        let action = UIAlertAction(title: "Ok", style: .Default) { (alert: UIAlertAction!) -> Void in
+            self.reach!.stopNotifier()
+            self.performSegueWithIdentifier("unwindFromDownloadDocument", sender: self)
+        }
+        alert.addAction(action)
         
         presentViewController(alert, animated: true, completion: nil)
     }

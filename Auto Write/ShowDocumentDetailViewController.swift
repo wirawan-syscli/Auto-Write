@@ -110,7 +110,7 @@ extension ShowDocumentDetailViewController {
         let duration = info[UIKeyboardAnimationDurationUserInfoKey] as! Double
         let curve = info[UIKeyboardAnimationCurveUserInfoKey] as! Int
         
-        let keyboardFrame = info[UIKeyboardFrameBeginUserInfoKey]!.CGRectValue()
+        let keyboardFrame = info[UIKeyboardFrameEndUserInfoKey]!.CGRectValue()
         let keyboardHeight = keyboardFrame.height
         let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: keyboardHeight, right: 0.0)
         

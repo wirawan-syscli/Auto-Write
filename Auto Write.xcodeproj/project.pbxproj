@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		829F975E92B34861E837644D /* libPods-Auto Write.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BED231D1197293FFC94E6CE /* libPods-Auto Write.a */; };
+		990B420B1B4FB521009241FE /* DashboardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990B420A1B4FB521009241FE /* DashboardTableViewCell.swift */; };
 		991C2F0C1B3989F300892ABD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991C2F0B1B3989F300892ABD /* AppDelegate.swift */; };
 		991C2F0F1B3989F300892ABD /* Auto_Write.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 991C2F0D1B3989F300892ABD /* Auto_Write.xcdatamodeld */; };
 		991C2F111B3989F300892ABD /* NewDocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991C2F101B3989F300892ABD /* NewDocumentViewController.swift */; };
@@ -21,6 +22,7 @@
 		99A391E51B4BB32700C18E40 /* DownloadDocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A391E41B4BB32700C18E40 /* DownloadDocumentViewController.swift */; };
 		99A391E71B4BC91E00C18E40 /* DownloadDocumentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A391E61B4BC91E00C18E40 /* DownloadDocumentCollectionViewCell.swift */; };
 		99A391E91B4E244A00C18E40 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A391E81B4E244A00C18E40 /* LoginViewController.swift */; };
+		99A391ED1B4F6F9E00C18E40 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 99A391EC1B4F6F9E00C18E40 /* Reachability.m */; };
 		99BA15C01B3A734300352E6F /* NewDocumentSettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BA15BF1B3A734300352E6F /* NewDocumentSettingsTableViewController.swift */; };
 		99D84AB11B4A6054003EDD9E /* EditDocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D84AB01B4A6054003EDD9E /* EditDocumentViewController.swift */; };
 		99EDD7891B4654DF00B00284 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99EDD7871B4654DF00B00284 /* Bolts.framework */; };
@@ -63,6 +65,7 @@
 
 /* Begin PBXFileReference section */
 		7BED231D1197293FFC94E6CE /* libPods-Auto Write.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Auto Write.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		990B420A1B4FB521009241FE /* DashboardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardTableViewCell.swift; sourceTree = "<group>"; };
 		991C2F061B3989F300892ABD /* Auto Write.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Auto Write.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		991C2F0A1B3989F300892ABD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		991C2F0B1B3989F300892ABD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -81,6 +84,8 @@
 		99A391E41B4BB32700C18E40 /* DownloadDocumentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadDocumentViewController.swift; sourceTree = "<group>"; };
 		99A391E61B4BC91E00C18E40 /* DownloadDocumentCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadDocumentCollectionViewCell.swift; sourceTree = "<group>"; };
 		99A391E81B4E244A00C18E40 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		99A391EB1B4F6F9E00C18E40 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = "../../../Downloads/Reachability-master/Reachability.h"; sourceTree = "<group>"; };
+		99A391EC1B4F6F9E00C18E40 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = "../../../Downloads/Reachability-master/Reachability.m"; sourceTree = "<group>"; };
 		99BA15BF1B3A734300352E6F /* NewDocumentSettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewDocumentSettingsTableViewController.swift; sourceTree = "<group>"; };
 		99D84AB01B4A6054003EDD9E /* EditDocumentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditDocumentViewController.swift; sourceTree = "<group>"; };
 		99EDD77E1B46348B00B00284 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
@@ -156,6 +161,7 @@
 				991C2F071B3989F300892ABD /* Products */,
 				C821EB8B30F7403D9A6F35A9 /* Pods */,
 				AA42CC36424E482739E5387A /* Frameworks */,
+				99A391EA1B4F6F6800C18E40 /* Third-Party Libraries */,
 			);
 			sourceTree = "<group>";
 		};
@@ -219,6 +225,16 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		99A391EA1B4F6F6800C18E40 /* Third-Party Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				99A391EB1B4F6F9E00C18E40 /* Reachability.h */,
+				99A391EC1B4F6F9E00C18E40 /* Reachability.m */,
+			);
+			name = "Third-Party Libraries";
+			path = "Auto Write";
+			sourceTree = "<group>";
+		};
 		99BA15BB1B3A6A2100352E6F /* Language pack */ = {
 			isa = PBXGroup;
 			children = (
@@ -233,6 +249,7 @@
 				99EDD7AB1B466CDE00B00284 /* Documents.swift */,
 				99EDD7AD1B466CDE00B00284 /* Questions.swift */,
 				99EDD7A51B4662D400B00284 /* IntDate.swift */,
+				990B420A1B4FB521009241FE /* DashboardTableViewCell.swift */,
 				99EDD7B11B46720D00B00284 /* ShowDocumentTableViewCell.swift */,
 				99FEDB5F1B3D0018000FE88D /* ShowDocumentDetailTableViewCell.swift */,
 				99A391E61B4BC91E00C18E40 /* DownloadDocumentCollectionViewCell.swift */,
@@ -413,6 +430,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				99A391E91B4E244A00C18E40 /* LoginViewController.swift in Sources */,
+				990B420B1B4FB521009241FE /* DashboardTableViewCell.swift in Sources */,
 				99A391E31B4BB10F00C18E40 /* CollectionViewController.swift in Sources */,
 				99FEDB661B413BAB000FE88D /* AWSDynamoDB.swift in Sources */,
 				99FEDB681B414FA3000FE88D /* QuestionDB.swift in Sources */,
@@ -426,6 +444,7 @@
 				99D84AB11B4A6054003EDD9E /* EditDocumentViewController.swift in Sources */,
 				99FEDB621B3D3C56000FE88D /* AWSCognitoCredentials.swift in Sources */,
 				99EDD7AE1B466CDE00B00284 /* Questions.swift in Sources */,
+				99A391ED1B4F6F9E00C18E40 /* Reachability.m in Sources */,
 				99A391E71B4BC91E00C18E40 /* DownloadDocumentCollectionViewCell.swift in Sources */,
 				991C2F351B3A5E8700892ABD /* DashboardViewController.swift in Sources */,
 				99EDD7B01B46704800B00284 /* ShowDocumentViewController.swift in Sources */,
