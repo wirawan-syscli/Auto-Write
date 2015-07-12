@@ -11,7 +11,7 @@ import UIKit
 // MARK: CLASS INIT
 class ShowDocumentViewController: UIViewController {
     
-    var documents: [Documents]!
+    var documents = [Documents]()
     var selectedDocument: Documents?
     
     @IBOutlet weak var tableview: UITableView!
@@ -20,16 +20,28 @@ class ShowDocumentViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        tableview.delegate = self
-        tableview.dataSource = self
+        
         tableview.rowHeight = UITableViewAutomaticDimension
         tableview.estimatedRowHeight = 44
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        fetchAllData()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+}
+
+// MARK: PERFORM FETCH REQUEST
+extension ShowDocumentViewController  {
+    
+    func fetchAllData() {
+        documents = Documents.MR_findAllSortedBy("id", ascending: true) as! [Documents]
     }
 }
 

@@ -125,7 +125,10 @@ extension DashboardViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if segue.identifier == "showListDocument" {
-            let destination: ShowDocumentViewController = segue.destinationViewController as! ShowDocumentViewController
+            let navbar: UITabBarController = segue.destinationViewController as! UITabBarController
+            let destination: ShowDocumentViewController = navbar.viewControllers![0] as! ShowDocumentViewController
+            
+            navbar.view.layer.backgroundColor = ColorsPallete.orangeLight().CGColor
             destination.documents = documents
         }
         
