@@ -8,10 +8,17 @@
 
 import UIKit
 
+protocol NewDocumentViewControllerDelegate {
+    
+    func NewDocumentWillNavigateToDashboard(newDocument: NewDocumentViewController)
+}
+
 // MARK: INIT
 class NewDocumentViewController: UIViewController{
 
     @IBOutlet weak var textView: UITextView!
+    
+    var delegate: NewDocumentViewControllerDelegate?
     
     // CORE DATA
     var document: Documents!
@@ -35,6 +42,12 @@ class NewDocumentViewController: UIViewController{
         saveBarButtonItem = UIBarButtonItem(title: "Save", style: .Plain, target: self, action: Selector("textViewSaveEditing"))
         textView.delegate = self
         navigationItem.rightBarButtonItem = nil
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(true)
+        
+        delegate?.NewDocumentWillNavigateToDashboard(self)
     }
 
     override func didReceiveMemoryWarning() {
@@ -180,7 +193,7 @@ extension NewDocumentViewController {
             self.showAlertBeforePresentingNewQuestion()
         } else {
             self.saveObjectContext()
-            performSegueWithIdentifier("unwindFromNewDocument", sender: self)
+            dismissViewControllerAnimated(true, completion: nil)
         }
     }
     

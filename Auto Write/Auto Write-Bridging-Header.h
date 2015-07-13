@@ -13,3 +13,5 @@
 #import <pop/POP.h>
 
 #import "Reachability.h"
+
+#import "CRGradientNavigationBar.h"

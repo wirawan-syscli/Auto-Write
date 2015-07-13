@@ -33,8 +33,8 @@ class LoginViewController: UIViewController {
     
     func initViewStyling() {
         let orange = ColorsPallete.orangeDark()
-        let gradient: CAGradientLayer = CAGradientLayer()
         
+        let gradient: CAGradientLayer = CAGradientLayer()
         gradient.frame = view.bounds
         gradient.colors = [ColorsPallete.orangeLight().CGColor, ColorsPallete.orangeDark().CGColor]
         view.layer.insertSublayer(gradient, atIndex: 0)

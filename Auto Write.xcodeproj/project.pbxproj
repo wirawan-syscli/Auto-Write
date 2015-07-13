@@ -7,8 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3C0B19F4FFC9F29654C975BC /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 394AE650D8CB77D7C8EAC1A9 /* libPods.a */; };
-		829F975E92B34861E837644D /* libPods-Auto Write.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BED231D1197293FFC94E6CE /* libPods-Auto Write.a */; };
+		4312BE9481E82374B4BD3A8F /* libPods-Auto Write.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 496AEAFA1278DC4ADB60A443 /* libPods-Auto Write.a */; };
 		990B420B1B4FB521009241FE /* DashboardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990B420A1B4FB521009241FE /* DashboardTableViewCell.swift */; };
 		991C2F0C1B3989F300892ABD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991C2F0B1B3989F300892ABD /* AppDelegate.swift */; };
 		991C2F0F1B3989F300892ABD /* Auto_Write.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 991C2F0D1B3989F300892ABD /* Auto_Write.xcdatamodeld */; };
@@ -67,8 +66,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		394AE650D8CB77D7C8EAC1A9 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		7BED231D1197293FFC94E6CE /* libPods-Auto Write.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Auto Write.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		496AEAFA1278DC4ADB60A443 /* libPods-Auto Write.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Auto Write.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		990B420A1B4FB521009241FE /* DashboardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardTableViewCell.swift; sourceTree = "<group>"; };
 		991C2F061B3989F300892ABD /* Auto Write.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Auto Write.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		991C2F0A1B3989F300892ABD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -94,6 +92,7 @@
 		99A391E61B4BC91E00C18E40 /* DownloadDocumentCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadDocumentCollectionViewCell.swift; sourceTree = "<group>"; };
 		99A391E81B4E244A00C18E40 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		99BA15BF1B3A734300352E6F /* NewDocumentSettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewDocumentSettingsTableViewController.swift; sourceTree = "<group>"; };
+		99C5E8501B53ACEC00011AE6 /* libPods-Auto Write-FoldingTabBar.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-Auto Write-FoldingTabBar.a"; path = "Pods/../build/Debug-iphoneos/libPods-Auto Write-FoldingTabBar.a"; sourceTree = "<group>"; };
 		99D84AB01B4A6054003EDD9E /* EditDocumentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditDocumentViewController.swift; sourceTree = "<group>"; };
 		99EDD77E1B46348B00B00284 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
 		99EDD7871B4654DF00B00284 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
@@ -142,10 +141,9 @@
 				99EDD7901B46553B00B00284 /* CoreGraphics.framework in Frameworks */,
 				99EDD78E1B46553500B00284 /* CFNetwork.framework in Frameworks */,
 				99EDD78C1B46553000B00284 /* AudioToolbox.framework in Frameworks */,
-				829F975E92B34861E837644D /* libPods-Auto Write.a in Frameworks */,
 				99EDD78A1B4654DF00B00284 /* Parse.framework in Frameworks */,
 				99EDD7891B4654DF00B00284 /* Bolts.framework in Frameworks */,
-				3C0B19F4FFC9F29654C975BC /* libPods.a in Frameworks */,
+				4312BE9481E82374B4BD3A8F /* libPods-Auto Write.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -188,18 +186,17 @@
 				999F4EE41B511E8F009B4B6E /* TabBarController.swift */,
 				999F4EE61B515A61009B4B6E /* ShowDocumentNavigationController.swift */,
 				99A391E81B4E244A00C18E40 /* LoginViewController.swift */,
-				991C2F341B3A5E8700892ABD /* DashboardViewController.swift */,
 				99BA15BF1B3A734300352E6F /* NewDocumentSettingsTableViewController.swift */,
 				991C2F101B3989F300892ABD /* NewDocumentViewController.swift */,
 				99EDD7AF1B46704800B00284 /* ShowDocumentViewController.swift */,
 				99D84AB01B4A6054003EDD9E /* EditDocumentViewController.swift */,
 				99FEDB5D1B3BEDA6000FE88D /* ShowDocumentDetailViewController.swift */,
 				99A391E41B4BB32700C18E40 /* DownloadDocumentViewController.swift */,
-				99A391E21B4BB10F00C18E40 /* CollectionViewController.swift */,
 				991C2F121B3989F300892ABD /* Main.storyboard */,
 				991C2F151B3989F300892ABD /* Images.xcassets */,
 				991C2F171B3989F300892ABD /* LaunchScreen.xib */,
 				991C2F0D1B3989F300892ABD /* Auto_Write.xcdatamodeld */,
+				99C5E84E1B53947500011AE6 /* Unused Class */,
 				991C2F091B3989F300892ABD /* Supporting Files */,
 			);
 			path = "Auto Write";
@@ -257,15 +254,32 @@
 				99EDD7AB1B466CDE00B00284 /* Documents.swift */,
 				99EDD7AD1B466CDE00B00284 /* Questions.swift */,
 				99EDD7A51B4662D400B00284 /* IntDate.swift */,
-				990B420A1B4FB521009241FE /* DashboardTableViewCell.swift */,
 				99EDD7B11B46720D00B00284 /* ShowDocumentTableViewCell.swift */,
 				99FEDB5F1B3D0018000FE88D /* ShowDocumentDetailTableViewCell.swift */,
 				99A391E61B4BC91E00C18E40 /* DownloadDocumentCollectionViewCell.swift */,
+				999F4EE01B50F835009B4B6E /* ColorsPallete.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		99C5E84E1B53947500011AE6 /* Unused Class */ = {
+			isa = PBXGroup;
+			children = (
+				99C5E84F1B53948A00011AE6 /* Model */,
+				991C2F341B3A5E8700892ABD /* DashboardViewController.swift */,
+			);
+			name = "Unused Class";
+			sourceTree = "<group>";
+		};
+		99C5E84F1B53948A00011AE6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				99A391E21B4BB10F00C18E40 /* CollectionViewController.swift */,
+				990B420A1B4FB521009241FE /* DashboardTableViewCell.swift */,
 				99FEDB611B3D3C56000FE88D /* AWSCognitoCredentials.swift */,
 				99FEDB651B413BAB000FE88D /* AWSDynamoDB.swift */,
 				99FEDB631B412201000FE88D /* DocumentDB.swift */,
 				99FEDB671B414FA3000FE88D /* QuestionDB.swift */,
-				999F4EE01B50F835009B4B6E /* ColorsPallete.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -273,6 +287,7 @@
 		AA42CC36424E482739E5387A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				99C5E8501B53ACEC00011AE6 /* libPods-Auto Write-FoldingTabBar.a */,
 				99EDD7A31B4657A000B00284 /* Social.framework */,
 				99EDD7A11B46579B00B00284 /* Accounts.framework */,
 				99EDD79F1B46557300B00284 /* libsqlite3.dylib */,
@@ -287,8 +302,7 @@
 				99EDD78B1B46553000B00284 /* AudioToolbox.framework */,
 				99EDD7871B4654DF00B00284 /* Bolts.framework */,
 				99EDD7881B4654DF00B00284 /* Parse.framework */,
-				7BED231D1197293FFC94E6CE /* libPods-Auto Write.a */,
-				394AE650D8CB77D7C8EAC1A9 /* libPods.a */,
+				496AEAFA1278DC4ADB60A443 /* libPods-Auto Write.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -309,11 +323,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 991C2F281B3989F400892ABD /* Build configuration list for PBXNativeTarget "Auto Write" */;
 			buildPhases = (
-				CE290AC4E1D33B67AA710203 /* Check Pods Manifest.lock */,
+				C5B1B9F664C60519EE64D8EA /* Check Pods Manifest.lock */,
 				991C2F021B3989F300892ABD /* Sources */,
 				991C2F031B3989F300892ABD /* Frameworks */,
 				991C2F041B3989F300892ABD /* Resources */,
-				C5665088A00F4F66AEAED14B /* Copy Pods Resources */,
+				68E5E7101E9EA62094941928 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -407,7 +421,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		C5665088A00F4F66AEAED14B /* Copy Pods Resources */ = {
+		68E5E7101E9EA62094941928 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -422,7 +436,7 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Auto Write/Pods-Auto Write-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		CE290AC4E1D33B67AA710203 /* Check Pods Manifest.lock */ = {
+		C5B1B9F664C60519EE64D8EA /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -607,6 +621,10 @@
 				INFOPLIST_FILE = "Auto Write/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks $(CONFIGURATION_BUILD_DIR)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Auto Write/Auto Write-Bridging-Header.h";
@@ -629,6 +647,10 @@
 				INFOPLIST_FILE = "Auto Write/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks $(CONFIGURATION_BUILD_DIR)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Auto Write/Auto Write-Bridging-Header.h";

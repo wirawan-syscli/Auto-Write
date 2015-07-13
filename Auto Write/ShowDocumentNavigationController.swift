@@ -14,9 +14,13 @@ class ShowDocumentNavigationController: UINavigationController {
         super.viewDidLoad()
 
         navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        navigationBar.tintColor = UIColor.whiteColor()
         navigationBar.barTintColor = ColorsPallete.orangeLight()
         navigationBar.alpha = 1.0
         navigationBar.translucent = false
+        
+        let gradient = [ColorsPallete.orangeLight().CGColor, ColorsPallete.orangeDark().CGColor]
+        CRGradientNavigationBar.appearance().setBarTintGradientColors(gradient)
     }
 
     override func didReceiveMemoryWarning() {

@@ -38,6 +38,26 @@ class NewDocumentSettingsTableViewController: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func resetAllSettings() {
+        
+        titleLabel.text = ""
+        subjectLabel.text = ""
+        gradeStepper.value = 1
+        gradeLabel.text = "1"
+        totalQuestionsStepper.value = 1
+        totalQuestionsLabel.text = "1"
+    }
+}
+
+// MARK: NEWDOCUMENT VIEW DELEGATE
+extension NewDocumentSettingsTableViewController: NewDocumentViewControllerDelegate {
+    
+    func NewDocumentWillNavigateToDashboard(newDocument: NewDocumentViewController) {
+        
+        resetAllSettings()
+        tabBarController?.selectedIndex = 0
+    }
 }
 
 // MARK: UITEXTFIELD
@@ -115,6 +135,7 @@ extension NewDocumentSettingsTableViewController {
         if segue.identifier == "showNewDocument" {
             let navigation: UINavigationController = segue.destinationViewController as! UINavigationController
             let source: NewDocumentViewController = navigation.topViewController as! NewDocumentViewController
+            source.delegate = self
             source.document = document
         }
     }

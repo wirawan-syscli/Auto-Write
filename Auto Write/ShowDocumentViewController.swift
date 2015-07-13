@@ -23,12 +23,15 @@ class ShowDocumentViewController: UIViewController {
         
         tableview.rowHeight = UITableViewAutomaticDimension
         tableview.estimatedRowHeight = 44
+        
+        tabBarController?.delegate = self
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
         fetchAllData()
+        tableview.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -84,8 +87,8 @@ extension ShowDocumentViewController: UITableViewDelegate, UITableViewDataSource
         cell.totalQuestionsLabel.layer.borderColor = cell.totalQuestionsLabel.tintColor.CGColor
         cell.totalQuestionsLabel.layer.borderWidth = 1.25
         
-        cell.transform = CGAffineTransformMakeScale(0.0, 0.0)
         let durationTime = 1.0 + (Float(indexPath.row) * 0.1)
+        cell.transform = CGAffineTransformMakeScale(0.0, 0.0)
         UIView.animateWithDuration(NSTimeInterval(durationTime), animations: { () -> Void in
             cell.transform = CGAffineTransformMakeScale(1.0, 1.0)
         })
@@ -144,8 +147,32 @@ extension ShowDocumentViewController {
     }
 }
 
+// MARK: TABBAR CONTROLLER
+extension ShowDocumentViewController: UITabBarControllerDelegate {
+    
+    func tabBarController(tabBarController: UITabBarController, didSelectViewController viewController: UIViewController) {
+    
+        if viewController.isKindOfClass(ShowDocumentNavigationController) {
+            
+            let navbar = viewController as! ShowDocumentNavigationController
+            
+            if navbar.topViewController.isKindOfClass(DownloadDocumentViewController) {
+                
+                let destination: DownloadDocumentViewController = navbar.topViewController as! DownloadDocumentViewController
+                destination.savedDocuments = documents
+                
+            }
+        }
+    }
+}
+
 // MARK: PREPARE SEGUE
 extension ShowDocumentViewController {
+    
+    @IBAction func unwindFromNewDocument(segue: UIStoryboardSegue) {
+        let source: NewDocumentViewController = segue.sourceViewController as! NewDocumentViewController
+        documents.append(source.document!)
+    }
     
     @IBAction func unwindFromEditDocument(segue: UIStoryboardSegue) {
         tableview.reloadData()

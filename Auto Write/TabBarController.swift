@@ -15,7 +15,7 @@ class TabBarController: UITabBarController {
 
         let layer = CALayer()
         layer.frame = CGRectMake(0.0, 0.0, tabBar.frame.size.width, 3.0)
-        layer.backgroundColor = ColorsPallete.orangeLight().CGColor
+        layer.backgroundColor = ColorsPallete.orangeDark().CGColor
         tabBar.layer.addSublayer(layer)
         
         tabBar.tintColor = ColorsPallete.orangeLight()
@@ -27,7 +27,6 @@ class TabBarController: UITabBarController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 
     /*
     // MARK: - Navigation

@@ -14,6 +14,7 @@ class ShowDocumentDetailViewController: UIViewController {
 
     var document: Documents!
     
+    @IBOutlet weak var documentView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subjectLabel: UILabel!
     @IBOutlet weak var totalQuestionsLabel: UILabel!
@@ -29,21 +30,24 @@ class ShowDocumentDetailViewController: UIViewController {
     var textViewsHeight = [NSIndexPath: CGFloat]()
     var currentTextView: UITextView?
     var currentIndex: Int?
+    var saveButton: UIBarButtonItem?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        tableView.delegate = self
-        tableView.dataSource = self
+
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 50
         tableView.reloadSections(NSIndexSet(indexesInRange: NSMakeRange(0, tableView.numberOfSections())), withRowAnimation: .None)
         
         titleLabel.text = document.title
         subjectLabel.text = document.subject
-        totalQuestionsLabel.text = "\(document.totalQuestions) Question"
-        gradeLabel.text = "Grade \(document.grade)"
+        totalQuestionsLabel.text = "Q: \(document.totalQuestions)"
+        gradeLabel.text = "G: \(document.grade)"
+        saveButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Action, target: self, action: Selector("uploadDataIntoDatabase"))
         
+        navigationItem.rightBarButtonItem = saveButton
+        
+        initForStyling()
         initNotificationSettings()
     }
     
@@ -56,6 +60,14 @@ class ShowDocumentDetailViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func initForStyling() {
+        
+        let borderTop = CALayer()
+        borderTop.frame = CGRectMake(0.0, 0.0, view.frame.width, 1.0)
+        borderTop.backgroundColor = UIColor.darkGrayColor().CGColor
+        documentView.layer.addSublayer(borderTop)
     }
 }
 
@@ -79,6 +91,11 @@ extension ShowDocumentDetailViewController: UITableViewDelegate, UITableViewData
         let borderColor = UIColor(red: RGBColor, green: RGBColor, blue: RGBColor, alpha: 1.0).CGColor
         cell.layer.borderColor = borderColor
         cell.layer.borderWidth = 0.5
+        
+        let borderTop = CALayer()
+        borderTop.frame = CGRectMake(0.0, 0.5, cell.frame.width, 1.0)
+        borderTop.backgroundColor = UIColor.whiteColor().CGColor
+        cell.layer.addSublayer(borderTop)
         
         let question = document.questions.objectAtIndex(indexPath.row) as! Questions
         cell.questionTextView.text = question.text
@@ -159,7 +176,7 @@ extension ShowDocumentDetailViewController: UITextViewDelegate {
         
         dataSavedIntoObjectContext()
         
-        navigationItem.rightBarButtonItem = nil
+        navigationItem.rightBarButtonItem = saveButton
         currentTextView = nil
         
     }
@@ -183,7 +200,7 @@ extension ShowDocumentDetailViewController {
         }
     }
     
-    @IBAction func documentDetailViewWillSaveDocumentIntoDatabase(sender: AnyObject) {
+    func uploadDataIntoDatabase() {
         
         hud = MBProgressHUD.showHUDAddedTo(view, animated: true)
         hud!.mode = .AnnularDeterminate

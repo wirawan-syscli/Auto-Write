@@ -34,8 +34,13 @@ class DownloadDocumentViewController: UIViewController {
         
         addShadowToSearchBar()
         initTapGestureRecognizer()
-        checkForConnection()
         }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+    
+        checkForConnection()
+    }
 
     override func didReceiveMemoryWarning() {
         
@@ -139,8 +144,66 @@ extension DownloadDocumentViewController {
 extension DownloadDocumentViewController {
     
     func performDownloadingDocument(id: Int) {
-        println(id)
-        viewWillPerformUnwind()
+        
+        self.hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        self.hud!.mode = .AnnularDeterminate
+        self.hud?.color = UIColor.orangeColor()
+        self.hud!.labelText = "Downloading.."
+        
+        let document = startDownloadingDocument(id)
+        document.questions = startDownloadingQuestions(id)
+        
+        var defaultContext = NSManagedObjectContext.MR_defaultContext()
+        defaultContext.MR_saveToPersistentStoreWithCompletion { (success: Bool, error: NSError!) -> Void in
+            
+            self.hud!.hide(true)
+            
+            if success == true {
+                
+                self.viewWillPerformUnwind()
+                
+            } else if error != nil {
+                
+                // print error message here
+            }
+        }
+    }
+    
+    func startDownloadingDocument(id: Int) -> Documents {
+        
+        let predicate = NSPredicate(format: "documentId = \(id)")
+        let query = PFQuery(className: "Documents", predicate: predicate)
+        let PFDocument = query.findObjects()!.first as! PFObject
+        
+        let document             = Documents.MR_createEntity()
+        document?.id             = PFDocument["documentId"]     as! Int
+        document?.title          = PFDocument["title"]          as! String
+        document?.subject        = PFDocument["subject"]        as! String
+        document?.grade          = PFDocument["grade"]          as! Int
+        document?.totalQuestions = PFDocument["totalQuestions"] as! Int
+        
+        return document
+    }
+    
+    func startDownloadingQuestions(id: Int) -> NSMutableOrderedSet {
+        
+        var questions = NSMutableOrderedSet()
+        
+        let predicate = NSPredicate(format: "documentId = \(id)")
+        let query = PFQuery(className: "Questions", predicate: predicate)
+        let PFQuestions = query.findObjects() as! [PFObject]
+        
+        for PFQuestion in PFQuestions {
+        
+            let question             = Questions.MR_createEntity()
+            question?.id             = PFQuestion["questionId"] as! Int
+            question?.documentId     = PFQuestion["documentId"] as! Int
+            question?.text           = PFQuestion["text"]       as! String
+            
+            questions.addObject(question)
+        }
+        
+        return questions
     }
 }
 
@@ -239,7 +302,7 @@ extension DownloadDocumentViewController {
     
     func viewWillPerformUnwind() {
         
-        self.performSegueWithIdentifier("unwindFromDownloadDocument", sender: self)
+        showAlertFromDownloadCompleted()
     }
 }
 
@@ -248,11 +311,11 @@ extension DownloadDocumentViewController {
     
     func showAlertBeforeDownloadingDocument(documentTitle: String, documentId: Int) {
         
-        let alert = UIAlertController(title: "Downloading \(documentTitle)", message: "Press Begin to start downloading the document\r Downloaded document will be added into application data", preferredStyle: .Alert)
-        let begin = UIAlertAction(title: "Begin", style: .Default) { (alert: UIAlertAction!) -> Void in
+        let alert = UIAlertController(title: "\(documentTitle)", message: "Downloaded document will be saved into directory", preferredStyle: .ActionSheet)
+        let begin = UIAlertAction(title: "Download", style: .Default) { (alert: UIAlertAction!) -> Void in
             self.performDownloadingDocument(documentId)
         }
-        let cancel = UIAlertAction(title: "Cancel", style: .Default) { (alert: UIAlertAction!) -> Void in }
+        let cancel = UIAlertAction(title: "Cancel", style: .Cancel) { (alert: UIAlertAction!) -> Void in }
         alert.addAction(begin)
         alert.addAction(cancel)
         
@@ -264,7 +327,18 @@ extension DownloadDocumentViewController {
         let alert = UIAlertController(title: "No Internet Connection", message: "Internet connection is required to view this page", preferredStyle: .Alert)
         let action = UIAlertAction(title: "Ok", style: .Default) { (alert: UIAlertAction!) -> Void in
             self.reach!.stopNotifier()
-            self.performSegueWithIdentifier("unwindFromDownloadDocument", sender: self)
+            self.tabBarController?.selectedIndex = 0
+        }
+        alert.addAction(action)
+        
+        presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    func showAlertFromDownloadCompleted() {
+        
+        let alert = UIAlertController(title: "Download Completed", message: "Document has been successfully added into directory", preferredStyle: .Alert)
+        let action = UIAlertAction(title: "Continue", style: .Default) { (alert: UIAlertAction!) -> Void in
+            self.tabBarController?.selectedIndex = 0
         }
         alert.addAction(action)
         
