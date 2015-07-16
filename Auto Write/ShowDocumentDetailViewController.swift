@@ -31,6 +31,7 @@ class ShowDocumentDetailViewController: UIViewController {
     var currentTextView: UITextView?
     var currentIndex: Int?
     var saveButton: UIBarButtonItem?
+    var printButton: UIBarButtonItem?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,9 +44,10 @@ class ShowDocumentDetailViewController: UIViewController {
         subjectLabel.text = document.subject
         totalQuestionsLabel.text = "Q: \(document.totalQuestions)"
         gradeLabel.text = "G: \(document.grade)"
-        saveButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Action, target: self, action: Selector("uploadDataIntoDatabase"))
+        saveButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Save, target: self, action: Selector("uploadDataIntoDatabase"))
+        printButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Action, target: self, action: Selector("viewPrintPreviewPage"))
         
-        navigationItem.rightBarButtonItem = saveButton
+        navigationItem.rightBarButtonItems = [saveButton!, printButton!]
         
         initForStyling()
         initNotificationSettings()
@@ -157,7 +159,7 @@ extension ShowDocumentDetailViewController: UITextViewDelegate {
         currentTextView = textView
         
         var doneEditingButton = UIBarButtonItem(title: "Done", style: .Plain, target: self, action: Selector("textViewDoneEditing"))
-        navigationItem.rightBarButtonItem = doneEditingButton
+        navigationItem.rightBarButtonItems = [doneEditingButton, printButton!]
         
         return true
     }
@@ -176,7 +178,7 @@ extension ShowDocumentDetailViewController: UITextViewDelegate {
         
         dataSavedIntoObjectContext()
         
-        navigationItem.rightBarButtonItem = saveButton
+        navigationItem.rightBarButtonItems = [saveButton!, printButton!]
         currentTextView = nil
         
     }
@@ -322,6 +324,28 @@ extension ShowDocumentDetailViewController {
                     }
                 })
             })
+        }
+    }
+}
+
+// MARK: PRINTING
+extension ShowDocumentDetailViewController {
+    
+    func viewPrintPreviewPage() {
+        
+        performSegueWithIdentifier("showPrintPreviewPage", sender: self)
+    }
+}
+
+// MARK: SEGUE
+extension ShowDocumentDetailViewController {
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == "showPrintPreviewPage" {
+            
+            let destination = segue.destinationViewController as! PrintingViewController
+            destination.document = document
         }
     }
 }
