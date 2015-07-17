@@ -8,12 +8,15 @@
 
 import UIKit
 
-class PrintingViewController: UIViewController, UIPrintInteractionControllerDelegate, UIScrollViewDelegate {
+class PrintingViewController: UIViewController, UIScrollViewDelegate {
 
     var document: Documents?
     var printPreviewPage: UIView?
+    var paperSizeOption = [(String, Double, Double)]()
     
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var paperSizeOptionView: UIView!
+    @IBOutlet weak var paperSizePicker: UIPickerView!
     
     var currentOriginY: CGFloat = 0
     var hasNotPlayed = true
@@ -21,10 +24,7 @@ class PrintingViewController: UIViewController, UIPrintInteractionControllerDele
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.title = document?.title
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Action, target: self, action: Selector("configurePrintingSettings"))
-        
-        scrollView.delegate = self
+        initDefaultSettings()
     }
     
     override func viewDidLayoutSubviews() {
@@ -34,6 +34,14 @@ class PrintingViewController: UIViewController, UIPrintInteractionControllerDele
             initPrintPreview()
             hasNotPlayed = false
         }
+    }
+    
+    func initDefaultSettings() {
+        
+        navigationItem.title = document?.title
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Action, target: self, action: Selector("configurePrintingSettings"))
+        
+        initPaperSizeOption()
     }
     
     func initPrintPreview() {
@@ -125,6 +133,40 @@ class PrintingViewController: UIViewController, UIPrintInteractionControllerDele
         scrollView.zoomToRect(rectToZoomTo, animated: true)
     }
     
+    func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
+        return printPreviewPage
+    }
+    
+    func scrollViewDidZoom(scrollView: UIScrollView) {
+        setCenterPositionToPreviewPage()
+    }
+}
+
+// PAPER SIZE OPTION
+extension PrintingViewController: UIPickerViewDataSource, UIPickerViewDelegate {
+    
+    func initPaperSizeOption() {
+        paperSizeOption.append(("A4", 793.322834646, 1096.062992126))
+    }
+    
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return paperSizeOption.count
+    }
+    
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
+        let (paperType, _, _) = paperSizeOption[row]
+        
+        return paperType
+    }
+}
+
+// PRINTING
+extension PrintingViewController: UIPrintInteractionControllerDelegate {
+    
     func configurePrintingSettings() {
         
         let printObject = UIPrintInteractionController.sharedPrintController()
@@ -146,20 +188,14 @@ class PrintingViewController: UIViewController, UIPrintInteractionControllerDele
             println(printObject)
         })
     }
-    
-    func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
-        return printPreviewPage
-    }
-    
-    func scrollViewDidZoom(scrollView: UIScrollView) {
-        setCenterPositionToPreviewPage()
-    }
-    
+
     func printInteractionControllerWillStartJob(printInteractionController: UIPrintInteractionController) {
+        
         println("printing start")
     }
     
     func printInteractionControllerDidFinishJob(printInteractionController: UIPrintInteractionController) {
+        
         println("printing stop")
     }
 }
