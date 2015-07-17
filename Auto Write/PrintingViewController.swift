@@ -8,13 +8,15 @@
 
 import UIKit
 
-class PrintingViewController: UIViewController, UIScrollViewDelegate {
+// MARK: CLASS INIT
+class PrintingViewController: UIViewController {
 
     var document: Documents?
     var printPreviewPage: UIView?
     var paperSizeOption = [(String, Double, Double)]()
     
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var configPicker: UIPickerView!
     @IBOutlet weak var paperSizeOptionView: UIView!
     @IBOutlet weak var paperSizePicker: UIPickerView!
     
@@ -31,7 +33,7 @@ class PrintingViewController: UIViewController, UIScrollViewDelegate {
         super.viewDidLayoutSubviews()
     
         if hasNotPlayed {
-            initPrintPreview()
+            initPrintPreview("A4",  paperWidth: 793.322834646, paperHeight: 1096.062992126)
             hasNotPlayed = false
         }
     }
@@ -41,22 +43,22 @@ class PrintingViewController: UIViewController, UIScrollViewDelegate {
         navigationItem.title = document?.title
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Action, target: self, action: Selector("configurePrintingSettings"))
         
+        initTapGestureRecognition()
         initPaperSizeOption()
     }
+}
+
+// MARK: UISCROLL + PRINT PAGE PREVIEW
+extension PrintingViewController: UIScrollViewDelegate {
     
-    func initPrintPreview() {
+    func initPrintPreview(paperType: String, paperWidth: Double, paperHeight: Double) {
         
-        printPreviewPage = UIView(frame: CGRectMake(0.0, 0.0, 793.322834646, 1096.062992126))
-        printPreviewPage?.backgroundColor = UIColor.whiteColor()
-        
-        for question in document!.questions {
-            currentOriginY = insertContentToPreviewPage(question as! Questions, currentOriginY: currentOriginY)
+        if let lastPreviewPage = printPreviewPage {
+            lastPreviewPage.removeFromSuperview()
         }
         
-        var doubleTapRecognizer = UITapGestureRecognizer(target: self, action: "scrollViewDoubleTapped:")
-        doubleTapRecognizer.numberOfTapsRequired = 2
-        doubleTapRecognizer.numberOfTouchesRequired = 1
-        scrollView.addGestureRecognizer(doubleTapRecognizer)
+        printPreviewPage = UIView(frame: CGRectMake(0.0, 0.0, CGFloat(paperWidth), CGFloat(paperHeight)))
+        printPreviewPage?.backgroundColor = UIColor.whiteColor()
         
         scrollView.addSubview(printPreviewPage!)
         scrollView.contentSize = printPreviewPage!.frame.size
@@ -70,12 +72,20 @@ class PrintingViewController: UIViewController, UIScrollViewDelegate {
         scrollView.minimumZoomScale = minScale
         scrollView.zoomScale = minScale
         
+        initContent()
         setCenterPositionToPreviewPage()
         insertShadowToPreviewPage()
     }
     
+    func initContent() {
+        for question in document!.questions {
+            currentOriginY = insertContentToPreviewPage(question as! Questions, currentOriginY: currentOriginY)
+        }
+        currentOriginY = 0.0
+    }
+    
     func insertContentToPreviewPage(question: Questions, currentOriginY: CGFloat) -> CGFloat {
-
+        
         let textLabel = UILabel(frame: CGRectMake(20.0, currentOriginY + 20.0, printPreviewPage!.frame.width, printPreviewPage!.frame.height))
         textLabel.lineBreakMode = NSLineBreakMode.ByWordWrapping
         textLabel.numberOfLines = 0
@@ -84,16 +94,6 @@ class PrintingViewController: UIViewController, UIScrollViewDelegate {
         printPreviewPage?.addSubview(textLabel)
         
         return textLabel.frame.origin.y + textLabel.frame.height
-    }
-    
-    func insertShadowToPreviewPage() {
-        
-        let shadow = UIBezierPath(rect: printPreviewPage!.bounds)
-        printPreviewPage!.layer.masksToBounds = false
-        printPreviewPage!.layer.shadowColor = UIColor.darkGrayColor().CGColor
-        printPreviewPage!.layer.shadowOffset = CGSize(width: 0.5, height: 0.5)
-        printPreviewPage!.layer.shadowOpacity = 0.25
-        printPreviewPage!.layer.shadowPath = shadow.CGPath
     }
     
     func setCenterPositionToPreviewPage() {
@@ -116,6 +116,38 @@ class PrintingViewController: UIViewController, UIScrollViewDelegate {
         printPreviewPage!.frame = contentsFrame
     }
     
+    func insertShadowToPreviewPage() {
+        
+        let shadow = UIBezierPath(rect: printPreviewPage!.bounds)
+        printPreviewPage!.layer.masksToBounds = false
+        printPreviewPage!.layer.shadowColor = UIColor.darkGrayColor().CGColor
+        printPreviewPage!.layer.shadowOffset = CGSize(width: 0.5, height: 0.5)
+        printPreviewPage!.layer.shadowOpacity = 0.25
+        printPreviewPage!.layer.shadowPath = shadow.CGPath
+    }
+    
+    func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
+        return printPreviewPage
+    }
+    
+    func scrollViewDidZoom(scrollView: UIScrollView) {
+        setCenterPositionToPreviewPage()
+    }
+}
+
+// MARK: GESTURE RECOGNITION
+extension PrintingViewController {
+    
+    func initTapGestureRecognition() {
+    
+        var doubleTapRecognizer = UITapGestureRecognizer(target: self, action: "scrollViewDoubleTapped:")
+    
+        doubleTapRecognizer.numberOfTapsRequired = 2
+        doubleTapRecognizer.numberOfTouchesRequired = 1
+    
+        scrollView.addGestureRecognizer(doubleTapRecognizer)
+    }
+    
     func scrollViewDoubleTapped(recognizer: UITapGestureRecognizer) {
         let pointInView = recognizer.locationInView(printPreviewPage)
         
@@ -132,28 +164,25 @@ class PrintingViewController: UIViewController, UIScrollViewDelegate {
         
         scrollView.zoomToRect(rectToZoomTo, animated: true)
     }
-    
-    func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
-        return printPreviewPage
-    }
-    
-    func scrollViewDidZoom(scrollView: UIScrollView) {
-        setCenterPositionToPreviewPage()
-    }
 }
 
-// PAPER SIZE OPTION
+// MARK: PAPER SIZE OPTION
 extension PrintingViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     
     func initPaperSizeOption() {
-        paperSizeOption.append(("A4", 793.322834646, 1096.062992126))
+        
+        paperSizeOption.append(("A3", 1122.519685039, 1591.181102362))
+        paperSizeOption.append(("A4",  793.322834646, 1096.062992126))
+        paperSizeOption.append(("A5",  559.748031496,  793.322834646))
     }
     
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        
         return 1
     }
     
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        
         return paperSizeOption.count
     }
     
@@ -162,9 +191,16 @@ extension PrintingViewController: UIPickerViewDataSource, UIPickerViewDelegate {
         
         return paperType
     }
+    
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
+        let (paperType, paperWidth, paperHeight) = paperSizeOption[row]
+        
+        initPrintPreview(paperType, paperWidth: paperWidth, paperHeight: paperHeight)
+    }
 }
 
-// PRINTING
+// MARK: PRINTING
 extension PrintingViewController: UIPrintInteractionControllerDelegate {
     
     func configurePrintingSettings() {
