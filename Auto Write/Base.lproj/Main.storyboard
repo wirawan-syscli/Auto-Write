@@ -161,7 +161,7 @@
                                     <constraint firstAttribute="width" constant="368" id="oxd-yG-kuq"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -193,9 +193,9 @@
                             <mask key="constraints">
                                 <exclude reference="A1B-vx-ZKt"/>
                                 <exclude reference="CrA-ry-Nu8"/>
+                                <exclude reference="kOX-C1-VeJ"/>
                                 <exclude reference="2zz-CE-59h"/>
                                 <exclude reference="bmk-wW-LCG"/>
-                                <exclude reference="kOX-C1-VeJ"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -206,9 +206,9 @@
                             <mask key="constraints">
                                 <include reference="A1B-vx-ZKt"/>
                                 <include reference="CrA-ry-Nu8"/>
+                                <include reference="kOX-C1-VeJ"/>
                                 <include reference="2zz-CE-59h"/>
                                 <include reference="bmk-wW-LCG"/>
-                                <include reference="kOX-C1-VeJ"/>
                             </mask>
                         </variation>
                     </view>
@@ -230,44 +230,76 @@
                         <viewControllerLayoutGuide type="bottom" id="GfG-Li-S1A"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="6cK-4F-dyW">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nvV-ta-3GV">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </scrollView>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="lZV-kj-xqG">
+                                <rect key="frame" x="-19" y="-18" width="39" height="37"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="39" id="CS7-zF-o6T"/>
+                                    <constraint firstAttribute="height" constant="37" id="uhZ-Xq-Ksj"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="CS7-zF-o6T"/>
+                                        <exclude reference="uhZ-Xq-Ksj"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="CS7-zF-o6T"/>
+                                        <include reference="uhZ-Xq-Ksj"/>
+                                    </mask>
+                                </variation>
+                            </pageControl>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="0.72941176470000002" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="nvV-ta-3GV" firstAttribute="leading" secondItem="6cK-4F-dyW" secondAttribute="leadingMargin" constant="-16" id="ObP-82-4nx"/>
-                            <constraint firstItem="nvV-ta-3GV" firstAttribute="top" secondItem="6cK-4F-dyW" secondAttribute="topMargin" id="hz3-iv-RFp"/>
+                            <constraint firstAttribute="centerX" secondItem="lZV-kj-xqG" secondAttribute="centerX" id="Ufl-Ql-Qq4"/>
+                            <constraint firstItem="lZV-kj-xqG" firstAttribute="top" secondItem="iAe-00-Oah" secondAttribute="bottom" id="WkH-fd-i1p">
+                                <variation key="heightClass=regular-widthClass=compact" constant="68"/>
+                            </constraint>
+                            <constraint firstItem="nvV-ta-3GV" firstAttribute="top" secondItem="6cK-4F-dyW" secondAttribute="topMargin" id="hz3-iv-RFp">
+                                <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                            </constraint>
                             <constraint firstItem="GfG-Li-S1A" firstAttribute="top" secondItem="nvV-ta-3GV" secondAttribute="bottom" id="k0e-1X-1sc"/>
                             <constraint firstAttribute="trailingMargin" secondItem="nvV-ta-3GV" secondAttribute="trailing" constant="-16" id="ytw-eu-46X"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="nvV-ta-3GV"/>
+                                <exclude reference="lZV-kj-xqG"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="ObP-82-4nx"/>
                                 <exclude reference="hz3-iv-RFp"/>
                                 <exclude reference="ytw-eu-46X"/>
+                                <exclude reference="Ufl-Ql-Qq4"/>
+                                <exclude reference="WkH-fd-i1p"/>
                                 <exclude reference="k0e-1X-1sc"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="subviews">
                                 <include reference="nvV-ta-3GV"/>
+                                <include reference="lZV-kj-xqG"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="ObP-82-4nx"/>
                                 <include reference="hz3-iv-RFp"/>
                                 <include reference="ytw-eu-46X"/>
+                                <include reference="Ufl-Ql-Qq4"/>
+                                <include reference="WkH-fd-i1p"/>
                                 <include reference="k0e-1X-1sc"/>
                             </mask>
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="pageControl" destination="lZV-kj-xqG" id="Uj3-9W-TbS"/>
                         <outlet property="scrollView" destination="nvV-ta-3GV" id="0C3-k3-3hT"/>
                     </connections>
                 </viewController>
@@ -1214,6 +1246,9 @@ Document</string>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="46" y="8" width="266" height="33"/>
+                                                    </variation>
                                                 </textView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="01." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cgF-3J-Zey">
                                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -1691,17 +1726,17 @@ Document</string>
                                 <exclude reference="EVo-8d-z3V"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="3qd-sY-6sx"/>
-                                <exclude reference="DPf-W0-HrZ"/>
-                                <exclude reference="Gku-68-dtA"/>
+                                <exclude reference="MzO-tW-Y7X"/>
+                                <exclude reference="E7D-cn-Uxf"/>
+                                <exclude reference="cgJ-Ck-r8c"/>
+                                <exclude reference="xFK-ox-Sv5"/>
                                 <exclude reference="6ZX-1u-s68"/>
                                 <exclude reference="XDM-4z-dgf"/>
                                 <exclude reference="Ygv-bA-hJi"/>
                                 <exclude reference="xm8-Fd-F3m"/>
-                                <exclude reference="E7D-cn-Uxf"/>
-                                <exclude reference="cgJ-Ck-r8c"/>
-                                <exclude reference="xFK-ox-Sv5"/>
-                                <exclude reference="MzO-tW-Y7X"/>
+                                <exclude reference="3qd-sY-6sx"/>
+                                <exclude reference="DPf-W0-HrZ"/>
+                                <exclude reference="Gku-68-dtA"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -1711,17 +1746,17 @@ Document</string>
                                 <include reference="EVo-8d-z3V"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="3qd-sY-6sx"/>
-                                <include reference="DPf-W0-HrZ"/>
-                                <include reference="Gku-68-dtA"/>
+                                <include reference="MzO-tW-Y7X"/>
+                                <include reference="E7D-cn-Uxf"/>
+                                <include reference="cgJ-Ck-r8c"/>
+                                <include reference="xFK-ox-Sv5"/>
                                 <include reference="6ZX-1u-s68"/>
                                 <exclude reference="XDM-4z-dgf"/>
                                 <include reference="Ygv-bA-hJi"/>
                                 <include reference="xm8-Fd-F3m"/>
-                                <include reference="E7D-cn-Uxf"/>
-                                <include reference="cgJ-Ck-r8c"/>
-                                <include reference="xFK-ox-Sv5"/>
-                                <include reference="MzO-tW-Y7X"/>
+                                <include reference="3qd-sY-6sx"/>
+                                <include reference="DPf-W0-HrZ"/>
+                                <include reference="Gku-68-dtA"/>
                             </mask>
                         </variation>
                     </view>
@@ -2266,7 +2301,7 @@ Document</string>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="1" green="0.48225592909999998" blue="0.39879860589999999" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" red="1" green="0.48225592909999998" blue="0.39879860589999999" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="barTintColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="barTintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="x8P-Rj-9Ah" kind="relationship" relationship="viewControllers" id="2Sb-4t-tGf"/>

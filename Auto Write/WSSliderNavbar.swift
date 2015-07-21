@@ -83,7 +83,6 @@ class WSSliderNavbar: NSObject {
         var detailItemOption: UIView?
         let detailItemWidth = scrollView.bounds.width - size.width
         
-        println(detailItemsOption.count)
         if detailItemsOption.count > index {
             detailItemOption = detailItemsOption[index]
         }
@@ -126,15 +125,10 @@ class WSSliderNavbar: NSObject {
         var offsetY: CGFloat = 0.0
         var customViewHeight = detailItem.frame.height
         
-        println(customView.frame.height)
-        println(customViewHeight)
-        
         if customView.frame.height > detailItem.frame.height {
             offsetY = -(customView.frame.height - detailItem.frame.height) / 2
             customViewHeight = customView.frame.height
         }
-        
-        println(offsetY)
         
         customView.frame = CGRectMake(0.0, offsetY, 0.0, customViewHeight)
         

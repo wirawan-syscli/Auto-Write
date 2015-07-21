@@ -7,44 +7,70 @@
 //
 
 import UIKit
+import CoreText
+import CoreGraphics
 
-class CoreTextViewController: UIViewController {
+class CoreTextViewController: UIViewController, UIScrollViewDelegate {
 
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var pageControl: UIPageControl!
     
     var pages = [UIView]()
     
+    var textContainer: NSTextContainer?
+    var layoutManager: NSLayoutManager?
+    var textView: UITextView?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        scrollView.delegate = self
+        
+        let path = NSBundle.mainBundle().pathForResource("sampleText", ofType: ".txt")
+        let string = NSString(contentsOfFile: path!, encoding: NSUTF8StringEncoding, error: nil)
+        let textStorage = NSTextStorage(string: String(string!))
+        layoutManager = NSLayoutManager()
+        
+        textStorage.addLayoutManager(layoutManager!)
+        
+        layoutTextContainers()
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-    
-        let center = scrollView.center
+    func layoutTextContainers() {
+        
+        var lastRenderedGlyph: Int = 0
+        let currentXOffset: CGFloat = 0
+        
         let pageSize = CGSize(width: 300.0, height: 400.0)
-        let pageOrigin = CGPoint(x: center.x - (pageSize.width / 2), y: center.y - (pageSize.height / 2))
-        let offsetX = pageOrigin.x + pageSize.width
+        let originX = view.bounds.size.width - pageSize.width
+        let originStartX = originX / 2
         
-        for index in 0...10 {
+        let originY = (view.bounds.size.height - pageSize.height) / 2
+        var index = 0
         
-            let pageOriginOffsetX = offsetX * CGFloat(index) + pageOrigin.x
+        while (lastRenderedGlyph < layoutManager!.numberOfGlyphs) {
+            let pageOriginX = originStartX + (originX + pageSize.width) * CGFloat(index)
             
-            let page = UIView(
-                            frame: CGRectMake(
-                                pageOriginOffsetX,
-                                pageOrigin.y,
-                                pageSize.width,
-                                pageSize.height
-                            )
-                        )
-            page.backgroundColor = UIColor.whiteColor()
-        
-            scrollView.addSubview(page)
-            pages.append(page)
+            textContainer = NSTextContainer(size: CGSize(width: pageSize.width, height: pageSize.height))
+            layoutManager!.addTextContainer(textContainer!)
+            textView = UITextView(frame: CGRectMake(pageOriginX, originY, pageSize.width, pageSize.height), textContainer: textContainer)
+            textView!.scrollEnabled = false
+            scrollView.addSubview(textView!)
+            
+            index++
+            lastRenderedGlyph = NSMaxRange(layoutManager!.glyphRangeForTextContainer(textContainer!))
+            pages.append(textView!)
         }
         
+        // Need to update the scrollView size
         scrollView.contentSize = CGSize(width: pages.first!.frame.origin.x + pages.last!.frame.origin.x + pages.last!.frame.width, height: scrollView.frame.height)
         scrollView.pagingEnabled = true
+    }
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        
+        let currentPage = Int(floor(scrollView.contentOffset.x / 375))
+        
+        pageControl.currentPage = currentPage
     }
 }

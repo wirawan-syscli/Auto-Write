@@ -105,8 +105,6 @@ extension PrintingViewController: UIScrollViewDelegate {
     
     func insertContentToPreviewPage(question: Questions, currentOriginY: CGFloat) -> CGFloat {
         
-        println("text label's width: \(printPreviewPage!.bounds.width)")
-        
         let textLabel = UILabel(frame: CGRectMake(0.0, currentOriginY, printPreviewPage!.bounds.width, printPreviewPage!.bounds.height))
         textLabel.lineBreakMode = NSLineBreakMode.ByWordWrapping
         textLabel.numberOfLines = 0
@@ -319,8 +317,6 @@ extension PrintingViewController: UIPrintInteractionControllerDelegate {
             } else if (error != nil){
                 println("printing error: \(error.userInfo)")
             }
-            
-            println(printObject)
         })
     }
 
