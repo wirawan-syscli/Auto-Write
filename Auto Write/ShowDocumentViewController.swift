@@ -104,7 +104,7 @@ extension ShowDocumentViewController: UITableViewDelegate, UITableViewDataSource
     func leftButtonPressed() -> NSMutableArray {
         let leftUtilityButtons = NSMutableArray()
         
-        leftUtilityButtons.sw_addUtilityButtonWithColor(UIColor.orangeColor(), title: "Edit")
+        leftUtilityButtons.sw_addUtilityButtonWithColor(UIColor.orangeColor(), icon: UIImage(named: "Edit_Document"))
         
         return leftUtilityButtons
     }
@@ -112,7 +112,7 @@ extension ShowDocumentViewController: UITableViewDelegate, UITableViewDataSource
     func rightButtonPressed() -> NSMutableArray {
         let rightUtilityButtons = NSMutableArray()
         
-        rightUtilityButtons.sw_addUtilityButtonWithColor(UIColor.redColor(), title: "Delete")
+        rightUtilityButtons.sw_addUtilityButtonWithColor(UIColor.redColor(), icon: UIImage(named: "Delete_Document"))
         
         return rightUtilityButtons
     }

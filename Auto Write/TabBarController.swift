@@ -19,6 +19,8 @@ class TabBarController: UITabBarController {
         tabBar.layer.addSublayer(layer)
         
         tabBar.tintColor = ColorsPallete.orangeLight()
+        tabBar.translucent = true
+        tabBar.alpha = 0.8
         
         // Do any additional setup after loading the view.
     }

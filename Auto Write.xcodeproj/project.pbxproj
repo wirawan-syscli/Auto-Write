@@ -18,6 +18,9 @@
 		991C2F251B3989F400892ABD /* Auto_WriteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991C2F241B3989F400892ABD /* Auto_WriteTests.swift */; };
 		991C2F331B398E5800892ABD /* tessdata in Resources */ = {isa = PBXBuildFile; fileRef = 991C2F321B398E5800892ABD /* tessdata */; };
 		991C2F351B3A5E8700892ABD /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991C2F341B3A5E8700892ABD /* DashboardViewController.swift */; };
+		992785571B5954D60045BF6D /* WSSliderNavbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992785561B5954D60045BF6D /* WSSliderNavbar.swift */; };
+		992785591B595C970045BF6D /* Testing2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992785581B595C970045BF6D /* Testing2ViewController.swift */; };
+		9927855B1B5B6B2F0045BF6D /* CoreTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9927855A1B5B6B2F0045BF6D /* CoreTextViewController.swift */; };
 		999F4EDF1B50DC84009B4B6E /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 999F4EDE1B50DC84009B4B6E /* Reachability.m */; };
 		999F4EE11B50F835009B4B6E /* ColorsPallete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999F4EE01B50F835009B4B6E /* ColorsPallete.swift */; };
 		999F4EE51B511E8F009B4B6E /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999F4EE41B511E8F009B4B6E /* TabBarController.swift */; };
@@ -28,7 +31,6 @@
 		99A391E91B4E244A00C18E40 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A391E81B4E244A00C18E40 /* LoginViewController.swift */; };
 		99BA15C01B3A734300352E6F /* NewDocumentSettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BA15BF1B3A734300352E6F /* NewDocumentSettingsTableViewController.swift */; };
 		99C5E8531B57617700011AE6 /* PrintingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C5E8521B57617700011AE6 /* PrintingViewController.swift */; };
-		99C5E8551B58C3E400011AE6 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C5E8541B58C3E400011AE6 /* TestViewController.swift */; };
 		99D84AB11B4A6054003EDD9E /* EditDocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D84AB01B4A6054003EDD9E /* EditDocumentViewController.swift */; };
 		99EDD7891B4654DF00B00284 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99EDD7871B4654DF00B00284 /* Bolts.framework */; };
 		99EDD78A1B4654DF00B00284 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99EDD7881B4654DF00B00284 /* Parse.framework */; };
@@ -84,6 +86,9 @@
 		991C2F2E1B398A6800892ABD /* Auto Write-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Auto Write-Bridging-Header.h"; sourceTree = "<group>"; };
 		991C2F321B398E5800892ABD /* tessdata */ = {isa = PBXFileReference; lastKnownFileType = folder; path = tessdata; sourceTree = "<group>"; };
 		991C2F341B3A5E8700892ABD /* DashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
+		992785561B5954D60045BF6D /* WSSliderNavbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WSSliderNavbar.swift; sourceTree = "<group>"; };
+		992785581B595C970045BF6D /* Testing2ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Testing2ViewController.swift; sourceTree = "<group>"; };
+		9927855A1B5B6B2F0045BF6D /* CoreTextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreTextViewController.swift; sourceTree = "<group>"; };
 		999F4EDD1B50DC84009B4B6E /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		999F4EDE1B50DC84009B4B6E /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		999F4EE01B50F835009B4B6E /* ColorsPallete.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorsPallete.swift; sourceTree = "<group>"; };
@@ -96,7 +101,6 @@
 		99BA15BF1B3A734300352E6F /* NewDocumentSettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewDocumentSettingsTableViewController.swift; sourceTree = "<group>"; };
 		99C5E8501B53ACEC00011AE6 /* libPods-Auto Write-FoldingTabBar.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-Auto Write-FoldingTabBar.a"; path = "Pods/../build/Debug-iphoneos/libPods-Auto Write-FoldingTabBar.a"; sourceTree = "<group>"; };
 		99C5E8521B57617700011AE6 /* PrintingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintingViewController.swift; sourceTree = "<group>"; };
-		99C5E8541B58C3E400011AE6 /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		99D84AB01B4A6054003EDD9E /* EditDocumentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditDocumentViewController.swift; sourceTree = "<group>"; };
 		99EDD77E1B46348B00B00284 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
 		99EDD7871B4654DF00B00284 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
@@ -185,7 +189,9 @@
 		991C2F081B3989F300892ABD /* Auto Write */ = {
 			isa = PBXGroup;
 			children = (
-				99C5E8541B58C3E400011AE6 /* TestViewController.swift */,
+				992785581B595C970045BF6D /* Testing2ViewController.swift */,
+				9927855A1B5B6B2F0045BF6D /* CoreTextViewController.swift */,
+				992785561B5954D60045BF6D /* WSSliderNavbar.swift */,
 				99C5E8521B57617700011AE6 /* PrintingViewController.swift */,
 				99BA15BB1B3A6A2100352E6F /* Language pack */,
 				99BA15BC1B3A6A3F00352E6F /* Model */,
@@ -466,8 +472,10 @@
 			files = (
 				99A391E91B4E244A00C18E40 /* LoginViewController.swift in Sources */,
 				990B420B1B4FB521009241FE /* DashboardTableViewCell.swift in Sources */,
+				9927855B1B5B6B2F0045BF6D /* CoreTextViewController.swift in Sources */,
 				99A391E31B4BB10F00C18E40 /* CollectionViewController.swift in Sources */,
 				99FEDB661B413BAB000FE88D /* AWSDynamoDB.swift in Sources */,
+				992785571B5954D60045BF6D /* WSSliderNavbar.swift in Sources */,
 				99FEDB681B414FA3000FE88D /* QuestionDB.swift in Sources */,
 				999F4EE71B515A61009B4B6E /* ShowDocumentNavigationController.swift in Sources */,
 				991C2F111B3989F300892ABD /* NewDocumentViewController.swift in Sources */,
@@ -478,7 +486,6 @@
 				999F4EDF1B50DC84009B4B6E /* Reachability.m in Sources */,
 				991C2F0F1B3989F300892ABD /* Auto_Write.xcdatamodeld in Sources */,
 				99C5E8531B57617700011AE6 /* PrintingViewController.swift in Sources */,
-				99C5E8551B58C3E400011AE6 /* TestViewController.swift in Sources */,
 				99FEDB5E1B3BEDA6000FE88D /* ShowDocumentDetailViewController.swift in Sources */,
 				99D84AB11B4A6054003EDD9E /* EditDocumentViewController.swift in Sources */,
 				99FEDB621B3D3C56000FE88D /* AWSCognitoCredentials.swift in Sources */,
@@ -487,6 +494,7 @@
 				991C2F351B3A5E8700892ABD /* DashboardViewController.swift in Sources */,
 				999F4EE51B511E8F009B4B6E /* TabBarController.swift in Sources */,
 				99EDD7B01B46704800B00284 /* ShowDocumentViewController.swift in Sources */,
+				992785591B595C970045BF6D /* Testing2ViewController.swift in Sources */,
 				99EDD7A61B4662D400B00284 /* IntDate.swift in Sources */,
 				991C2F0C1B3989F300892ABD /* AppDelegate.swift in Sources */,
 				99EDD7AC1B466CDE00B00284 /* Documents.swift in Sources */,

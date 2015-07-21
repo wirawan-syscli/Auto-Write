@@ -12,13 +12,19 @@ import UIKit
 class PrintingViewController: UIViewController {
 
     var document: Documents?
-    var printPreviewPage: UIView?
+    var printPreviewPage: UIScrollView?
+    
+    var sliderNavbar: WSSliderNavbar?
+    
+    var paperSizePicker = UIPickerView()
     var paperSizeOption = [(String, Double, Double)]()
+    var horizontalSlider = UISlider()
+    var verticalSlider = UISlider()
+    var headerSwitch: UISwitch?
     
     @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var configPicker: UIPickerView!
-    @IBOutlet weak var paperSizeOptionView: UIView!
-    @IBOutlet weak var paperSizePicker: UIPickerView!
+    @IBOutlet weak var sliderNavbarContainer: UIScrollView!
+    
     
     var currentOriginY: CGFloat = 0
     var hasNotPlayed = true
@@ -44,7 +50,21 @@ class PrintingViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Action, target: self, action: Selector("configurePrintingSettings"))
         
         initTapGestureRecognition()
-        initPaperSizeOption()
+        
+        let size = CGSizeMake(150.0, 60.0)
+        let paperSize = WSSliderNavbar.button("Paper Size", color: UIColor.whiteColor(), highlightedColor: UIColor.lightGrayColor())
+        let horizontalMargin = WSSliderNavbar.button("Horizontal Margin", color: UIColor.whiteColor(), highlightedColor: UIColor.lightGrayColor())
+        let verticalMargin = WSSliderNavbar.button("Vertical Margin", color: UIColor.whiteColor(), highlightedColor: UIColor.lightGrayColor())
+        let utility = WSSliderNavbar.button("Utility", color: UIColor.whiteColor(), highlightedColor: UIColor.lightGrayColor())
+    
+        let buttons = [paperSize, horizontalMargin, verticalMargin, utility]
+        
+        sliderNavbar = WSSliderNavbar(size: size, scrollView: sliderNavbarContainer, buttons: buttons)
+        
+        addConfigToPaperSize()
+        addConfigToHorizontalMargin()
+        addConfigToVerticalMargin()
+        addConfigToUtility()
     }
 }
 
@@ -57,7 +77,7 @@ extension PrintingViewController: UIScrollViewDelegate {
             lastPreviewPage.removeFromSuperview()
         }
         
-        printPreviewPage = UIView(frame: CGRectMake(0.0, 0.0, CGFloat(paperWidth), CGFloat(paperHeight)))
+        printPreviewPage = UIScrollView(frame: CGRectMake(0.0, 0.0, CGFloat(paperWidth), CGFloat(paperHeight)))
         printPreviewPage?.backgroundColor = UIColor.whiteColor()
         
         scrollView.addSubview(printPreviewPage!)
@@ -74,7 +94,6 @@ extension PrintingViewController: UIScrollViewDelegate {
         
         initContent()
         setCenterPositionToPreviewPage()
-        insertShadowToPreviewPage()
     }
     
     func initContent() {
@@ -86,14 +105,16 @@ extension PrintingViewController: UIScrollViewDelegate {
     
     func insertContentToPreviewPage(question: Questions, currentOriginY: CGFloat) -> CGFloat {
         
-        let textLabel = UILabel(frame: CGRectMake(20.0, currentOriginY + 20.0, printPreviewPage!.frame.width, printPreviewPage!.frame.height))
+        println("text label's width: \(printPreviewPage!.bounds.width)")
+        
+        let textLabel = UILabel(frame: CGRectMake(0.0, currentOriginY, printPreviewPage!.bounds.width, printPreviewPage!.bounds.height))
         textLabel.lineBreakMode = NSLineBreakMode.ByWordWrapping
         textLabel.numberOfLines = 0
         textLabel.text = question.text
         textLabel.sizeToFit()
         printPreviewPage?.addSubview(textLabel)
         
-        return textLabel.frame.origin.y + textLabel.frame.height
+        return textLabel.frame.origin.y + textLabel.frame.height + 20.0
     }
     
     func setCenterPositionToPreviewPage() {
@@ -114,16 +135,6 @@ extension PrintingViewController: UIScrollViewDelegate {
         }
         
         printPreviewPage!.frame = contentsFrame
-    }
-    
-    func insertShadowToPreviewPage() {
-        
-        let shadow = UIBezierPath(rect: printPreviewPage!.bounds)
-        printPreviewPage!.layer.masksToBounds = false
-        printPreviewPage!.layer.shadowColor = UIColor.darkGrayColor().CGColor
-        printPreviewPage!.layer.shadowOffset = CGSize(width: 0.5, height: 0.5)
-        printPreviewPage!.layer.shadowOpacity = 0.25
-        printPreviewPage!.layer.shadowPath = shadow.CGPath
     }
     
     func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
@@ -169,11 +180,16 @@ extension PrintingViewController {
 // MARK: PAPER SIZE OPTION
 extension PrintingViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     
-    func initPaperSizeOption() {
+    func addConfigToPaperSize() {
+        
+        paperSizePicker.delegate = self
+        paperSizePicker.dataSource = self
         
         paperSizeOption.append(("A3", 1122.519685039, 1591.181102362))
         paperSizeOption.append(("A4",  793.322834646, 1096.062992126))
         paperSizeOption.append(("A5",  559.748031496,  793.322834646))
+        
+        sliderNavbar!.insertCustomViewIntoItem(paperSizePicker, index: 0, color: ColorsPallete.orangeDark())
     }
     
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
@@ -197,6 +213,89 @@ extension PrintingViewController: UIPickerViewDataSource, UIPickerViewDelegate {
         let (paperType, paperWidth, paperHeight) = paperSizeOption[row]
         
         initPrintPreview(paperType, paperWidth: paperWidth, paperHeight: paperHeight)
+    }
+}
+
+// MARK: HORIZONTAL MARGIN OPTION
+extension PrintingViewController {
+    
+    func addConfigToHorizontalMargin() {
+        
+        // 0.1 cm = 3.779527559 px
+        
+        horizontalSlider.minimumValue = 0.0
+        horizontalSlider.maximumValue = 10.0
+        horizontalSlider.value = 2.0
+        horizontalSlider.addTarget(self, action: Selector("horizontalSliderValueChanged:"), forControlEvents: .ValueChanged)
+        
+        sliderNavbar!.insertCustomViewIntoItem(horizontalSlider, index: 1, color: ColorsPallete.orangeDark())
+    }
+    
+    func horizontalSliderValueChanged(sender: UISlider) {
+        
+        let centimeters = sender.value
+        let pixels = CGFloat(centimeters * 37.79527559)
+        
+        setPrintPreviewPageHorizontalMargin(pixels)
+    }
+    
+    func setPrintPreviewPageHorizontalMargin(pixels: CGFloat) {
+        
+        let previousContentInsets = printPreviewPage!.contentInset
+        let contentInsets = UIEdgeInsets(top: pixels, left: previousContentInsets.left, bottom: pixels, right: previousContentInsets.right)
+        
+        printPreviewPage!.contentInset = contentInsets
+    }
+}
+
+// MARK: VERTICAL MARGIN OPTION
+extension PrintingViewController {
+    
+    func addConfigToVerticalMargin() {
+        
+        // 0.1 cm = 3.779527559 px
+        
+        verticalSlider.minimumValue = 0.0
+        verticalSlider.maximumValue = 10.0
+        verticalSlider.value = 2.0
+        verticalSlider.addTarget(self, action: Selector("verticalSliderValueChanged:"), forControlEvents: .ValueChanged)
+        
+        sliderNavbar!.insertCustomViewIntoItem(verticalSlider, index: 2, color: ColorsPallete.orangeDark())
+    }
+    
+    func verticalSliderValueChanged(sender: UISlider) {
+        
+        let centimeters = sender.value
+        let pixels = CGFloat(centimeters * 37.79527559)
+        
+        setPrintPreviewPageVerticalMargin(pixels)
+    }
+    
+    func setPrintPreviewPageVerticalMargin(pixels: CGFloat) {
+        
+        let previousContentInsets = printPreviewPage!.contentInset
+        let contentInsets = UIEdgeInsets(top: previousContentInsets.top, left: pixels, bottom: previousContentInsets.bottom, right: pixels)
+        
+        printPreviewPage!.contentInset = contentInsets
+    }
+}
+
+// MARK: UTILITY OPTION
+extension PrintingViewController {
+    
+    func addConfigToUtility() {
+        
+        headerSwitch = UISwitch(frame: CGRectMake(10.0, 15.0, 50.0, 60.0))
+        headerSwitch?.on = false
+        
+        let headerLabel = UILabel(frame: CGRectMake(headerSwitch!.frame.origin.x + headerSwitch!.frame.width + 10.0, 0.0, 140.0, 60.0))
+        headerLabel.text = "Include header"
+        
+        let headerView = UIView(frame: CGRectMake(0.0, 0.0, 210.0, 60.0))
+        headerView.addSubview(headerSwitch!)
+        headerView.addSubview(headerLabel)
+        
+        sliderNavbar!.insertCustomViewIntoItem(headerView, index: 3, color: ColorsPallete.orangeDark())
     }
 }
 
