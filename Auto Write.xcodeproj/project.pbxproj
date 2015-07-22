@@ -32,6 +32,7 @@
 		99A391E91B4E244A00C18E40 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A391E81B4E244A00C18E40 /* LoginViewController.swift */; };
 		99BA15C01B3A734300352E6F /* NewDocumentSettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BA15BF1B3A734300352E6F /* NewDocumentSettingsTableViewController.swift */; };
 		99C5E8531B57617700011AE6 /* PrintingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C5E8521B57617700011AE6 /* PrintingViewController.swift */; };
+		99D105081B5F8747003BD200 /* WSPagePreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D105071B5F8747003BD200 /* WSPagePreview.swift */; };
 		99D84AB11B4A6054003EDD9E /* EditDocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D84AB01B4A6054003EDD9E /* EditDocumentViewController.swift */; };
 		99EDD7891B4654DF00B00284 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99EDD7871B4654DF00B00284 /* Bolts.framework */; };
 		99EDD78A1B4654DF00B00284 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99EDD7881B4654DF00B00284 /* Parse.framework */; };
@@ -103,6 +104,7 @@
 		99BA15BF1B3A734300352E6F /* NewDocumentSettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewDocumentSettingsTableViewController.swift; sourceTree = "<group>"; };
 		99C5E8501B53ACEC00011AE6 /* libPods-Auto Write-FoldingTabBar.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-Auto Write-FoldingTabBar.a"; path = "Pods/../build/Debug-iphoneos/libPods-Auto Write-FoldingTabBar.a"; sourceTree = "<group>"; };
 		99C5E8521B57617700011AE6 /* PrintingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintingViewController.swift; sourceTree = "<group>"; };
+		99D105071B5F8747003BD200 /* WSPagePreview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WSPagePreview.swift; sourceTree = "<group>"; };
 		99D84AB01B4A6054003EDD9E /* EditDocumentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditDocumentViewController.swift; sourceTree = "<group>"; };
 		99EDD77E1B46348B00B00284 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
 		99EDD7871B4654DF00B00284 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 				997E5C271B5E3A6800340DE5 /* sampleText.txt */,
 				992785581B595C970045BF6D /* Testing2ViewController.swift */,
 				9927855A1B5B6B2F0045BF6D /* CoreTextViewController.swift */,
+				99D105071B5F8747003BD200 /* WSPagePreview.swift */,
 				992785561B5954D60045BF6D /* WSSliderNavbar.swift */,
 				99C5E8521B57617700011AE6 /* PrintingViewController.swift */,
 				99BA15BB1B3A6A2100352E6F /* Language pack */,
@@ -497,6 +500,7 @@
 				99A391E71B4BC91E00C18E40 /* DownloadDocumentCollectionViewCell.swift in Sources */,
 				991C2F351B3A5E8700892ABD /* DashboardViewController.swift in Sources */,
 				999F4EE51B511E8F009B4B6E /* TabBarController.swift in Sources */,
+				99D105081B5F8747003BD200 /* WSPagePreview.swift in Sources */,
 				99EDD7B01B46704800B00284 /* ShowDocumentViewController.swift in Sources */,
 				992785591B595C970045BF6D /* Testing2ViewController.swift in Sources */,
 				99EDD7A61B4662D400B00284 /* IntDate.swift in Sources */,

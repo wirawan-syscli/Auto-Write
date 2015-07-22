@@ -14,6 +14,7 @@ class PrintingViewController: UIViewController {
     var document: Documents?
     var printPreviewPage: UIScrollView?
     
+    var pagePreview: WSPagePreview?
     var sliderNavbar: WSSliderNavbar?
     
     var paperSizePicker = UIPickerView()
@@ -25,31 +26,27 @@ class PrintingViewController: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var sliderNavbarContainer: UIScrollView!
     
-    
     var currentOriginY: CGFloat = 0
     var hasNotPlayed = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        pagePreview = WSPagePreview()
+        pagePreview?.delegate = self
         initDefaultSettings()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
     
-        if hasNotPlayed {
-            initPrintPreview("A4",  paperWidth: 793.322834646, paperHeight: 1096.062992126)
-            hasNotPlayed = false
-        }
+        pagePreview?.initDefaultSettings(scrollView)
     }
     
     func initDefaultSettings() {
         
         navigationItem.title = document?.title
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Action, target: self, action: Selector("configurePrintingSettings"))
-        
-        initTapGestureRecognition()
         
         let size = CGSizeMake(150.0, 60.0)
         let paperSize = WSSliderNavbar.button("Paper Size", color: UIColor.whiteColor(), highlightedColor: UIColor.lightGrayColor())
@@ -69,109 +66,18 @@ class PrintingViewController: UIViewController {
 }
 
 // MARK: UISCROLL + PRINT PAGE PREVIEW
-extension PrintingViewController: UIScrollViewDelegate {
+extension PrintingViewController: UIScrollViewDelegate, WSPagePreviewDelegate {
     
-    func initPrintPreview(paperType: String, paperWidth: Double, paperHeight: Double) {
-        
-        if let lastPreviewPage = printPreviewPage {
-            lastPreviewPage.removeFromSuperview()
-        }
-        
-        printPreviewPage = UIScrollView(frame: CGRectMake(0.0, 0.0, CGFloat(paperWidth), CGFloat(paperHeight)))
-        printPreviewPage?.backgroundColor = UIColor.whiteColor()
-        
-        scrollView.addSubview(printPreviewPage!)
-        scrollView.contentSize = printPreviewPage!.frame.size
-        
-        let scrollViewFrame = scrollView.frame
-        let scaleWidth = scrollViewFrame.width / scrollView.contentSize.width
-        let scaleHeight = scrollViewFrame.height / scrollView.contentSize.height
-        let minScale = min(scaleWidth, scaleHeight)
-        
-        scrollView.maximumZoomScale = 1.0
-        scrollView.minimumZoomScale = minScale
-        scrollView.zoomScale = minScale
-        
-        initContent()
-        setCenterPositionToPreviewPage()
+    func WSPagePreviewSetTextContent(pagePreview: WSPagePreview) -> String {
+        let question = document!.questions.firstObject as! Questions
+        return question.text
     }
     
-    func initContent() {
-        for question in document!.questions {
-            currentOriginY = insertContentToPreviewPage(question as! Questions, currentOriginY: currentOriginY)
-        }
-        currentOriginY = 0.0
-    }
-    
-    func insertContentToPreviewPage(question: Questions, currentOriginY: CGFloat) -> CGFloat {
+    func WSPagePreviewShowPageControl(pagePreview: WSPagePreview, pageControl: UIPageControl) {
+        pageControl.currentPageIndicatorTintColor = ColorsPallete.orangeLight()
+        pageControl.pageIndicatorTintColor = ColorsPallete.orangeDark()
         
-        let textLabel = UILabel(frame: CGRectMake(0.0, currentOriginY, printPreviewPage!.bounds.width, printPreviewPage!.bounds.height))
-        textLabel.lineBreakMode = NSLineBreakMode.ByWordWrapping
-        textLabel.numberOfLines = 0
-        textLabel.text = question.text
-        textLabel.sizeToFit()
-        printPreviewPage?.addSubview(textLabel)
-        
-        return textLabel.frame.origin.y + textLabel.frame.height + 20.0
-    }
-    
-    func setCenterPositionToPreviewPage() {
-        
-        let boundsSize = scrollView.bounds.size
-        var contentsFrame = printPreviewPage!.frame
-        
-        if contentsFrame.size.width < boundsSize.width {
-            contentsFrame.origin.x = (boundsSize.width - contentsFrame.size.width) / 2.0
-        } else {
-            contentsFrame.origin.x = 0.0
-        }
-        
-        if contentsFrame.size.height < boundsSize.height {
-            contentsFrame.origin.y = (boundsSize.height - contentsFrame.size.height) / 2.0
-        } else {
-            contentsFrame.origin.y = 0.0
-        }
-        
-        printPreviewPage!.frame = contentsFrame
-    }
-    
-    func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
-        return printPreviewPage
-    }
-    
-    func scrollViewDidZoom(scrollView: UIScrollView) {
-        setCenterPositionToPreviewPage()
-    }
-}
-
-// MARK: GESTURE RECOGNITION
-extension PrintingViewController {
-    
-    func initTapGestureRecognition() {
-    
-        var doubleTapRecognizer = UITapGestureRecognizer(target: self, action: "scrollViewDoubleTapped:")
-    
-        doubleTapRecognizer.numberOfTapsRequired = 2
-        doubleTapRecognizer.numberOfTouchesRequired = 1
-    
-        scrollView.addGestureRecognizer(doubleTapRecognizer)
-    }
-    
-    func scrollViewDoubleTapped(recognizer: UITapGestureRecognizer) {
-        let pointInView = recognizer.locationInView(printPreviewPage)
-        
-        var newZoomScale = scrollView.zoomScale * 1.5
-        newZoomScale = min(newZoomScale, scrollView.maximumZoomScale)
-        
-        let scrollViewSize = scrollView.bounds.size
-        let w = scrollViewSize.width / newZoomScale
-        let h = scrollViewSize.height / newZoomScale
-        let x = pointInView.x - (w / 2.0)
-        let y = pointInView.y - (h / 2.0)
-        
-        let rectToZoomTo = CGRectMake(x, y, w, h);
-        
-        scrollView.zoomToRect(rectToZoomTo, animated: true)
+        view.addSubview(pageControl)
     }
 }
 
@@ -209,8 +115,9 @@ extension PrintingViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
         let (paperType, paperWidth, paperHeight) = paperSizeOption[row]
+        let size = CGSize(width: paperWidth, height: paperHeight)
         
-        initPrintPreview(paperType, paperWidth: paperWidth, paperHeight: paperHeight)
+        pagePreview?.setPageSize(size)
     }
 }
 
@@ -223,7 +130,7 @@ extension PrintingViewController {
         
         horizontalSlider.minimumValue = 0.0
         horizontalSlider.maximumValue = 10.0
-        horizontalSlider.value = 2.0
+        horizontalSlider.value = 0.0
         horizontalSlider.addTarget(self, action: Selector("horizontalSliderValueChanged:"), forControlEvents: .ValueChanged)
         
         sliderNavbar!.insertCustomViewIntoItem(horizontalSlider, index: 1, color: ColorsPallete.orangeDark())
@@ -239,10 +146,7 @@ extension PrintingViewController {
     
     func setPrintPreviewPageHorizontalMargin(pixels: CGFloat) {
         
-        let previousContentInsets = printPreviewPage!.contentInset
-        let contentInsets = UIEdgeInsets(top: pixels, left: previousContentInsets.left, bottom: pixels, right: previousContentInsets.right)
-        
-        printPreviewPage!.contentInset = contentInsets
+        pagePreview?.setPageMarginHorizontally(pixels, bottom: pixels)
     }
 }
 
@@ -271,10 +175,7 @@ extension PrintingViewController {
     
     func setPrintPreviewPageVerticalMargin(pixels: CGFloat) {
         
-        let previousContentInsets = printPreviewPage!.contentInset
-        let contentInsets = UIEdgeInsets(top: previousContentInsets.top, left: pixels, bottom: previousContentInsets.bottom, right: pixels)
-        
-        printPreviewPage!.contentInset = contentInsets
+        pagePreview?.setPageMarginVertically(pixels, right: pixels)
     }
 }
 
