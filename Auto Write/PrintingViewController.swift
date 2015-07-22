@@ -146,7 +146,7 @@ extension PrintingViewController {
     
     func setPrintPreviewPageHorizontalMargin(pixels: CGFloat) {
         
-        pagePreview?.setPageMarginHorizontally(pixels, bottom: pixels)
+        pagePreview?.setPageMarginHorizontally(pixels, right: pixels)
     }
 }
 
@@ -175,7 +175,7 @@ extension PrintingViewController {
     
     func setPrintPreviewPageVerticalMargin(pixels: CGFloat) {
         
-        pagePreview?.setPageMarginVertically(pixels, right: pixels)
+        pagePreview?.setPageMarginVertically(pixels, bottom: pixels)
     }
 }
 
