@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4312BE9481E82374B4BD3A8F /* libPods-Auto Write.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 496AEAFA1278DC4ADB60A443 /* libPods-Auto Write.a */; };
+		2C23E4E4A6DCBD46B6470D13 /* libPods-Auto Write.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E471E9A57B386AF25788AFDB /* libPods-Auto Write.a */; };
 		990B420B1B4FB521009241FE /* DashboardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990B420A1B4FB521009241FE /* DashboardTableViewCell.swift */; };
 		991C2F0C1B3989F300892ABD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991C2F0B1B3989F300892ABD /* AppDelegate.swift */; };
 		991C2F0F1B3989F300892ABD /* Auto_Write.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 991C2F0D1B3989F300892ABD /* Auto_Write.xcdatamodeld */; };
@@ -31,7 +31,6 @@
 		99A391E91B4E244A00C18E40 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A391E81B4E244A00C18E40 /* LoginViewController.swift */; };
 		99BA15C01B3A734300352E6F /* NewDocumentSettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BA15BF1B3A734300352E6F /* NewDocumentSettingsTableViewController.swift */; };
 		99C5E8531B57617700011AE6 /* PrintingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C5E8521B57617700011AE6 /* PrintingViewController.swift */; };
-		99D105081B5F8747003BD200 /* WSPagePreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D105071B5F8747003BD200 /* WSPagePreview.swift */; };
 		99D84AB11B4A6054003EDD9E /* EditDocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D84AB01B4A6054003EDD9E /* EditDocumentViewController.swift */; };
 		99EDD7891B4654DF00B00284 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99EDD7871B4654DF00B00284 /* Bolts.framework */; };
 		99EDD78A1B4654DF00B00284 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99EDD7881B4654DF00B00284 /* Parse.framework */; };
@@ -71,7 +70,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		496AEAFA1278DC4ADB60A443 /* libPods-Auto Write.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Auto Write.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		990B420A1B4FB521009241FE /* DashboardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardTableViewCell.swift; sourceTree = "<group>"; };
 		991C2F061B3989F300892ABD /* Auto Write.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Auto Write.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		991C2F0A1B3989F300892ABD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -102,7 +100,6 @@
 		99BA15BF1B3A734300352E6F /* NewDocumentSettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewDocumentSettingsTableViewController.swift; sourceTree = "<group>"; };
 		99C5E8501B53ACEC00011AE6 /* libPods-Auto Write-FoldingTabBar.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-Auto Write-FoldingTabBar.a"; path = "Pods/../build/Debug-iphoneos/libPods-Auto Write-FoldingTabBar.a"; sourceTree = "<group>"; };
 		99C5E8521B57617700011AE6 /* PrintingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintingViewController.swift; sourceTree = "<group>"; };
-		99D105071B5F8747003BD200 /* WSPagePreview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WSPagePreview.swift; sourceTree = "<group>"; };
 		99D84AB01B4A6054003EDD9E /* EditDocumentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditDocumentViewController.swift; sourceTree = "<group>"; };
 		99EDD77E1B46348B00B00284 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
 		99EDD7871B4654DF00B00284 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
@@ -131,6 +128,7 @@
 		99FEDB651B413BAB000FE88D /* AWSDynamoDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AWSDynamoDB.swift; sourceTree = "<group>"; };
 		99FEDB671B414FA3000FE88D /* QuestionDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionDB.swift; sourceTree = "<group>"; };
 		CE1DE9973485679C3135A40D /* Pods-Auto Write.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Auto Write.release.xcconfig"; path = "Pods/Target Support Files/Pods-Auto Write/Pods-Auto Write.release.xcconfig"; sourceTree = "<group>"; };
+		E471E9A57B386AF25788AFDB /* libPods-Auto Write.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Auto Write.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F49D6271056093B81A8EC73F /* Pods-Auto Write.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Auto Write.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Auto Write/Pods-Auto Write.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -153,7 +151,7 @@
 				99EDD78C1B46553000B00284 /* AudioToolbox.framework in Frameworks */,
 				99EDD78A1B4654DF00B00284 /* Parse.framework in Frameworks */,
 				99EDD7891B4654DF00B00284 /* Bolts.framework in Frameworks */,
-				4312BE9481E82374B4BD3A8F /* libPods-Auto Write.a in Frameworks */,
+				2C23E4E4A6DCBD46B6470D13 /* libPods-Auto Write.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -193,7 +191,6 @@
 			children = (
 				992785581B595C970045BF6D /* Testing2ViewController.swift */,
 				9927855A1B5B6B2F0045BF6D /* CoreTextViewController.swift */,
-				99D105071B5F8747003BD200 /* WSPagePreview.swift */,
 				992785561B5954D60045BF6D /* WSSliderNavbar.swift */,
 				99C5E8521B57617700011AE6 /* PrintingViewController.swift */,
 				99BA15BB1B3A6A2100352E6F /* Language pack */,
@@ -317,7 +314,7 @@
 				99EDD78B1B46553000B00284 /* AudioToolbox.framework */,
 				99EDD7871B4654DF00B00284 /* Bolts.framework */,
 				99EDD7881B4654DF00B00284 /* Parse.framework */,
-				496AEAFA1278DC4ADB60A443 /* libPods-Auto Write.a */,
+				E471E9A57B386AF25788AFDB /* libPods-Auto Write.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -496,7 +493,6 @@
 				99A391E71B4BC91E00C18E40 /* DownloadDocumentCollectionViewCell.swift in Sources */,
 				991C2F351B3A5E8700892ABD /* DashboardViewController.swift in Sources */,
 				999F4EE51B511E8F009B4B6E /* TabBarController.swift in Sources */,
-				99D105081B5F8747003BD200 /* WSPagePreview.swift in Sources */,
 				99EDD7B01B46704800B00284 /* ShowDocumentViewController.swift in Sources */,
 				992785591B595C970045BF6D /* Testing2ViewController.swift in Sources */,
 				99EDD7A61B4662D400B00284 /* IntDate.swift in Sources */,
