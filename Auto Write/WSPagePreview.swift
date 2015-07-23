@@ -23,6 +23,7 @@ class WSPagePreview: NSObject, UIScrollViewDelegate {
     
     var layoutManager = NSLayoutManager()
     var attrText: NSAttributedString?
+    var fontSize: CGFloat?
     
     var delegate: WSPagePreviewDelegate?
     
@@ -35,9 +36,10 @@ class WSPagePreview: NSObject, UIScrollViewDelegate {
     var delimiter: CGFloat?
     
     
-    init(pageSize: CGSize, pageMargin: UIEdgeInsets) {
+    init(pageSize: CGSize, pageMargin: UIEdgeInsets, fontSize: CGFloat) {
         self.pageSize = pageSize
         self.pageMargin = pageMargin
+        self.fontSize = fontSize
         
         super.init()
     }
@@ -45,8 +47,9 @@ class WSPagePreview: NSObject, UIScrollViewDelegate {
     convenience override init() {
         let pageSize = CGSize(width: 793.322834646, height: 1096.062992126)
         let pageMargin = UIEdgeInsetsZero
+        let fontSize: CGFloat = 14.0
         
-        self.init(pageSize: pageSize, pageMargin: pageMargin)
+        self.init(pageSize: pageSize, pageMargin: pageMargin, fontSize: fontSize)
     }
     
     func initDefaultSettings(scrollView: UIScrollView) {
@@ -79,6 +82,10 @@ class WSPagePreview: NSObject, UIScrollViewDelegate {
         setPageMargin(margin)
     }
     
+    func setFontSize(fontSize: CGFloat) {
+        initTextContent(fontSize)
+    }
+    
     func updateSettings() {
         
         if pageControl != nil {
@@ -103,18 +110,17 @@ class WSPagePreview: NSObject, UIScrollViewDelegate {
         pageOrigin = CGPoint(x: scrollView!.bounds.width - pageSize!.width, y: (scrollView!.bounds.height - pageSize!.height) / 2)
         pageOriginOffsetX = pageOrigin!.x / 2
         
-        initTextContent()
-        
-        adjustPageMargin()
+        initTextContent(fontSize!)
     }
     
-    func initTextContent() {
-        let fontSize = 14 * delimiter!
-        let font = UIFont.systemFontOfSize(fontSize)
+    func initTextContent(fontSize: CGFloat) {
         
         let text = delegate!.WSPagePreviewSetTextContent(self)
+        
+        let font = UIFont.systemFontOfSize(fontSize)
         attrText = NSAttributedString(string: text, attributes: [NSFontAttributeName : font])
         
+        adjustPageMargin()
     }
     
     func adjustPageMargin() {
