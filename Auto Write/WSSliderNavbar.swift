@@ -21,10 +21,26 @@ class WSSliderNavbar: NSObject {
     var currentDetailItem: UIView?
     var animationDuration: NSTimeInterval = 1.0
     
-    static func button(title: String, color: UIColor, highlightedColor: UIColor) -> UIButton {
+    static func createButtonWithText(title: String, color: UIColor, highlightedColor: UIColor) -> UIButton {
         
-        let button = UIButton(frame: CGRectZero)
+        var button = UIButton(frame: CGRectZero)
         button.setTitle(title, forState: .Normal)
+        button = buttonWithColor(button, color: color, highlightedColor: highlightedColor)
+        
+        return button
+    }
+    
+    static func createButtonWithImage(image: UIImage, color: UIColor, highlightedColor: UIColor) -> UIButton {
+        
+        var button = UIButton(frame: CGRectZero)
+        button.setImage(image, forState: .Normal)
+        button = buttonWithColor(button, color: color, highlightedColor: highlightedColor)
+        
+        return button
+    }
+    
+    static func buttonWithColor(button: UIButton, color: UIColor, highlightedColor: UIColor) -> UIButton {
+        
         button.setTitleColor(color, forState: .Normal)
         button.setTitleColor(color, forState: .Highlighted)
         

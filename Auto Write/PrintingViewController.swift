@@ -48,11 +48,11 @@ class PrintingViewController: UIViewController {
         navigationItem.title = document?.title
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Action, target: self, action: Selector("configurePrintingSettings"))
         
-        let size = CGSizeMake(150.0, 60.0)
-        let paperSize = WSSliderNavbar.button("Paper Size", color: UIColor.whiteColor(), highlightedColor: UIColor.lightGrayColor())
-        let horizontalMargin = WSSliderNavbar.button("Horizontal Margin", color: UIColor.whiteColor(), highlightedColor: UIColor.lightGrayColor())
-        let verticalMargin = WSSliderNavbar.button("Vertical Margin", color: UIColor.whiteColor(), highlightedColor: UIColor.lightGrayColor())
-        let utility = WSSliderNavbar.button("Utility", color: UIColor.whiteColor(), highlightedColor: UIColor.lightGrayColor())
+        let size = CGSizeMake(130.0, 60.0)
+        let paperSize = WSSliderNavbar.createButtonWithImage(UIImage(named: "Page_size")!, color: UIColor.whiteColor(), highlightedColor: UIColor.lightGrayColor())
+        let horizontalMargin = WSSliderNavbar.createButtonWithImage(UIImage(named: "Horizontal_margin")!, color: UIColor.whiteColor(), highlightedColor: UIColor.lightGrayColor())
+        let verticalMargin = WSSliderNavbar.createButtonWithImage(UIImage(named: "Vertical_margin")!, color: UIColor.whiteColor(), highlightedColor: UIColor.lightGrayColor())
+        let utility = WSSliderNavbar.createButtonWithImage(UIImage(named: "Header_include")!, color: UIColor.whiteColor(), highlightedColor: UIColor.lightGrayColor())
     
         let buttons = [paperSize, horizontalMargin, verticalMargin, utility]
         
@@ -74,8 +74,8 @@ extension PrintingViewController: UIScrollViewDelegate, WSPagePreviewDelegate {
     }
     
     func WSPagePreviewShowPageControl(pagePreview: WSPagePreview, pageControl: UIPageControl) {
-        pageControl.currentPageIndicatorTintColor = ColorsPallete.orangeLight()
-        pageControl.pageIndicatorTintColor = ColorsPallete.orangeDark()
+        pageControl.currentPageIndicatorTintColor = ColorsPallete.orangeDark()
+        pageControl.pageIndicatorTintColor = ColorsPallete.orangeLight()
         
         view.addSubview(pageControl)
     }
@@ -129,7 +129,7 @@ extension PrintingViewController {
         // 0.1 cm = 3.779527559 px
         
         horizontalSlider.minimumValue = 0.0
-        horizontalSlider.maximumValue = 10.0
+        horizontalSlider.maximumValue = 5.0
         horizontalSlider.value = 0.0
         horizontalSlider.addTarget(self, action: Selector("horizontalSliderValueChanged:"), forControlEvents: .ValueChanged)
         
@@ -158,7 +158,7 @@ extension PrintingViewController {
         // 0.1 cm = 3.779527559 px
         
         verticalSlider.minimumValue = 0.0
-        verticalSlider.maximumValue = 10.0
+        verticalSlider.maximumValue = 5.0
         verticalSlider.value = 2.0
         verticalSlider.addTarget(self, action: Selector("verticalSliderValueChanged:"), forControlEvents: .ValueChanged)
         
@@ -174,7 +174,6 @@ extension PrintingViewController {
     }
     
     func setPrintPreviewPageVerticalMargin(pixels: CGFloat) {
-        
         pagePreview?.setPageMarginVertically(pixels, bottom: pixels)
     }
 }

@@ -252,11 +252,11 @@
                                 <exclude reference="nvV-ta-3GV"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="k0e-1X-1sc"/>
+                                <exclude reference="zV9-hY-Gxo"/>
                                 <exclude reference="ObP-82-4nx"/>
                                 <exclude reference="hz3-iv-RFp"/>
                                 <exclude reference="ytw-eu-46X"/>
-                                <exclude reference="k0e-1X-1sc"/>
-                                <exclude reference="zV9-hY-Gxo"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -264,11 +264,11 @@
                                 <include reference="nvV-ta-3GV"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="k0e-1X-1sc"/>
+                                <exclude reference="zV9-hY-Gxo"/>
                                 <include reference="ObP-82-4nx"/>
                                 <include reference="hz3-iv-RFp"/>
                                 <include reference="ytw-eu-46X"/>
-                                <include reference="k0e-1X-1sc"/>
-                                <exclude reference="zV9-hY-Gxo"/>
                             </mask>
                         </variation>
                     </view>

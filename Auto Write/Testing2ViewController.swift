@@ -23,13 +23,13 @@ class Testing2ViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        let button1 = WSSliderNavbar.button("Paper Size", color: UIColor.whiteColor(), highlightedColor: UIColor.lightGrayColor())
+        let button1 = WSSliderNavbar.createButtonWithText("Paper Size", color: UIColor.whiteColor(), highlightedColor: UIColor.lightGrayColor())
         
-        let button2 = WSSliderNavbar.button("Horizontal Margin", color: UIColor.whiteColor(), highlightedColor: UIColor.lightGrayColor())
+        let button2 = WSSliderNavbar.createButtonWithText("Horizontal Margin", color: UIColor.whiteColor(), highlightedColor: UIColor.lightGrayColor())
         
-        let button3 = WSSliderNavbar.button("Vertical Margin", color: UIColor.whiteColor(), highlightedColor: UIColor.lightGrayColor())
+        let button3 = WSSliderNavbar.createButtonWithText("Vertical Margin", color: UIColor.whiteColor(), highlightedColor: UIColor.lightGrayColor())
         
-        let button4 = WSSliderNavbar.button("Utility", color: UIColor.whiteColor(), highlightedColor: UIColor.lightGrayColor())
+        let button4 = WSSliderNavbar.createButtonWithText("Utility", color: UIColor.whiteColor(), highlightedColor: UIColor.lightGrayColor())
         
         let buttons = [button1, button2, button3, button4]
         let size = CGSizeMake(160.0, 60.0)

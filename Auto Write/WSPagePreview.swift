@@ -22,7 +22,7 @@ class WSPagePreview: NSObject, UIScrollViewDelegate {
     var pageControl: UIPageControl?
     
     var layoutManager = NSLayoutManager()
-    var text: String = ""
+    var attrText: NSAttributedString?
     
     var delegate: WSPagePreviewDelegate?
     
@@ -31,6 +31,9 @@ class WSPagePreview: NSObject, UIScrollViewDelegate {
     var pageOriginOffsetX: CGFloat?
     var pageMargin: UIEdgeInsets?
     var pages = [UITextView]()
+    
+    var delimiter: CGFloat?
+    
     
     init(pageSize: CGSize, pageMargin: UIEdgeInsets) {
         self.pageSize = pageSize
@@ -61,16 +64,18 @@ class WSPagePreview: NSObject, UIScrollViewDelegate {
     
     func setPageMargin(margin: UIEdgeInsets){
         pageMargin = margin
-        updateSettings()
+        adjustPageMargin()
     }
     
     func setPageMarginHorizontally(left: CGFloat, right: CGFloat) {
-        let margin = UIEdgeInsets(top: pageMargin!.top, left: left, bottom: pageMargin!.bottom, right: right)
+        let margin = UIEdgeInsets(top: pageMargin!.top, left: left * delimiter!, bottom: pageMargin!.bottom, right: right * delimiter!)
+        println(delimiter!)
         setPageMargin(margin)
     }
     
     func setPageMarginVertically(top: CGFloat, bottom: CGFloat) {
-        let margin = UIEdgeInsets(top: top, left: pageMargin!.left, bottom: bottom, right: pageMargin!.right)
+        let margin = UIEdgeInsets(top: top * delimiter!, left: pageMargin!.left, bottom: bottom * delimiter!, right: pageMargin!.right)
+        println(delimiter!)
         setPageMargin(margin)
     }
     
@@ -82,24 +87,34 @@ class WSPagePreview: NSObject, UIScrollViewDelegate {
         let pageControlFrame = CGRectMake(scrollView!.frame.origin.x, scrollView!.frame.origin.y, scrollView!.frame.width, 20.0)
         pageControl = UIPageControl(frame: pageControlFrame)
         
-        text = delegate!.WSPagePreviewSetTextContent(self)
-        
         var pageSizeScale = pageSize!
         if pageSizeScale.width > scrollView!.bounds.width - scrollViewMargin ||
             pageSizeScale.height > scrollView!.bounds.height - scrollViewMargin {
                 
-                let delimiter = max(pageSize!.width, pageSize!.height)
+                let highestSize = max(pageSize!.width, pageSize!.height)
                 let scrollViewFrame = min(scrollView!.frame.width, scrollView!.frame.height) - scrollViewMargin
+                delimiter = CGFloat(scrollViewFrame / highestSize)
                 
-                pageSizeScale.width = CGFloat(scrollViewFrame / delimiter) * pageSizeScale.width
-                pageSizeScale.height = CGFloat(scrollViewFrame / delimiter) * pageSizeScale.height
+                pageSizeScale.width = delimiter! * pageSizeScale.width
+                pageSizeScale.height = delimiter! * pageSizeScale.height
         }
         pageSize = pageSizeScale
         
         pageOrigin = CGPoint(x: scrollView!.bounds.width - pageSize!.width, y: (scrollView!.bounds.height - pageSize!.height) / 2)
         pageOriginOffsetX = pageOrigin!.x / 2
         
+        initTextContent()
+        
         adjustPageMargin()
+    }
+    
+    func initTextContent() {
+        let fontSize = 14 * delimiter!
+        let font = UIFont.systemFontOfSize(fontSize)
+        
+        let text = delegate!.WSPagePreviewSetTextContent(self)
+        attrText = NSAttributedString(string: text, attributes: [NSFontAttributeName : font])
+        
     }
     
     func adjustPageMargin() {
@@ -110,7 +125,7 @@ class WSPagePreview: NSObject, UIScrollViewDelegate {
             }
             pages = [UITextView]()
         }
-        let textStorage = NSTextStorage(string: text)
+        let textStorage = NSTextStorage(attributedString: attrText!)
         layoutManager = NSLayoutManager()
         textStorage.addLayoutManager(layoutManager)
         
@@ -121,7 +136,7 @@ class WSPagePreview: NSObject, UIScrollViewDelegate {
             
             let pageOriginX = pageOriginOffsetX! + (pageOrigin!.x + pageSize!.width) * CGFloat(index++)
             
-            let textContainer = NSTextContainer(size: CGSize(width: pageSize!.width - pageMargin!.left + pageMargin!.right, height: pageSize!.height - pageMargin!.top + pageMargin!.bottom))
+            let textContainer = NSTextContainer(size: CGSize(width: pageSize!.width - (pageMargin!.left + pageMargin!.right), height: pageSize!.height - (pageMargin!.top + pageMargin!.bottom)))
             layoutManager.addTextContainer(textContainer)
             
             // Set TEXTVIEW

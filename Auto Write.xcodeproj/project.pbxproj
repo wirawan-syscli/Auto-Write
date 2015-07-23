@@ -21,7 +21,6 @@
 		992785571B5954D60045BF6D /* WSSliderNavbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992785561B5954D60045BF6D /* WSSliderNavbar.swift */; };
 		992785591B595C970045BF6D /* Testing2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992785581B595C970045BF6D /* Testing2ViewController.swift */; };
 		9927855B1B5B6B2F0045BF6D /* CoreTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9927855A1B5B6B2F0045BF6D /* CoreTextViewController.swift */; };
-		997E5C281B5E3A6800340DE5 /* sampleText.txt in Resources */ = {isa = PBXBuildFile; fileRef = 997E5C271B5E3A6800340DE5 /* sampleText.txt */; };
 		999F4EDF1B50DC84009B4B6E /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 999F4EDE1B50DC84009B4B6E /* Reachability.m */; };
 		999F4EE11B50F835009B4B6E /* ColorsPallete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999F4EE01B50F835009B4B6E /* ColorsPallete.swift */; };
 		999F4EE51B511E8F009B4B6E /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999F4EE41B511E8F009B4B6E /* TabBarController.swift */; };
@@ -91,7 +90,6 @@
 		992785561B5954D60045BF6D /* WSSliderNavbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WSSliderNavbar.swift; sourceTree = "<group>"; };
 		992785581B595C970045BF6D /* Testing2ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Testing2ViewController.swift; sourceTree = "<group>"; };
 		9927855A1B5B6B2F0045BF6D /* CoreTextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreTextViewController.swift; sourceTree = "<group>"; };
-		997E5C271B5E3A6800340DE5 /* sampleText.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = sampleText.txt; path = ../../../Desktop/sampleText.txt; sourceTree = "<group>"; };
 		999F4EDD1B50DC84009B4B6E /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		999F4EDE1B50DC84009B4B6E /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		999F4EE01B50F835009B4B6E /* ColorsPallete.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorsPallete.swift; sourceTree = "<group>"; };
@@ -193,7 +191,6 @@
 		991C2F081B3989F300892ABD /* Auto Write */ = {
 			isa = PBXGroup;
 			children = (
-				997E5C271B5E3A6800340DE5 /* sampleText.txt */,
 				992785581B595C970045BF6D /* Testing2ViewController.swift */,
 				9927855A1B5B6B2F0045BF6D /* CoreTextViewController.swift */,
 				99D105071B5F8747003BD200 /* WSPagePreview.swift */,
@@ -425,7 +422,6 @@
 				991C2F141B3989F300892ABD /* Main.storyboard in Resources */,
 				991C2F331B398E5800892ABD /* tessdata in Resources */,
 				991C2F191B3989F300892ABD /* LaunchScreen.xib in Resources */,
-				997E5C281B5E3A6800340DE5 /* sampleText.txt in Resources */,
 				991C2F161B3989F300892ABD /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
