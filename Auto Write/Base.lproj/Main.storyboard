@@ -280,7 +280,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="70a-S6-w83" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5869.5" y="-903"/>
+            <point key="canvasLocation" x="5403" y="-903"/>
         </scene>
         <!--New Document Settings-->
         <scene sceneID="U8R-GQ-0ad">
@@ -2354,7 +2354,7 @@ Document</string>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qe5-d5-hvG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4951.5" y="-903"/>
+            <point key="canvasLocation" x="4722" y="-903"/>
         </scene>
     </scenes>
     <resources>

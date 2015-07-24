@@ -28,10 +28,16 @@ class WSPagePreview: NSObject, UIScrollViewDelegate {
     var delegate: WSPagePreviewDelegate?
     
     var pageSize: CGSize?
+    var resizedPageSize: CGSize?
+    
     var pageOrigin: CGPoint?
     var pageOriginOffsetX: CGFloat?
+    
     var pageMargin: UIEdgeInsets?
+    var resizedPageMargin: UIEdgeInsets?
+    
     var pages = [UITextView]()
+    var pagesPrint = [UITextView]()
     
     var delimiter: CGFloat?
     
@@ -39,6 +45,7 @@ class WSPagePreview: NSObject, UIScrollViewDelegate {
     init(pageSize: CGSize, pageMargin: UIEdgeInsets, fontSize: CGFloat) {
         self.pageSize = pageSize
         self.pageMargin = pageMargin
+        self.resizedPageMargin = self.pageMargin
         self.fontSize = fontSize
         
         super.init()
@@ -65,21 +72,22 @@ class WSPagePreview: NSObject, UIScrollViewDelegate {
         updateSettings()
     }
     
-    func setPageMargin(margin: UIEdgeInsets){
+    func setPageMargin(margin: UIEdgeInsets, resizedMargin: UIEdgeInsets){
         pageMargin = margin
+        resizedPageMargin = resizedMargin
         adjustPageMargin()
     }
     
     func setPageMarginHorizontally(left: CGFloat, right: CGFloat) {
-        let margin = UIEdgeInsets(top: pageMargin!.top, left: left * delimiter!, bottom: pageMargin!.bottom, right: right * delimiter!)
-        println(delimiter!)
-        setPageMargin(margin)
+        let resizedMargin = UIEdgeInsets(top: pageMargin!.top, left: left * delimiter!, bottom: pageMargin!.bottom, right: right * delimiter!)
+        let margin = UIEdgeInsets(top: pageMargin!.top, left: left, bottom: pageMargin!.bottom, right: right)
+        setPageMargin(margin, resizedMargin: resizedMargin)
     }
     
     func setPageMarginVertically(top: CGFloat, bottom: CGFloat) {
-        let margin = UIEdgeInsets(top: top * delimiter!, left: pageMargin!.left, bottom: bottom * delimiter!, right: pageMargin!.right)
-        println(delimiter!)
-        setPageMargin(margin)
+        let resizedMargin = UIEdgeInsets(top: top * delimiter!, left: pageMargin!.left, bottom: bottom * delimiter!, right: pageMargin!.right)
+        let margin = UIEdgeInsets(top: top, left: pageMargin!.left, bottom: bottom, right: pageMargin!.right)
+        setPageMargin(margin, resizedMargin: resizedMargin)
     }
     
     func setFontSize(fontSize: CGFloat) {
@@ -91,6 +99,7 @@ class WSPagePreview: NSObject, UIScrollViewDelegate {
         if pageControl != nil {
             pageControl?.removeFromSuperview()
         }
+        
         let pageControlFrame = CGRectMake(scrollView!.frame.origin.x, scrollView!.frame.origin.y, scrollView!.frame.width, 20.0)
         pageControl = UIPageControl(frame: pageControlFrame)
         
@@ -105,9 +114,9 @@ class WSPagePreview: NSObject, UIScrollViewDelegate {
                 pageSizeScale.width = delimiter! * pageSizeScale.width
                 pageSizeScale.height = delimiter! * pageSizeScale.height
         }
-        pageSize = pageSizeScale
+        resizedPageSize = pageSizeScale
         
-        pageOrigin = CGPoint(x: scrollView!.bounds.width - pageSize!.width, y: (scrollView!.bounds.height - pageSize!.height) / 2)
+        pageOrigin = CGPoint(x: scrollView!.bounds.width - resizedPageSize!.width, y: (scrollView!.bounds.height - resizedPageSize!.height) / 2)
         pageOriginOffsetX = pageOrigin!.x / 2
         
         initTextContent(fontSize!)
@@ -115,9 +124,11 @@ class WSPagePreview: NSObject, UIScrollViewDelegate {
     
     func initTextContent(fontSize: CGFloat) {
         
+        self.fontSize = fontSize
+        let adjustedFontSize = self.fontSize! * delimiter!
         let text = delegate!.WSPagePreviewSetTextContent(self)
         
-        let font = UIFont.systemFontOfSize(fontSize)
+        let font = UIFont.systemFontOfSize(adjustedFontSize)
         attrText = NSAttributedString(string: text, attributes: [NSFontAttributeName : font])
         
         adjustPageMargin()
@@ -139,21 +150,16 @@ class WSPagePreview: NSObject, UIScrollViewDelegate {
         var index = 0
         
         while (lastRenderedGlyph < layoutManager.numberOfGlyphs) {
-            
-            let pageOriginX = pageOriginOffsetX! + (pageOrigin!.x + pageSize!.width) * CGFloat(index++)
-            
-            let textContainer = NSTextContainer(size: CGSize(width: pageSize!.width - (pageMargin!.left + pageMargin!.right), height: pageSize!.height - (pageMargin!.top + pageMargin!.bottom)))
+
+            let pageOriginX = pageOriginOffsetX! + (pageOrigin!.x + resizedPageSize!.width) * CGFloat(index++)
+            let textContainer = NSTextContainer(size: CGSize(width: resizedPageSize!.width - (pageMargin!.left + pageMargin!.right), height: resizedPageSize!.height - (pageMargin!.top + pageMargin!.bottom)))
             layoutManager.addTextContainer(textContainer)
             
+            setPrintPreviewPages(textContainer, pageOriginX: pageOriginX)
+            setPrintFormatPages(pageOriginX)
+            
             // Set TEXTVIEW
-            let textView = UITextView(frame: CGRectMake(pageOriginX, pageOrigin!.y, pageSize!.width, pageSize!.height), textContainer: textContainer)
-            textView.textContainerInset = UIEdgeInsets(top: pageMargin!.top, left: pageMargin!.left, bottom: pageMargin!.bottom, right: pageMargin!.right)
-            textView.scrollEnabled = false
-            
             lastRenderedGlyph = NSMaxRange(layoutManager.glyphRangeForTextContainer(textContainer))
-            
-            scrollView!.addSubview(textView)
-            pages.append(textView)
         }
         
         scrollView!.contentSize = CGSize(width: pages.first!.frame.origin.x + pages.last!.frame.width + pages.last!.frame.origin.x, height: scrollView!.frame.height)
@@ -161,6 +167,28 @@ class WSPagePreview: NSObject, UIScrollViewDelegate {
         
         pageControl!.numberOfPages = pages.count
         delegate?.WSPagePreviewShowPageControl?(self, pageControl: pageControl!)
+    }
+    
+    func setPrintPreviewPages(textContainer: NSTextContainer, pageOriginX: CGFloat) {
+        
+        let textView = UITextView(frame: CGRectMake(pageOriginX, pageOrigin!.y, resizedPageSize!.width, resizedPageSize!.height), textContainer: textContainer)
+        textView.textContainerInset = UIEdgeInsets(top: resizedPageMargin!.top, left: resizedPageMargin!.left, bottom: resizedPageMargin!.bottom, right: resizedPageMargin!.right)
+        textView.scrollEnabled = false
+        
+        pages.append(textView)
+        scrollView!.addSubview(textView)
+    }
+    
+    func setPrintFormatPages(pageOriginX: CGFloat) {
+        
+        let printPreview = pages.last!
+        
+        let textView = UITextView(frame: CGRectMake(pageOriginX, pageOrigin!.y, resizedPageSize!.width, resizedPageSize!.height))
+        textView.text = printPreview.text
+        textView.textContainerInset = UIEdgeInsets(top: pageMargin!.top, left: pageMargin!.left, bottom: pageMargin!.bottom, right: pageMargin!.right)
+        textView.scrollEnabled = false
+        
+        pagesPrint.append(textView)
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {

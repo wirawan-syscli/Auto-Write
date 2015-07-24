@@ -98,56 +98,56 @@ extension NewDocumentViewController: UIImagePickerControllerDelegate,
 }
 
 // MARK: G8TESSERACTOCR & MBProgressHUD
-extension NewDocumentViewController { //: G8TesseractDelegate {
+extension NewDocumentViewController : G8TesseractDelegate {
     
     func performRecognizingText(image: UIImage) {
         
-//        let imageBW = image.g8_blackAndWhite()
-//        
-//        hud = MBProgressHUD.showHUDAddedTo(view, animated: true)
-//        hud!.mode = .AnnularDeterminate
-//        hud?.color = UIColor.orangeColor()
-//        hud!.labelText = "Scanning.."
-//        
-//        autoreleasepool { () -> () in
-//            var operation = G8RecognitionOperation(language: "eng+jpn")
-//            operation.delegate = self
-//            operation.tesseract.engineMode = G8OCREngineMode.TesseractOnly
-//            operation.tesseract.pageSegmentationMode = G8PageSegmentationMode.AutoOnly
-//            operation.tesseract.image = imageBW
-//            operation.recognitionCompleteBlock = { (tesseract: G8Tesseract!) in
-//                
-//                // GUIDE_1: Go to below
-//                self.performRecognizingTextIsCompleted(tesseract)
-//                operation = nil
-//            }
-//            
-//            operationQueue.addOperation(operation)
-//        }
+        let imageBW = image.g8_blackAndWhite()
+        
+        hud = MBProgressHUD.showHUDAddedTo(view, animated: true)
+        hud!.mode = .AnnularDeterminate
+        hud?.color = UIColor.orangeColor()
+        hud!.labelText = "Scanning.."
+        
+        autoreleasepool { () -> () in
+            var operation = G8RecognitionOperation(language: "eng+jpn")
+            operation.delegate = self
+            operation.tesseract.engineMode = G8OCREngineMode.TesseractOnly
+            operation.tesseract.pageSegmentationMode = G8PageSegmentationMode.AutoOnly
+            operation.tesseract.image = imageBW
+            operation.recognitionCompleteBlock = { (tesseract: G8Tesseract!) in
+                
+                // GUIDE_1: Go to below
+                self.performRecognizingTextIsCompleted(tesseract)
+                operation = nil
+            }
+            
+            operationQueue.addOperation(operation)
+        }
     }
     
-//    // GUIDE_1: From top
-//    func performRecognizingTextIsCompleted(tesseract: G8Tesseract) {
-//        
-//        hud!.hide(true)
-//        
-//        self.navigationItem.rightBarButtonItem = self.saveBarButtonItem
-//        self.textView.text = tesseract.recognizedText
-//        
-//        // release unused object to reduce memory usage
-//        G8Tesseract.clearCache()
-//    }
-//    
-//    func shouldCancelImageRecognitionForTesseract(tesseract: G8Tesseract!) -> Bool {
-//        
-//        return false
-//    }
-//    
-//    func progressImageRecognitionForTesseract(tesseract: G8Tesseract!) {
-//        
-//        var progress: Float = Float(tesseract.progress) / 100.0
-//        hud!.progress = progress;
-//    }
+    // GUIDE_1: From top
+    func performRecognizingTextIsCompleted(tesseract: G8Tesseract) {
+        
+        hud!.hide(true)
+        
+        self.navigationItem.rightBarButtonItem = self.saveBarButtonItem
+        self.textView.text = tesseract.recognizedText
+        
+        // release unused object to reduce memory usage
+        G8Tesseract.clearCache()
+    }
+    
+    func shouldCancelImageRecognitionForTesseract(tesseract: G8Tesseract!) -> Bool {
+        
+        return false
+    }
+    
+    func progressImageRecognitionForTesseract(tesseract: G8Tesseract!) {
+        
+        var progress: Float = Float(tesseract.progress) / 100.0
+        hud!.progress = progress;
+    }
 }
 
 // MARK: UITEXTVIEW

@@ -205,7 +205,8 @@ extension PrintingViewController: UIPrintInteractionControllerDelegate {
         let printObject = UIPrintInteractionController.sharedPrintController()
         let printInfo = UIPrintInfo.printInfo()
         let content = document?.questions.firstObject as! Questions
-        let printFormatter = UISimpleTextPrintFormatter(text: content.text)
+        
+        let printFormatter = pagePreview!.pagesPrint.first!.viewPrintFormatter()
         
         printObject?.printInfo = printInfo
         printObject?.printFormatter = printFormatter
