@@ -35,6 +35,12 @@ class WSPagePreview: NSObject, UIScrollViewDelegate {
     
     var pageMargin: UIEdgeInsets?
     var resizedPageMargin: UIEdgeInsets?
+    var horizontalGuidelines: CALayer?
+    var verticalGuidelines: CALayer?
+    var guidelinesOffset: CGFloat = 10.0
+    var guidelinesStrokeSize: CGFloat = 15.0
+    var showPageMarginGuidelines: Bool = true
+    var cm: CGFloat = 37.79527559
     
     var pages = [UITextView]()
     var pagesPrint = [UITextView]()
@@ -70,24 +76,6 @@ class WSPagePreview: NSObject, UIScrollViewDelegate {
     func setPageSize(size: CGSize){
         pageSize = size
         updateSettings()
-    }
-    
-    func setPageMargin(margin: UIEdgeInsets, resizedMargin: UIEdgeInsets){
-        pageMargin = margin
-        resizedPageMargin = resizedMargin
-        adjustPageMargin()
-    }
-    
-    func setPageMarginHorizontally(left: CGFloat, right: CGFloat) {
-        let resizedMargin = UIEdgeInsets(top: pageMargin!.top, left: left * delimiter!, bottom: pageMargin!.bottom, right: right * delimiter!)
-        let margin = UIEdgeInsets(top: pageMargin!.top, left: left, bottom: pageMargin!.bottom, right: right)
-        setPageMargin(margin, resizedMargin: resizedMargin)
-    }
-    
-    func setPageMarginVertically(top: CGFloat, bottom: CGFloat) {
-        let resizedMargin = UIEdgeInsets(top: top * delimiter!, left: pageMargin!.left, bottom: bottom * delimiter!, right: pageMargin!.right)
-        let margin = UIEdgeInsets(top: top, left: pageMargin!.left, bottom: bottom, right: pageMargin!.right)
-        setPageMargin(margin, resizedMargin: resizedMargin)
     }
     
     func setFontSize(fontSize: CGFloat) {
@@ -141,6 +129,7 @@ class WSPagePreview: NSObject, UIScrollViewDelegate {
                 page.removeFromSuperview()
             }
             pages = [UITextView]()
+            pagesPrint = [UITextView]()
         }
         let textStorage = NSTextStorage(attributedString: attrText!)
         layoutManager = NSLayoutManager()
@@ -152,7 +141,7 @@ class WSPagePreview: NSObject, UIScrollViewDelegate {
         while (lastRenderedGlyph < layoutManager.numberOfGlyphs) {
 
             let pageOriginX = pageOriginOffsetX! + (pageOrigin!.x + resizedPageSize!.width) * CGFloat(index++)
-            let textContainer = NSTextContainer(size: CGSize(width: resizedPageSize!.width - (pageMargin!.left + pageMargin!.right), height: resizedPageSize!.height - (pageMargin!.top + pageMargin!.bottom)))
+            let textContainer = NSTextContainer(size: CGSize(width: resizedPageSize!.width - (resizedPageMargin!.left + resizedPageMargin!.right), height: resizedPageSize!.height - (resizedPageMargin!.top + resizedPageMargin!.bottom)))
             layoutManager.addTextContainer(textContainer)
             
             setPrintPreviewPages(textContainer, pageOriginX: pageOriginX)
@@ -174,9 +163,78 @@ class WSPagePreview: NSObject, UIScrollViewDelegate {
         let textView = UITextView(frame: CGRectMake(pageOriginX, pageOrigin!.y, resizedPageSize!.width, resizedPageSize!.height), textContainer: textContainer)
         textView.textContainerInset = UIEdgeInsets(top: resizedPageMargin!.top, left: resizedPageMargin!.left, bottom: resizedPageMargin!.bottom, right: resizedPageMargin!.right)
         textView.scrollEnabled = false
+        textView.clipsToBounds = false
+        
+        if showPageMarginGuidelines {
+            
+            if horizontalGuidelines != nil {
+                horizontalGuidelines!.removeFromSuperlayer()
+            }
+            if verticalGuidelines != nil {
+                verticalGuidelines!.removeFromSuperlayer()
+            }
+            
+            drawHorizontalGuidelines(textView)
+            drawVerticalguidelines(textView)
+        }
         
         pages.append(textView)
         scrollView!.addSubview(textView)
+    }
+    
+    func drawHorizontalGuidelines(textView: UITextView) {
+        
+        let horizontalLine = CALayer()
+        horizontalLine.frame = CGRectMake(
+            textView.bounds.origin.x + resizedPageMargin!.left,
+            -(textView.frame.origin.y / 2 ),
+            textView.frame.width - (resizedPageMargin!.left * 2.0),
+            0.5)
+        horizontalLine.backgroundColor = UIColor.blackColor().CGColor
+        textView.layer.addSublayer(horizontalLine)
+        
+        println(scrollView!.frame.height)
+        println(textView.frame.height)
+        
+        let horizontalLabel = UILabel(frame: CGRectMake(
+            horizontalLine.bounds.width / 2 - guidelinesStrokeSize + resizedPageMargin!.left,
+            horizontalLine.frame.origin.y + 1.0,
+            guidelinesStrokeSize * 2.0,
+            guidelinesStrokeSize))
+        let horizontalUnit = String(format: "%.2f", pageMargin!.left / cm)
+        
+        horizontalLabel.text = "\(horizontalUnit)"
+        horizontalLabel.font = UIFont.systemFontOfSize(10)
+        horizontalLabel.textAlignment = NSTextAlignment.Center
+        horizontalLabel.backgroundColor = UIColor.groupTableViewBackgroundColor()
+        
+        textView.addSubview(horizontalLabel)
+    }
+    
+    func drawVerticalguidelines(textView: UITextView) {
+        
+        let verticalLine = CALayer()
+        verticalLine.frame = CGRectMake(
+            ((scrollView!.bounds.width / 2 - textView.bounds.width) / 2 ),
+            textView.bounds.origin.y + resizedPageMargin!.top,
+            0.5,
+            textView.frame.height - (resizedPageMargin!.top * 2.0))
+        verticalLine.backgroundColor = UIColor.blackColor().CGColor
+        textView.layer.addSublayer(verticalLine)
+        
+        let verticalLabel = UILabel(frame: CGRectMake(
+            verticalLine.frame.origin.x + 1.0,
+            verticalLine.bounds.height / 2 - guidelinesStrokeSize + resizedPageMargin!.top,
+            guidelinesStrokeSize * 2.2,
+            guidelinesStrokeSize))
+        let verticalUnit = String(format: "%.2f", pageMargin!.top / cm)
+        
+        verticalLabel.text = "\(verticalUnit)"
+        verticalLabel.font = UIFont.systemFontOfSize(10)
+        verticalLabel.textAlignment = NSTextAlignment.Center
+        verticalLabel.backgroundColor = UIColor.groupTableViewBackgroundColor()
+        
+        textView.addSubview(verticalLabel)
     }
     
     func setPrintFormatPages(pageOriginX: CGFloat) {

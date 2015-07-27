@@ -22,6 +22,7 @@
 		992785591B595C970045BF6D /* Testing2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992785581B595C970045BF6D /* Testing2ViewController.swift */; };
 		9927855B1B5B6B2F0045BF6D /* CoreTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9927855A1B5B6B2F0045BF6D /* CoreTextViewController.swift */; };
 		9979A6461B60DFE000D14FB5 /* WSPagePreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9979A6451B60DFE000D14FB5 /* WSPagePreview.swift */; };
+		9979A6491B65DB5A00D14FB5 /* WSPagePreviewMargin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9979A6481B65DB5A00D14FB5 /* WSPagePreviewMargin.swift */; };
 		999F4EDF1B50DC84009B4B6E /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 999F4EDE1B50DC84009B4B6E /* Reachability.m */; };
 		999F4EE11B50F835009B4B6E /* ColorsPallete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999F4EE01B50F835009B4B6E /* ColorsPallete.swift */; };
 		999F4EE51B511E8F009B4B6E /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999F4EE41B511E8F009B4B6E /* TabBarController.swift */; };
@@ -90,6 +91,7 @@
 		992785581B595C970045BF6D /* Testing2ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Testing2ViewController.swift; sourceTree = "<group>"; };
 		9927855A1B5B6B2F0045BF6D /* CoreTextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreTextViewController.swift; sourceTree = "<group>"; };
 		9979A6451B60DFE000D14FB5 /* WSPagePreview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WSPagePreview.swift; path = "../../Auto write/Auto Write/WSPagePreview.swift"; sourceTree = "<group>"; };
+		9979A6481B65DB5A00D14FB5 /* WSPagePreviewMargin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WSPagePreviewMargin.swift; sourceTree = "<group>"; };
 		999F4EDD1B50DC84009B4B6E /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		999F4EDE1B50DC84009B4B6E /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		999F4EE01B50F835009B4B6E /* ColorsPallete.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorsPallete.swift; sourceTree = "<group>"; };
@@ -191,10 +193,10 @@
 		991C2F081B3989F300892ABD /* Auto Write */ = {
 			isa = PBXGroup;
 			children = (
+				9979A6471B65DB2C00D14FB5 /* WSPagePreview */,
 				992785581B595C970045BF6D /* Testing2ViewController.swift */,
 				9927855A1B5B6B2F0045BF6D /* CoreTextViewController.swift */,
 				992785561B5954D60045BF6D /* WSSliderNavbar.swift */,
-				9979A6451B60DFE000D14FB5 /* WSPagePreview.swift */,
 				99C5E8521B57617700011AE6 /* PrintingViewController.swift */,
 				99BA15BB1B3A6A2100352E6F /* Language pack */,
 				99BA15BC1B3A6A3F00352E6F /* Model */,
@@ -243,6 +245,15 @@
 				991C2F231B3989F400892ABD /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9979A6471B65DB2C00D14FB5 /* WSPagePreview */ = {
+			isa = PBXGroup;
+			children = (
+				9979A6451B60DFE000D14FB5 /* WSPagePreview.swift */,
+				9979A6481B65DB5A00D14FB5 /* WSPagePreviewMargin.swift */,
+			);
+			name = WSPagePreview;
 			sourceTree = "<group>";
 		};
 		99A391EA1B4F6F6800C18E40 /* Third-Party Libraries */ = {
@@ -500,6 +511,7 @@
 				99EDD7B01B46704800B00284 /* ShowDocumentViewController.swift in Sources */,
 				992785591B595C970045BF6D /* Testing2ViewController.swift in Sources */,
 				99EDD7A61B4662D400B00284 /* IntDate.swift in Sources */,
+				9979A6491B65DB5A00D14FB5 /* WSPagePreviewMargin.swift in Sources */,
 				991C2F0C1B3989F300892ABD /* AppDelegate.swift in Sources */,
 				99EDD7AC1B466CDE00B00284 /* Documents.swift in Sources */,
 				99BA15C01B3A734300352E6F /* NewDocumentSettingsTableViewController.swift in Sources */,

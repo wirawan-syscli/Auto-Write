@@ -41,6 +41,7 @@ class PrintingViewController: UIViewController {
         super.viewDidLayoutSubviews()
     
         pagePreview?.initDefaultSettings(scrollView)
+        //pagePreview?.setPageSize(CGSize(width: 500.0, height: 500.0))
     }
     
     func initDefaultSettings() {
@@ -147,6 +148,19 @@ extension PrintingViewController {
     func setPrintPreviewPageHorizontalMargin(pixels: CGFloat) {
         
         pagePreview?.setPageMarginHorizontally(pixels, right: pixels)
+        let pageMargin = pagePreview?.getUnitMetrics()
+        
+        showPageMarginInUnitMetrics(pageMargin!)
+    }
+    
+    func showPageMarginInUnitMetrics(margin: UIEdgeInsets) {
+        
+        let marginTop = String(format: "%.2f", margin.top)
+        let marginLeft = String(format: "%.2f", margin.left)
+        let marginBottom = String(format: "%.2f", margin.bottom)
+        let marginRight = String(format: "%.2f", margin.right)
+        
+        println("margin: \(marginTop)cm, \(marginLeft)cm, \(marginBottom)cm, \(marginRight)cm")
     }
 }
 
@@ -159,7 +173,7 @@ extension PrintingViewController {
         
         verticalSlider.minimumValue = 0.0
         verticalSlider.maximumValue = 5.0
-        verticalSlider.value = 2.0
+        verticalSlider.value = 0.0
         verticalSlider.addTarget(self, action: Selector("verticalSliderValueChanged:"), forControlEvents: .ValueChanged)
         
         sliderNavbar!.insertCustomViewIntoItem(verticalSlider, index: 2, color: ColorsPallete.orangeDark())
@@ -174,7 +188,11 @@ extension PrintingViewController {
     }
     
     func setPrintPreviewPageVerticalMargin(pixels: CGFloat) {
+        
         pagePreview?.setPageMarginVertically(pixels, bottom: pixels)
+        let pageMargin = pagePreview?.getUnitMetrics()
+        
+        showPageMarginInUnitMetrics(pageMargin!)
     }
 }
 
