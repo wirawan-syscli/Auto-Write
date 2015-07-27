@@ -41,7 +41,6 @@ class PrintingViewController: UIViewController {
         super.viewDidLayoutSubviews()
     
         pagePreview?.initDefaultSettings(scrollView)
-        //pagePreview?.setPageSize(CGSize(width: 500.0, height: 500.0))
     }
     
     func initDefaultSettings() {

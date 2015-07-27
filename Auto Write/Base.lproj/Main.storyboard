@@ -847,7 +847,7 @@ CAgICAgICAgICOODu1RpdGxlIGlzIHVzZWQgdG8gaWRlbnRpZnkgZG9jdW1lbnQ
                         <constraints>
                             <constraint firstItem="q9L-JY-Ly9" firstAttribute="trailing" secondItem="Y8M-9t-epZ" secondAttribute="trailingMargin" id="714-Lx-BiG"/>
                             <constraint firstItem="1jk-Xs-48e" firstAttribute="top" secondItem="q9L-JY-Ly9" secondAttribute="bottom" id="GdX-ru-1aV">
-                                <variation key="heightClass=regular-widthClass=compact" constant="20"/>
+                                <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                             </constraint>
                             <constraint firstItem="biQ-56-RZA" firstAttribute="leading" secondItem="Zna-0n-WaO" secondAttribute="trailing" constant="8" id="Ivs-V9-73r"/>
                             <constraint firstItem="W4V-2M-7Kk" firstAttribute="trailing" secondItem="Y8M-9t-epZ" secondAttribute="trailingMargin" id="PBd-Aj-w91"/>

@@ -18,7 +18,7 @@ import UIKit
 class WSPagePreview: NSObject, UIScrollViewDelegate {
     
     var scrollView: UIScrollView?
-    var scrollViewMargin: CGFloat = 20.0
+    var scrollViewMargin: CGFloat = 30.0
     var pageControl: UIPageControl?
     
     var layoutManager = NSLayoutManager()
@@ -38,7 +38,7 @@ class WSPagePreview: NSObject, UIScrollViewDelegate {
     var horizontalGuidelines: CALayer?
     var verticalGuidelines: CALayer?
     var guidelinesOffset: CGFloat = 10.0
-    var guidelinesStrokeSize: CGFloat = 15.0
+    var guidelinesStrokeSize: CGFloat = 13.0
     var showPageMarginGuidelines: Bool = true
     var cm: CGFloat = 37.79527559
     
@@ -99,8 +99,8 @@ class WSPagePreview: NSObject, UIScrollViewDelegate {
                 let scrollViewFrame = min(scrollView!.frame.width, scrollView!.frame.height) - scrollViewMargin
                 delimiter = CGFloat(scrollViewFrame / highestSize)
                 
-                pageSizeScale.width = delimiter! * pageSizeScale.width
-                pageSizeScale.height = delimiter! * pageSizeScale.height
+                pageSizeScale.width = delimiter! * pageSizeScale.width - scrollViewMargin
+                pageSizeScale.height = delimiter! * pageSizeScale.height - scrollViewMargin
         }
         resizedPageSize = pageSizeScale
         
@@ -187,20 +187,17 @@ class WSPagePreview: NSObject, UIScrollViewDelegate {
         let horizontalLine = CALayer()
         horizontalLine.frame = CGRectMake(
             textView.bounds.origin.x + resizedPageMargin!.left,
-            -(textView.frame.origin.y / 2 ),
+            -(scrollViewMargin / 2 ),
             textView.frame.width - (resizedPageMargin!.left * 2.0),
             0.5)
         horizontalLine.backgroundColor = UIColor.blackColor().CGColor
         textView.layer.addSublayer(horizontalLine)
         
-        println(scrollView!.frame.height)
-        println(textView.frame.height)
-        
         let horizontalLabel = UILabel(frame: CGRectMake(
             horizontalLine.bounds.width / 2 - guidelinesStrokeSize + resizedPageMargin!.left,
-            horizontalLine.frame.origin.y + 1.0,
+            (horizontalLine.frame.origin.y) - 1.0,
             guidelinesStrokeSize * 2.0,
-            guidelinesStrokeSize))
+            guidelinesStrokeSize - 6.0))
         let horizontalUnit = String(format: "%.2f", pageMargin!.left / cm)
         
         horizontalLabel.text = "\(horizontalUnit)"
@@ -215,7 +212,7 @@ class WSPagePreview: NSObject, UIScrollViewDelegate {
         
         let verticalLine = CALayer()
         verticalLine.frame = CGRectMake(
-            ((scrollView!.bounds.width / 2 - textView.bounds.width) / 2 ),
+            -(scrollViewMargin / 2 ),
             textView.bounds.origin.y + resizedPageMargin!.top,
             0.5,
             textView.frame.height - (resizedPageMargin!.top * 2.0))
@@ -223,7 +220,7 @@ class WSPagePreview: NSObject, UIScrollViewDelegate {
         textView.layer.addSublayer(verticalLine)
         
         let verticalLabel = UILabel(frame: CGRectMake(
-            verticalLine.frame.origin.x + 1.0,
+            (verticalLine.frame.origin.x * 2) - 1.0,
             verticalLine.bounds.height / 2 - guidelinesStrokeSize + resizedPageMargin!.top,
             guidelinesStrokeSize * 2.2,
             guidelinesStrokeSize))
