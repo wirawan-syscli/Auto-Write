@@ -22,7 +22,15 @@
 		992785591B595C970045BF6D /* Testing2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992785581B595C970045BF6D /* Testing2ViewController.swift */; };
 		9927855B1B5B6B2F0045BF6D /* CoreTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9927855A1B5B6B2F0045BF6D /* CoreTextViewController.swift */; };
 		9979A6461B60DFE000D14FB5 /* WSPagePreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9979A6451B60DFE000D14FB5 /* WSPagePreview.swift */; };
-		9979A6491B65DB5A00D14FB5 /* WSPagePreviewMargin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9979A6481B65DB5A00D14FB5 /* WSPagePreviewMargin.swift */; };
+		9979A64B1B6737FF00D14FB5 /* WSPagePreview_MarginGuidelines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9979A64A1B6737FF00D14FB5 /* WSPagePreview_MarginGuidelines.swift */; };
+		9979A64D1B67385300D14FB5 /* WSPagePreview_UIScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9979A64C1B67385300D14FB5 /* WSPagePreview_UIScrollView.swift */; };
+		9979A6511B6738A500D14FB5 /* WSPagePreview_Margin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9979A6501B6738A500D14FB5 /* WSPagePreview_Margin.swift */; };
+		9979A6531B67396A00D14FB5 /* WSPagePreview_Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9979A6521B67396A00D14FB5 /* WSPagePreview_Delegate.swift */; };
+		9979A6551B67461F00D14FB5 /* WSPagePreview_Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9979A6541B67461F00D14FB5 /* WSPagePreview_Size.swift */; };
+		9979A6571B67474D00D14FB5 /* WSPagePreview_PageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9979A6561B67474D00D14FB5 /* WSPagePreview_PageControl.swift */; };
+		9979A6591B6747CE00D14FB5 /* WSPagePreview_TextAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9979A6581B6747CE00D14FB5 /* WSPagePreview_TextAttributes.swift */; };
+		9979A65B1B67487700D14FB5 /* WSPagePreview_Print.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9979A65A1B67487700D14FB5 /* WSPagePreview_Print.swift */; };
+		9979A65D1B6767E200D14FB5 /* WSPagePreview_SizeGuidelines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9979A65C1B6767E200D14FB5 /* WSPagePreview_SizeGuidelines.swift */; };
 		999F4EDF1B50DC84009B4B6E /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 999F4EDE1B50DC84009B4B6E /* Reachability.m */; };
 		999F4EE11B50F835009B4B6E /* ColorsPallete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999F4EE01B50F835009B4B6E /* ColorsPallete.swift */; };
 		999F4EE51B511E8F009B4B6E /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999F4EE41B511E8F009B4B6E /* TabBarController.swift */; };
@@ -32,6 +40,7 @@
 		99A391E71B4BC91E00C18E40 /* DownloadDocumentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A391E61B4BC91E00C18E40 /* DownloadDocumentCollectionViewCell.swift */; };
 		99A391E91B4E244A00C18E40 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A391E81B4E244A00C18E40 /* LoginViewController.swift */; };
 		99BA15C01B3A734300352E6F /* NewDocumentSettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BA15BF1B3A734300352E6F /* NewDocumentSettingsTableViewController.swift */; };
+		99C060741B677EF200D72915 /* WSPagePreview_GuidelineStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C060731B677EF200D72915 /* WSPagePreview_GuidelineStyles.swift */; };
 		99C5E8531B57617700011AE6 /* PrintingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C5E8521B57617700011AE6 /* PrintingViewController.swift */; };
 		99D84AB11B4A6054003EDD9E /* EditDocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D84AB01B4A6054003EDD9E /* EditDocumentViewController.swift */; };
 		99EDD7891B4654DF00B00284 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99EDD7871B4654DF00B00284 /* Bolts.framework */; };
@@ -91,7 +100,15 @@
 		992785581B595C970045BF6D /* Testing2ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Testing2ViewController.swift; sourceTree = "<group>"; };
 		9927855A1B5B6B2F0045BF6D /* CoreTextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreTextViewController.swift; sourceTree = "<group>"; };
 		9979A6451B60DFE000D14FB5 /* WSPagePreview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WSPagePreview.swift; path = "../../Auto write/Auto Write/WSPagePreview.swift"; sourceTree = "<group>"; };
-		9979A6481B65DB5A00D14FB5 /* WSPagePreviewMargin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WSPagePreviewMargin.swift; sourceTree = "<group>"; };
+		9979A64A1B6737FF00D14FB5 /* WSPagePreview_MarginGuidelines.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WSPagePreview_MarginGuidelines.swift; sourceTree = "<group>"; };
+		9979A64C1B67385300D14FB5 /* WSPagePreview_UIScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WSPagePreview_UIScrollView.swift; sourceTree = "<group>"; };
+		9979A6501B6738A500D14FB5 /* WSPagePreview_Margin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WSPagePreview_Margin.swift; sourceTree = "<group>"; };
+		9979A6521B67396A00D14FB5 /* WSPagePreview_Delegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WSPagePreview_Delegate.swift; sourceTree = "<group>"; };
+		9979A6541B67461F00D14FB5 /* WSPagePreview_Size.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WSPagePreview_Size.swift; sourceTree = "<group>"; };
+		9979A6561B67474D00D14FB5 /* WSPagePreview_PageControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WSPagePreview_PageControl.swift; sourceTree = "<group>"; };
+		9979A6581B6747CE00D14FB5 /* WSPagePreview_TextAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WSPagePreview_TextAttributes.swift; sourceTree = "<group>"; };
+		9979A65A1B67487700D14FB5 /* WSPagePreview_Print.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WSPagePreview_Print.swift; sourceTree = "<group>"; };
+		9979A65C1B6767E200D14FB5 /* WSPagePreview_SizeGuidelines.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WSPagePreview_SizeGuidelines.swift; sourceTree = "<group>"; };
 		999F4EDD1B50DC84009B4B6E /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		999F4EDE1B50DC84009B4B6E /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		999F4EE01B50F835009B4B6E /* ColorsPallete.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorsPallete.swift; sourceTree = "<group>"; };
@@ -102,6 +119,7 @@
 		99A391E61B4BC91E00C18E40 /* DownloadDocumentCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadDocumentCollectionViewCell.swift; sourceTree = "<group>"; };
 		99A391E81B4E244A00C18E40 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		99BA15BF1B3A734300352E6F /* NewDocumentSettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewDocumentSettingsTableViewController.swift; sourceTree = "<group>"; };
+		99C060731B677EF200D72915 /* WSPagePreview_GuidelineStyles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WSPagePreview_GuidelineStyles.swift; sourceTree = "<group>"; };
 		99C5E8501B53ACEC00011AE6 /* libPods-Auto Write-FoldingTabBar.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-Auto Write-FoldingTabBar.a"; path = "Pods/../build/Debug-iphoneos/libPods-Auto Write-FoldingTabBar.a"; sourceTree = "<group>"; };
 		99C5E8521B57617700011AE6 /* PrintingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintingViewController.swift; sourceTree = "<group>"; };
 		99D84AB01B4A6054003EDD9E /* EditDocumentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditDocumentViewController.swift; sourceTree = "<group>"; };
@@ -251,7 +269,16 @@
 			isa = PBXGroup;
 			children = (
 				9979A6451B60DFE000D14FB5 /* WSPagePreview.swift */,
-				9979A6481B65DB5A00D14FB5 /* WSPagePreviewMargin.swift */,
+				9979A6521B67396A00D14FB5 /* WSPagePreview_Delegate.swift */,
+				9979A64C1B67385300D14FB5 /* WSPagePreview_UIScrollView.swift */,
+				9979A6541B67461F00D14FB5 /* WSPagePreview_Size.swift */,
+				9979A65C1B6767E200D14FB5 /* WSPagePreview_SizeGuidelines.swift */,
+				9979A6501B6738A500D14FB5 /* WSPagePreview_Margin.swift */,
+				9979A64A1B6737FF00D14FB5 /* WSPagePreview_MarginGuidelines.swift */,
+				99C060731B677EF200D72915 /* WSPagePreview_GuidelineStyles.swift */,
+				9979A6581B6747CE00D14FB5 /* WSPagePreview_TextAttributes.swift */,
+				9979A6561B67474D00D14FB5 /* WSPagePreview_PageControl.swift */,
+				9979A65A1B67487700D14FB5 /* WSPagePreview_Print.swift */,
 			);
 			name = WSPagePreview;
 			sourceTree = "<group>";
@@ -486,7 +513,10 @@
 			files = (
 				99A391E91B4E244A00C18E40 /* LoginViewController.swift in Sources */,
 				990B420B1B4FB521009241FE /* DashboardTableViewCell.swift in Sources */,
+				9979A64B1B6737FF00D14FB5 /* WSPagePreview_MarginGuidelines.swift in Sources */,
 				9927855B1B5B6B2F0045BF6D /* CoreTextViewController.swift in Sources */,
+				9979A6571B67474D00D14FB5 /* WSPagePreview_PageControl.swift in Sources */,
+				9979A65D1B6767E200D14FB5 /* WSPagePreview_SizeGuidelines.swift in Sources */,
 				99A391E31B4BB10F00C18E40 /* CollectionViewController.swift in Sources */,
 				99FEDB661B413BAB000FE88D /* AWSDynamoDB.swift in Sources */,
 				992785571B5954D60045BF6D /* WSSliderNavbar.swift in Sources */,
@@ -496,11 +526,15 @@
 				99FEDB601B3D0018000FE88D /* ShowDocumentDetailTableViewCell.swift in Sources */,
 				99FEDB641B412201000FE88D /* DocumentDB.swift in Sources */,
 				99EDD7B21B46720D00B00284 /* ShowDocumentTableViewCell.swift in Sources */,
+				99C060741B677EF200D72915 /* WSPagePreview_GuidelineStyles.swift in Sources */,
 				99A391E51B4BB32700C18E40 /* DownloadDocumentViewController.swift in Sources */,
+				9979A64D1B67385300D14FB5 /* WSPagePreview_UIScrollView.swift in Sources */,
 				999F4EDF1B50DC84009B4B6E /* Reachability.m in Sources */,
 				991C2F0F1B3989F300892ABD /* Auto_Write.xcdatamodeld in Sources */,
+				9979A6511B6738A500D14FB5 /* WSPagePreview_Margin.swift in Sources */,
 				99C5E8531B57617700011AE6 /* PrintingViewController.swift in Sources */,
 				99FEDB5E1B3BEDA6000FE88D /* ShowDocumentDetailViewController.swift in Sources */,
+				9979A65B1B67487700D14FB5 /* WSPagePreview_Print.swift in Sources */,
 				99D84AB11B4A6054003EDD9E /* EditDocumentViewController.swift in Sources */,
 				99FEDB621B3D3C56000FE88D /* AWSCognitoCredentials.swift in Sources */,
 				99EDD7AE1B466CDE00B00284 /* Questions.swift in Sources */,
@@ -509,9 +543,11 @@
 				999F4EE51B511E8F009B4B6E /* TabBarController.swift in Sources */,
 				9979A6461B60DFE000D14FB5 /* WSPagePreview.swift in Sources */,
 				99EDD7B01B46704800B00284 /* ShowDocumentViewController.swift in Sources */,
+				9979A6591B6747CE00D14FB5 /* WSPagePreview_TextAttributes.swift in Sources */,
+				9979A6531B67396A00D14FB5 /* WSPagePreview_Delegate.swift in Sources */,
 				992785591B595C970045BF6D /* Testing2ViewController.swift in Sources */,
+				9979A6551B67461F00D14FB5 /* WSPagePreview_Size.swift in Sources */,
 				99EDD7A61B4662D400B00284 /* IntDate.swift in Sources */,
-				9979A6491B65DB5A00D14FB5 /* WSPagePreviewMargin.swift in Sources */,
 				991C2F0C1B3989F300892ABD /* AppDelegate.swift in Sources */,
 				99EDD7AC1B466CDE00B00284 /* Documents.swift in Sources */,
 				99BA15C01B3A734300352E6F /* NewDocumentSettingsTableViewController.swift in Sources */,

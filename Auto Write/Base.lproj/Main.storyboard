@@ -1141,7 +1141,7 @@ Document</string>
                             </constraint>
                             <constraint firstItem="p38-UV-xQS" firstAttribute="trailing" secondItem="YMK-TH-9IQ" secondAttribute="trailingMargin" id="qLt-i1-1GX"/>
                             <constraint firstItem="ZEK-j1-Lg8" firstAttribute="top" secondItem="Nn2-jL-qa1" secondAttribute="bottom" id="uDw-Gl-DeH">
-                                <variation key="heightClass=regular-widthClass=compact" constant="19"/>
+                                <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                             </constraint>
                         </constraints>
                         <variation key="default">

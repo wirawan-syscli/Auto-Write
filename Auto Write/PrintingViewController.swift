@@ -8,6 +8,20 @@
 
 import UIKit
 
+enum GuidelineColor {
+    
+    case DefaultColor, HighlightedColor
+    
+    mutating func change() {
+        switch self {
+        case DefaultColor:
+            self = HighlightedColor
+        case HighlightedColor:
+            self = DefaultColor
+        }
+    }
+}
+
 // MARK: CLASS INIT
 class PrintingViewController: UIViewController {
 
@@ -21,6 +35,7 @@ class PrintingViewController: UIViewController {
     var paperSizeOption = [(String, Double, Double)]()
     var horizontalSlider = UISlider()
     var verticalSlider = UISlider()
+    var guidelineColor = GuidelineColor.HighlightedColor
     var headerSwitch: UISwitch?
     
     @IBOutlet weak var scrollView: UIScrollView!
@@ -41,6 +56,7 @@ class PrintingViewController: UIViewController {
         super.viewDidLayoutSubviews()
     
         pagePreview?.initDefaultSettings(scrollView)
+        //pagePreview?.setPageSize(CGSize(width: 500.0, height: 500.0))
     }
     
     func initDefaultSettings() {
@@ -48,24 +64,11 @@ class PrintingViewController: UIViewController {
         navigationItem.title = document?.title
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Action, target: self, action: Selector("configurePrintingSettings"))
         
-        let size = CGSizeMake(130.0, 60.0)
-        let paperSize = WSSliderNavbar.createButtonWithImage(UIImage(named: "Page_size")!, color: UIColor.whiteColor(), highlightedColor: UIColor.lightGrayColor())
-        let horizontalMargin = WSSliderNavbar.createButtonWithImage(UIImage(named: "Horizontal_margin")!, color: UIColor.whiteColor(), highlightedColor: UIColor.lightGrayColor())
-        let verticalMargin = WSSliderNavbar.createButtonWithImage(UIImage(named: "Vertical_margin")!, color: UIColor.whiteColor(), highlightedColor: UIColor.lightGrayColor())
-        let utility = WSSliderNavbar.createButtonWithImage(UIImage(named: "Header_include")!, color: UIColor.whiteColor(), highlightedColor: UIColor.lightGrayColor())
-    
-        let buttons = [paperSize, horizontalMargin, verticalMargin, utility]
-        
-        sliderNavbar = WSSliderNavbar(size: size, scrollView: sliderNavbarContainer, buttons: buttons)
-        
-        addConfigToPaperSize()
-        addConfigToHorizontalMargin()
-        addConfigToVerticalMargin()
-        addConfigToUtility()
+        initSliderNavbar()
     }
 }
 
-// MARK: UISCROLL + PRINT PAGE PREVIEW
+// MARK: WSPAGEPREVIEW
 extension PrintingViewController: UIScrollViewDelegate, WSPagePreviewDelegate {
     
     func WSPagePreviewSetTextContent(pagePreview: WSPagePreview) -> String {
@@ -78,6 +81,64 @@ extension PrintingViewController: UIScrollViewDelegate, WSPagePreviewDelegate {
         pageControl.pageIndicatorTintColor = ColorsPallete.orangeLight()
         
         view.addSubview(pageControl)
+    }
+}
+
+// MARK: WSSLIDERNAVBAR
+extension PrintingViewController: WSSliderNavbarDelegate {
+    
+    func initSliderNavbar() {
+        
+        let size = CGSizeMake(130.0, 60.0)
+        let paperSize = WSSliderNavbar.createButtonWithImage(UIImage(named: "Page_size")!, color: UIColor.whiteColor(), highlightedColor: UIColor.lightGrayColor())
+        let horizontalMargin = WSSliderNavbar.createButtonWithImage(UIImage(named: "Horizontal_margin")!, color: UIColor.whiteColor(), highlightedColor: UIColor.lightGrayColor())
+        let verticalMargin = WSSliderNavbar.createButtonWithImage(UIImage(named: "Vertical_margin")!, color: UIColor.whiteColor(), highlightedColor: UIColor.lightGrayColor())
+        let utility = WSSliderNavbar.createButtonWithImage(UIImage(named: "Header_include")!, color: UIColor.whiteColor(), highlightedColor: UIColor.lightGrayColor())
+        
+        let buttons = [paperSize, horizontalMargin, verticalMargin, utility]
+        
+        sliderNavbar = WSSliderNavbar(size: size, scrollView: sliderNavbarContainer, buttons: buttons)
+        sliderNavbar?.delegate = self
+        
+        addConfigToPaperSize()
+        addConfigToHorizontalMargin()
+        addConfigToVerticalMargin()
+        addConfigToUtility()
+    }
+    
+    func WSSliderNavbarSubMenuWillShow(sliderNavbar: WSSliderNavbar, index: Int) {
+        
+        var color = UIColor.lightGrayColor().CGColor
+        
+        switch guidelineColor {
+        case .DefaultColor:
+            switch index {
+            case 1:
+                pagePreview?.resetGuidelineBackgroundColor(WSGuidelineArea.Top, color: color)
+                break
+            case 2:
+                pagePreview?.resetGuidelineBackgroundColor(WSGuidelineArea.Left, color: color)
+                break
+            default:
+                break
+            }
+            break
+        case .HighlightedColor:
+            color = ColorsPallete.orangeLight().CGColor
+            switch index {
+            case 1:
+                pagePreview?.resetGuidelineBackgroundColor(WSGuidelineArea.Top, color: color)
+                break
+            case 2:
+                pagePreview?.resetGuidelineBackgroundColor(WSGuidelineArea.Left, color: color)
+                break
+            default:
+                break
+            }
+            break
+        }
+        
+        guidelineColor.change()
     }
 }
 
@@ -147,7 +208,7 @@ extension PrintingViewController {
     func setPrintPreviewPageHorizontalMargin(pixels: CGFloat) {
         
         pagePreview?.setPageMarginHorizontally(pixels, right: pixels)
-        let pageMargin = pagePreview?.getUnitMetrics()
+        let pageMargin = pagePreview?.getMetricUnit()
         
         showPageMarginInUnitMetrics(pageMargin!)
     }
@@ -189,7 +250,7 @@ extension PrintingViewController {
     func setPrintPreviewPageVerticalMargin(pixels: CGFloat) {
         
         pagePreview?.setPageMarginVertically(pixels, bottom: pixels)
-        let pageMargin = pagePreview?.getUnitMetrics()
+        let pageMargin = pagePreview?.getMetricUnit()
         
         showPageMarginInUnitMetrics(pageMargin!)
     }

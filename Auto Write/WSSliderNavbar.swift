@@ -8,6 +8,11 @@
 
 import UIKit
 
+@objc protocol WSSliderNavbarDelegate {
+    
+    optional func WSSliderNavbarSubMenuWillShow(sliderNavbar: WSSliderNavbar, index: Int)
+}
+
 class WSSliderNavbar: NSObject {
     
     var items = [UIView]()
@@ -20,6 +25,8 @@ class WSSliderNavbar: NSObject {
     
     var currentDetailItem: UIView?
     var animationDuration: NSTimeInterval = 1.0
+    
+    var delegate: WSSliderNavbarDelegate?
     
     static func createButtonWithText(title: String, color: UIColor, highlightedColor: UIColor) -> UIButton {
         
@@ -133,6 +140,8 @@ class WSSliderNavbar: NSObject {
             
             scrollView.scrollEnabled = false
         }
+        
+        delegate!.WSSliderNavbarSubMenuWillShow!(self, index: index)
     }
     
     func insertCustomViewIntoItem(customView: UIView, index: Int, color: UIColor) {
