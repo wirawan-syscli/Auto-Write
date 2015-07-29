@@ -6,11 +6,13 @@
 //  Copyright (c) 2015 wirawan sanusi. All rights reserved.
 //
 
+import UIKit
+
 extension WSPagePreview {
     
     func drawWidthSizeGuideline(textView: UITextView) {
         
-        horizontalGuideline = CALayer()
+        var horizontalGuideline = CALayer()
         horizontalGuideline!.frame = CGRectMake(
             textView.bounds.origin.x,
             textView.bounds.height + (containerMargin / 2 ),
@@ -34,7 +36,7 @@ extension WSPagePreview {
     
     func drawHeightSizeGuideline(textView: UITextView) {
         
-        verticalGuideline = CALayer()
+        var verticalGuideline = CALayer()
         verticalGuideline!.frame = CGRectMake(
             textView.bounds.width + (containerMargin / 2 ),
             textView.bounds.origin.y,

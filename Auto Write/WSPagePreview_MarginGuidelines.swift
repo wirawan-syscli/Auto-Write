@@ -16,12 +16,14 @@
 //  4 - height size guideline
 //
 
+import UIKit
+
 extension WSPagePreview {
     
-    func drawWidthMarginGuideline(textView: UITextView) -> CALayer? {
+    func drawWidthMarginGuideline(textView: UITextView) -> CALayer {
         
-        guidelinesWidthMargin = CALayer()
-        guidelinesWidthMargin!.frame = CGRectMake(
+        var horizontalGuideline = CALayer()
+        horizontalGuideline!.frame = CGRectMake(
             textView.bounds.origin.x + resizedPageMargin!.left,
             -(containerMargin / 2 ),
             textView.frame.width - (resizedPageMargin!.left * 2.0),
@@ -30,24 +32,24 @@ extension WSPagePreview {
         
         var horizontalLabel = UILabel()
         horizontalLabel.frame = CGRectMake(
-            guidelinesWidthMargin!.bounds.width / 2 - guidelinesHeight + resizedPageMargin!.left,
-            (guidelinesWidthMargin!.frame.origin.y) - 3.0,
+            horizontalGuideline!.bounds.width / 2 - guidelinesHeight + resizedPageMargin!.left,
+            (horizontalGuideline!.frame.origin.y) - 3.0,
             guidelinesHeight * 2.0,
             guidelinesHeight - 6.0
         )
         
-        (guidelinesWidthMargin, horizontalLabel) = stylingGuideline(1, guideline: guidelinesWidthMargin!, label: horizontalLabel)
+        (horizontalGuideline, horizontalLabel) = stylingGuideline(1, guideline: horizontalGuideline, label: horizontalLabel)
         
-        textView.layer.addSublayer(guidelinesWidthMargin)
+        textView.layer.addSublayer(horizontalGuideline)
         textView.addSubview(horizontalLabel)
         
-        return guidelinesWidthMargin
+        return horizontalGuideline
     }
     
-    func drawHeightMarginGuideline(textView: UITextView) -> CALayer? {
+    func drawHeightMarginGuideline(textView: UITextView) -> CALayer {
         
-        guidelinesHeightMargin = CALayer()
-        guidelinesHeightMargin!.frame = CGRectMake(
+        var verticalGuideline = CALayer()
+        verticalGuideline!.frame = CGRectMake(
             -(containerMargin / 2 ),
             textView.bounds.origin.y + resizedPageMargin!.top,
             guidelinesStrokeSize,
@@ -56,17 +58,17 @@ extension WSPagePreview {
         
         var verticalLabel = UILabel()
         verticalLabel.frame = CGRectMake(
-            (guidelinesHeightMargin!.frame.origin.x * 2) - 1.0,
-            guidelinesHeightMargin!.bounds.height / 2 - guidelinesHeight + resizedPageMargin!.top,
+            (verticalGuideline!.frame.origin.x * 2) - 1.0,
+            verticalGuideline!.bounds.height / 2 - guidelinesHeight + resizedPageMargin!.top,
             guidelinesHeight * 2.2,
             guidelinesHeight
         )
         
-        (guidelinesHeightMargin, verticalLabel) = stylingGuideline(2, guideline: guidelinesHeightMargin!, label: verticalLabel)
+        (verticalGuideline, verticalLabel) = stylingGuideline(2, guideline: verticalGuideline!, label: verticalLabel)
         
-        textView.layer.addSublayer(guidelinesHeightMargin)
+        textView.layer.addSublayer(verticalGuideline)
         textView.addSubview(verticalLabel)
         
-        return guidelinesHeightMargin
+        return verticalGuideline
     }
 }

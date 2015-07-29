@@ -13,12 +13,14 @@ class WSPagePreview: NSObject {
     
     // UIScrollView
     
-    var container                : UIScrollView?
-    var containerMargin          : CGFloat       = 30.0
+    var container                  : UIScrollView?
+    var containerPage              = UIView()
+    var containerMargin            : CGFloat       = 30.0
     
     // UIPageControl
     
-    var pageControl: UIPageControl?
+    var pageControl                : UIPageControl?
+    var currentPage                : Int           = 0
     
     // WSPagePreview
     
@@ -44,20 +46,18 @@ class WSPagePreview: NSObject {
     // WSPagePreview_SizeGuidelines
     // WSPagePreview_MarginGuidelines
     
-    var guidelinesWidthMargin      : CALayer?
-    var guidelinesHeightMargin     : CALayer?
-    var horizontalGuideline        : CALayer?
-    var verticalGuideline          : CALayer?
+    var guidelinesWidthMargin      = [CALayer?]()
+    var guidelinesHeightMargin     = [CALayer?]()
     var guidelinesOffset           : CGFloat       = 10.0
     var guidelinesHeight           : CGFloat       = 13.0
     var guidelinesStrokeSize       : CGFloat       = 0.5
     var guidelinesFontSize         : CGFloat       = 10
-    var guidelinesTopDefaultColor                  = UIColor.lightGrayColor().CGColor
-    var guidelinesLeftDefaultColor                 = UIColor.lightGrayColor().CGColor
+    var guidelinesTopTintColor                     = UIColor.lightGrayColor().CGColor
+    var guidelinesLeftTintColor                    = UIColor.lightGrayColor().CGColor
     var showPageMarginIndicators   : Bool          = true
     var cmUnit                     : CGFloat       = 37.79527559
     var delimiter                  : CGFloat?
-
+    
     // WSPagePreview_Print
     var pages                      = [UITextView]()
     var pagesPrint                 = [UITextView]()
@@ -99,7 +99,7 @@ extension WSPagePreview {
     }
     
     func updateSettings() {
-
+        
         adjustPageControl()
         adjustPageSize()
         adjustTextContent(fontSize!)
@@ -123,7 +123,7 @@ extension WSPagePreview {
         var index = 0
         
         while (lastRenderedGlyph < layoutManager.numberOfGlyphs) {
-
+            
             let pageOriginX = pageOriginOffsetX! + (pageOrigin!.x + resizedPageSize!.width) * CGFloat(index++)
             let textContainer = NSTextContainer(size: CGSize(width: resizedPageSize!.width - (resizedPageMargin!.left + resizedPageMargin!.right), height: resizedPageSize!.height - (resizedPageMargin!.top + resizedPageMargin!.bottom)))
             layoutManager.addTextContainer(textContainer)
@@ -135,8 +135,14 @@ extension WSPagePreview {
             lastRenderedGlyph = NSMaxRange(layoutManager.glyphRangeForTextContainer(textContainer))
         }
         
-        container!.contentSize = CGSize(width: pages.first!.frame.origin.x + pages.last!.frame.width + pages.last!.frame.origin.x, height: container!.frame.height)
-        container!.pagingEnabled = true
+        containerPage.frame.size = CGSize(width: pages.first!.frame.origin.x + pages.last!.frame.width + pages.last!.frame.origin.x, height: container!.frame.height)
+        
+        container?.addSubview(containerPage)
+        container?.minimumZoomScale = 1.0
+        container?.maximumZoomScale = 4.0
+        container?.zoomScale = 1.0
+        container?.contentSize = containerPage.frame.size
+        container?.pagingEnabled = true
         
         pageControl!.numberOfPages = pages.count
         delegate?.WSPagePreviewShowPageControl?(self, pageControl: pageControl!)
@@ -151,14 +157,14 @@ extension WSPagePreview {
         
         if showPageMarginIndicators {
             
-            guidelinesWidthMargin = drawWidthMarginGuideline(textView)
-            guidelinesHeightMargin = drawHeightMarginGuideline(textView)
+            guidelinesWidthMargin.append(drawWidthMarginGuideline(textView))
+            guidelinesHeightMargin.append(drawHeightMarginGuideline(textView))
             drawWidthSizeGuideline(textView)
             drawHeightSizeGuideline(textView)
         }
         
         pages.append(textView)
-        container!.addSubview(textView)
+        containerPage.addSubview(textView)
     }
 }
 

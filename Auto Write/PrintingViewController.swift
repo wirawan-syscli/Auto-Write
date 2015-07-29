@@ -31,6 +31,7 @@ class PrintingViewController: UIViewController {
     var pagePreview: WSPagePreview?
     var sliderNavbar: WSSliderNavbar?
     
+    var pageText: NSTextContainer?
     var paperSizePicker = UIPickerView()
     var paperSizeOption = [(String, Double, Double)]()
     var horizontalSlider = UISlider()
@@ -112,25 +113,28 @@ extension PrintingViewController: WSSliderNavbarDelegate {
         
         switch guidelineColor {
         case .DefaultColor:
+            
             switch index {
             case 1:
-                pagePreview?.resetGuidelineBackgroundColor(WSGuidelineArea.Top, color: color)
+                pagePreview?.setGuidelinesHighlightTintColor(WSGuidelineArea.Top, color: color)
                 break
             case 2:
-                pagePreview?.resetGuidelineBackgroundColor(WSGuidelineArea.Left, color: color)
+                pagePreview?.setGuidelinesHighlightTintColor(WSGuidelineArea.Left, color: color)
                 break
             default:
                 break
             }
             break
         case .HighlightedColor:
-            color = ColorsPallete.orangeLight().CGColor
+            
+            color = ColorsPallete.orangeDark().CGColor
+            
             switch index {
             case 1:
-                pagePreview?.resetGuidelineBackgroundColor(WSGuidelineArea.Top, color: color)
+                pagePreview?.setGuidelinesHighlightTintColor(WSGuidelineArea.Top, color: color)
                 break
             case 2:
-                pagePreview?.resetGuidelineBackgroundColor(WSGuidelineArea.Left, color: color)
+                pagePreview?.setGuidelinesHighlightTintColor(WSGuidelineArea.Left, color: color)
                 break
             default:
                 break
@@ -297,6 +301,11 @@ extension PrintingViewController: UIPrintInteractionControllerDelegate {
                 println("printing error: \(error.userInfo)")
             }
         })
+    }
+    
+    func printInteractionController(printInteractionController: UIPrintInteractionController, choosePaper paperList: [AnyObject]) -> UIPrintPaper? {
+        let paper = UIPrintPaper.bestPaperForPageSize(pagePreview!.pageSize!, withPapersFromArray: paperList)
+        return paper
     }
 
     func printInteractionControllerWillStartJob(printInteractionController: UIPrintInteractionController) {

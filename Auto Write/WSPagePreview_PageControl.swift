@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 wirawan sanusi. All rights reserved.
 //
 
+import UIKit
+
 extension WSPagePreview {
     
     func adjustPageControl() {
@@ -14,7 +16,7 @@ extension WSPagePreview {
             pageControl?.removeFromSuperview()
         }
         
-        let pageControlFrame = CGRectMake(container!.bounds.origin.x, container!.bounds.origin.y + containerMargin / 2.5, container!.bounds.width, 5.0)
+        let pageControlFrame = CGRectMake(container!.frame.origin.x, container!.frame.origin.y + containerMargin / 2.5, container!.bounds.width, 5.0)
         pageControl = UIPageControl(frame: pageControlFrame)
     }
 }

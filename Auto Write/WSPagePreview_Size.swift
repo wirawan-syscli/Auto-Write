@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 wirawan sanusi. All rights reserved.
 //
 
+import UIKit
+
 extension WSPagePreview {
     
     func setPageSize(size: CGSize){
@@ -19,14 +21,14 @@ extension WSPagePreview {
         
         var contentSize = pageSize!
         if contentSize.width  > container!.bounds.width  - containerMargin ||
-           contentSize.height > container!.bounds.height - containerMargin {
-            
-            contentSize = calculateResizedPageSize(container!.frame.size, contentSize: pageSize!)
+            contentSize.height > container!.bounds.height - containerMargin * 2.0 {
+                
+                contentSize = calculateResizedPageSize(container!.frame.size, contentSize: pageSize!)
         }
         
         resizedPageSize = contentSize
         
-        pageOrigin = CGPoint(x: container!.bounds.width - resizedPageSize!.width, y: (container!.bounds.height - resizedPageSize!.height) / 2)
+        pageOrigin = CGPoint(x: container!.bounds.width - resizedPageSize!.width, y: (container!.bounds.height - resizedPageSize!.height) / 2 + containerMargin / 2)
         pageOriginOffsetX = pageOrigin!.x / 2
     }
     
@@ -41,9 +43,9 @@ extension WSPagePreview {
         func scalingContentSize(contentSize: CGSize) -> CGSize {
             var scaledContentSize = contentSize
             delimiter = CGFloat(containerSize / maxSize)
-        
+            
             scaledContentSize.width = delimiter! * contentSize.width - containerMargin
-            scaledContentSize.height = delimiter! * contentSize.height - containerMargin
+            scaledContentSize.height = delimiter! * contentSize.height - (containerMargin * 2.0)
             
             return scaledContentSize
         }

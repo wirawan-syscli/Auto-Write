@@ -221,67 +221,6 @@
             </objects>
             <point key="canvasLocation" x="3331.5" y="-903"/>
         </scene>
-        <!--Item-->
-        <scene sceneID="wel-Pm-b88">
-            <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="hhm-6y-gGB" customClass="CoreTextViewController" customModule="Auto_Write" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="iAe-00-Oah"/>
-                        <viewControllerLayoutGuide type="bottom" id="GfG-Li-S1A"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="6cK-4F-dyW">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nvV-ta-3GV">
-                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                            </scrollView>
-                        </subviews>
-                        <color key="backgroundColor" red="1" green="0.72941176470000002" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="nvV-ta-3GV" firstAttribute="leading" secondItem="6cK-4F-dyW" secondAttribute="leadingMargin" constant="-16" id="ObP-82-4nx"/>
-                            <constraint firstItem="nvV-ta-3GV" firstAttribute="top" secondItem="6cK-4F-dyW" secondAttribute="topMargin" id="hz3-iv-RFp">
-                                <variation key="heightClass=regular-widthClass=compact" constant="64"/>
-                            </constraint>
-                            <constraint firstItem="GfG-Li-S1A" firstAttribute="top" secondItem="nvV-ta-3GV" secondAttribute="bottom" id="k0e-1X-1sc"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="nvV-ta-3GV" secondAttribute="trailing" constant="-16" id="ytw-eu-46X"/>
-                            <constraint firstItem="GfG-Li-S1A" firstAttribute="top" secondItem="nvV-ta-3GV" secondAttribute="bottom" id="zV9-hY-Gxo"/>
-                        </constraints>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="nvV-ta-3GV"/>
-                            </mask>
-                            <mask key="constraints">
-                                <exclude reference="k0e-1X-1sc"/>
-                                <exclude reference="zV9-hY-Gxo"/>
-                                <exclude reference="ObP-82-4nx"/>
-                                <exclude reference="hz3-iv-RFp"/>
-                                <exclude reference="ytw-eu-46X"/>
-                            </mask>
-                        </variation>
-                        <variation key="heightClass=regular-widthClass=compact">
-                            <mask key="subviews">
-                                <include reference="nvV-ta-3GV"/>
-                            </mask>
-                            <mask key="constraints">
-                                <include reference="k0e-1X-1sc"/>
-                                <exclude reference="zV9-hY-Gxo"/>
-                                <include reference="ObP-82-4nx"/>
-                                <include reference="hz3-iv-RFp"/>
-                                <include reference="ytw-eu-46X"/>
-                            </mask>
-                        </variation>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="Aqs-bT-Arb"/>
-                    <navigationItem key="navigationItem" id="rtx-x6-VLh"/>
-                    <connections>
-                        <outlet property="scrollView" destination="nvV-ta-3GV" id="0C3-k3-3hT"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="70a-S6-w83" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="5403" y="-903"/>
-        </scene>
         <!--New Document Settings-->
         <scene sceneID="U8R-GQ-0ad">
             <objects>
@@ -1658,7 +1597,7 @@ Document</string>
                             </constraint>
                             <constraint firstAttribute="trailingMargin" secondItem="EVo-8d-z3V" secondAttribute="trailing" constant="-16" id="xFK-ox-Sv5"/>
                             <constraint firstItem="RqX-01-u0A" firstAttribute="top" secondItem="HeI-MC-aUR" secondAttribute="bottom" constant="8" id="xm8-Fd-F3m">
-                                <variation key="heightClass=regular-widthClass=compact" constant="-32"/>
+                                <variation key="heightClass=regular-widthClass=compact" constant="-45"/>
                             </constraint>
                         </constraints>
                         <variation key="default">
@@ -2318,43 +2257,6 @@ Document</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C4w-zO-rGN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="393" y="465"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="Il6-rY-ZaK">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="aKB-jI-6rO" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="KXU-rK-sqG">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="xDK-Xb-iu9" kind="relationship" relationship="rootViewController" id="Iuu-Vh-kW5"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="kQf-P1-cgQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4033.5" y="-903"/>
-        </scene>
-        <!--Tab Bar Controller-->
-        <scene sceneID="bBp-j5-eVh">
-            <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="xDK-Xb-iu9" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationItem key="navigationItem" id="7vp-aw-1Go"/>
-                    <nil key="simulatedBottomBarMetrics"/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" id="kks-ZN-cIs">
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    </tabBar>
-                    <connections>
-                        <segue destination="hhm-6y-gGB" kind="relationship" relationship="viewControllers" id="zJL-nr-Uz1"/>
-                    </connections>
-                </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="qe5-d5-hvG" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4722" y="-903"/>
         </scene>
     </scenes>
     <resources>

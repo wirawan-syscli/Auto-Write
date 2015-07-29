@@ -6,13 +6,15 @@
 //  Copyright (c) 2015 wirawan sanusi. All rights reserved.
 //
 
+import UIKit
+
 enum WSGuidelineArea {
     case Top, Left, Bottom, Right
 }
 
 extension WSPagePreview {
     
-    func stylingGuideline(guidelineArea: Int, guideline: CALayer, label: UILabel) -> (CALayer?, UILabel) {
+    func stylingGuideline(guidelineArea: Int, guideline: CALayer, label: UILabel) -> (CALayer!, UILabel) {
         
         guideline.backgroundColor = UIColor.lightGrayColor().CGColor
         
@@ -20,11 +22,11 @@ extension WSPagePreview {
         switch guidelineArea {
         case 1:
             unit = String(format: "%.2f", pageMargin!.left / cmUnit)
-            guideline.backgroundColor = guidelinesTopDefaultColor
+            guideline.backgroundColor = guidelinesTopTintColor
             break
         case 2:
             unit = String(format: "%.2f", pageMargin!.top / cmUnit)
-            guideline.backgroundColor = guidelinesLeftDefaultColor
+            guideline.backgroundColor = guidelinesLeftTintColor
             break
         case 3:
             unit = String(format: "%.1f", pageSize!.width / cmUnit)
@@ -44,16 +46,20 @@ extension WSPagePreview {
         return (guideline, label)
     }
     
-    func resetGuidelineBackgroundColor(guidelineArea: WSGuidelineArea, color: CGColor){
+    func setGuidelinesHighlightTintColor(guidelineArea: WSGuidelineArea, color: CGColor){
         
         switch guidelineArea {
         case .Top:
-            guidelinesTopDefaultColor = color
-            guidelinesWidthMargin?.backgroundColor = color
+            guidelinesTopTintColor = color
+            for guideline in guidelinesWidthMargin {
+                guideline!.backgroundColor = color
+            }
             break
         case .Left:
-            guidelinesLeftDefaultColor = color
-            guidelinesHeightMargin?.backgroundColor = color
+            guidelinesLeftTintColor = color
+            for guideline in guidelinesHeightMargin {
+                guideline!.backgroundColor = color
+            }
             break
         default:
             break

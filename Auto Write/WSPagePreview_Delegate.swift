@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 wirawan sanusi. All rights reserved.
 //
 
+import UIKit
+
 @objc protocol WSPagePreviewDelegate {
     
     func WSPagePreviewSetTextContent(pagePreview: WSPagePreview) -> String

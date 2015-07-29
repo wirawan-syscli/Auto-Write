@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 wirawan sanusi. All rights reserved.
 //
 
+import UIKit
+
 extension WSPagePreview {
     
     func setPrintFormatPages(pageOriginX: CGFloat) {

@@ -20,7 +20,6 @@
 		991C2F351B3A5E8700892ABD /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991C2F341B3A5E8700892ABD /* DashboardViewController.swift */; };
 		992785571B5954D60045BF6D /* WSSliderNavbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992785561B5954D60045BF6D /* WSSliderNavbar.swift */; };
 		992785591B595C970045BF6D /* Testing2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992785581B595C970045BF6D /* Testing2ViewController.swift */; };
-		9927855B1B5B6B2F0045BF6D /* CoreTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9927855A1B5B6B2F0045BF6D /* CoreTextViewController.swift */; };
 		9979A6461B60DFE000D14FB5 /* WSPagePreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9979A6451B60DFE000D14FB5 /* WSPagePreview.swift */; };
 		9979A64B1B6737FF00D14FB5 /* WSPagePreview_MarginGuidelines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9979A64A1B6737FF00D14FB5 /* WSPagePreview_MarginGuidelines.swift */; };
 		9979A64D1B67385300D14FB5 /* WSPagePreview_UIScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9979A64C1B67385300D14FB5 /* WSPagePreview_UIScrollView.swift */; };
@@ -98,7 +97,6 @@
 		991C2F341B3A5E8700892ABD /* DashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		992785561B5954D60045BF6D /* WSSliderNavbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WSSliderNavbar.swift; sourceTree = "<group>"; };
 		992785581B595C970045BF6D /* Testing2ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Testing2ViewController.swift; sourceTree = "<group>"; };
-		9927855A1B5B6B2F0045BF6D /* CoreTextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreTextViewController.swift; sourceTree = "<group>"; };
 		9979A6451B60DFE000D14FB5 /* WSPagePreview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WSPagePreview.swift; path = "../../Auto write/Auto Write/WSPagePreview.swift"; sourceTree = "<group>"; };
 		9979A64A1B6737FF00D14FB5 /* WSPagePreview_MarginGuidelines.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WSPagePreview_MarginGuidelines.swift; sourceTree = "<group>"; };
 		9979A64C1B67385300D14FB5 /* WSPagePreview_UIScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WSPagePreview_UIScrollView.swift; sourceTree = "<group>"; };
@@ -213,9 +211,7 @@
 			children = (
 				9979A6471B65DB2C00D14FB5 /* WSPagePreview */,
 				992785581B595C970045BF6D /* Testing2ViewController.swift */,
-				9927855A1B5B6B2F0045BF6D /* CoreTextViewController.swift */,
 				992785561B5954D60045BF6D /* WSSliderNavbar.swift */,
-				99C5E8521B57617700011AE6 /* PrintingViewController.swift */,
 				99BA15BB1B3A6A2100352E6F /* Language pack */,
 				99BA15BC1B3A6A3F00352E6F /* Model */,
 				999F4EE41B511E8F009B4B6E /* TabBarController.swift */,
@@ -224,6 +220,7 @@
 				99BA15BF1B3A734300352E6F /* NewDocumentSettingsTableViewController.swift */,
 				991C2F101B3989F300892ABD /* NewDocumentViewController.swift */,
 				99EDD7AF1B46704800B00284 /* ShowDocumentViewController.swift */,
+				99C5E8521B57617700011AE6 /* PrintingViewController.swift */,
 				99D84AB01B4A6054003EDD9E /* EditDocumentViewController.swift */,
 				99FEDB5D1B3BEDA6000FE88D /* ShowDocumentDetailViewController.swift */,
 				99A391E41B4BB32700C18E40 /* DownloadDocumentViewController.swift */,
@@ -514,7 +511,6 @@
 				99A391E91B4E244A00C18E40 /* LoginViewController.swift in Sources */,
 				990B420B1B4FB521009241FE /* DashboardTableViewCell.swift in Sources */,
 				9979A64B1B6737FF00D14FB5 /* WSPagePreview_MarginGuidelines.swift in Sources */,
-				9927855B1B5B6B2F0045BF6D /* CoreTextViewController.swift in Sources */,
 				9979A6571B67474D00D14FB5 /* WSPagePreview_PageControl.swift in Sources */,
 				9979A65D1B6767E200D14FB5 /* WSPagePreview_SizeGuidelines.swift in Sources */,
 				99A391E31B4BB10F00C18E40 /* CollectionViewController.swift in Sources */,
